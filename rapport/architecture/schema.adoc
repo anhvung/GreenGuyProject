@@ -20,6 +20,8 @@ projet tout fait en encapsulant un programme déjà existant.
 
 Description textuelle du bloc 1.
 
-===== NomBloc2
+===== Bloc Serveur
+* L'image peut être redimensionnée et avoir un titre:
 
-Description textuelle du bloc 1.
+.Le logo du projet
+image::../images/bloc_serveur.svg[bloc serveur,800, 800]
