@@ -19,6 +19,9 @@ entre deux blocs électroniques, c’est une description des signaux +
 
 Description textuelle d’interface
 
-==== InterfaceBloc2-4
+==== Interface serveur
 
-Description textuelle d’interface
+* Voici les interfaces correspondantes au serveur
+
+.Interface serveur
+image::../images/interface_serveur.svg[logo pact, 400, 400]
