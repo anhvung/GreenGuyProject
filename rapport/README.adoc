@@ -1,4 +1,4 @@
-= Rapport d’avancement du groupe “x.y”
+= Rapport d’avancement du groupe “2.5”
 PACT groupe xy (Les plus beaux)
 ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 :doctype: book
@@ -16,12 +16,13 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 
 === Membres du groupe
 
-* Nom1
-* Nom2
-* Nom3
-* Nom4
-* Nom5
-* Nom6
+* Nguyen Anh-Vu
+* HASSANALY Olivier
+* LAMALLE Florian
+* PEBEREAU Pierre
+* XIA Caroline
+* DORGE DE VACHER DE SAINT GÉRAN Louis
+* KRICHEL Anas
 
 === Tuteur
 
