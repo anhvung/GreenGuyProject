@@ -24,4 +24,4 @@ Description textuelle d’interface
 * Voici les interfaces correspondantes au serveur
 
 .Interface serveur
-image::../images/interface_serveur.svg[logo pact, 400, 400]
+image::../images/interface_serveur.svg[interface serveur, 800, 800]
