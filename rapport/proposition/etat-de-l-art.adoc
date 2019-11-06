@@ -8,25 +8,28 @@ ressemblant à votre projet et les différences éventuelles. Illustrez
 avec des images si besoin. Utilisez des renvois vers votre
 bibliographie : « comme démontré dans [2], … »
 
-==== XXX
+On distingue divers types d’applications écologiques.
 
-Et magnis dis parturient montes, nascetur ridiculus mus.
+Celles qui donnent une liste d’actions positives réalisables au quotidien à 
+l’image de WAG développée par WWF.
 
-Aenean risus dui, volutpat non, posuere vitae, sollicitudin in, urna.
-Nam eget eros a enim pulvinar rhoncus. Cum sociis natoque penatibus et
-magnis dis parturient montes, nascetur ridiculus mus. Nulla facilisis
-massa ut massa. Sed nisi purus, malesuada eu, porta vulputate, suscipit
-auctor, nunc.
+Celles qui encouragent les actions de groupe que ce soit par des défis à relever
+en entreprise ou l’accès à une carte des personnes réalisant des actions 
+quotidiennes bénéfiques à l’image de KOOM.
 
-==== ZZZ
+Celles qui proposent des choix de consommation responsables et les rétribue par 
+un système de points échangeables contre des récompenses à l’image de ZEI. 
 
-Et magnis dis parturient montes, nascetur ridiculus mus.
+Green Guy est un réseau social et est donc orienté sur les actions de groupe 
+(défis, rencontres de commerçants engagés). Il permet de sensibiliser 
+l’utilisateur en lui distillant des informations et en l’informant des 
+événements écologiques organisés.
 
-Aenean risus dui, volutpat non, posuere vitae, sollicitudin in, urna.
-Nam eget eros a enim pulvinar rhoncus. Cum sociis natoque penatibus et
-magnis dis parturient montes, nascetur ridiculus mus. Nulla facilisis
-massa ut massa. Sed nisi purus, malesuada eu, porta vulputate, suscipit
-auctor, nunc.
+Il se démarque des applications déjà existantes de par sa carte interactive 
+performante où sont localisés tous les lieux qui sont engagés dans la cause 
+écologique. Ses partenariats avec les communes permettent à l’application de 
+contribuer à l’économie circulaire.
+
 
 ==== Exemples de citations
 
