@@ -6,18 +6,20 @@ constatés avant élaboration du projet, comment votre projet répond à ces
 besoins. Ajouter une image ou une figure pour montrer à quoi cela
 ressemble si besoin._
 
-Amet, tellus. Maecenas a dolor. Praesent tempor, felis eget gravida
-blandit, urna lacus faucibus velit, in consectetuer sapien erat nec
-quam. Integer bibendum odio sit amet neque. Integer imperdiet rhoncus
-mi. Pellentesque malesuada purus id purus. Quisque viverra porta lectus.
-Sed lacus leo, feugiat at, consectetuer eu, luctus quis, risus.
-Suspendisse faucibus orci et nunc. Nullam vehicula fermentum risus.
-Fusce felis nibh, dignissim vulputate, ultrices quis, lobortis et, arcu.
-Duis aliquam libero non diam.
+En tant qu’étudiants sensibilisés aux enjeux climatiques, nous avons constaté la difficulté à se renseigner sur les actualités écologiques de notre environnement proche et à interagir avec d’autres citoyens sensibilisés. Nous avons également remarqué qu’il n’existait pas de réseau social assez développés centré sur l’écologie et nous avons la conviction qu’il s’agit aujourd’hui du premier outil de sensibilisation, notamment chez les jeunes générations.
+Il nous est alors apparu naturel de programmer un réseau social écologique: GreenGuy.
 
-Vestibulum placerat tincidunt tortor. Ut vehicula ligula quis lectus. In
-eget velit. Quisque vel risus. Mauris pede. Nullam ornare sapien sit
-amet nisl. Cras tortor. Donec tortor lorem.
+Ce réseau s’appuie principalement sur une carte interactive, où tous les utilisateurs peuvent contribuer, actualisée en temps réel.  Un utilisateur peut y signaler une bonne adresse eco-friendly/un encombrant/un lieu public/ une poubelle. Sa requête est filtrée par un algorithme avant d’être validée pour éviter les abus.
+En partenariat avec la mairie, des caméras sont placées sur les bus, qui réalisent les mêmes trajets plusieurs fois par jour. Ils envoient des images au serveur qui, via traitement d’image, reconnaît les encombrants ou les accumulations de déchets et les signale sur la carte. Ils effectuent donc également un travail de cartographie, en complément des utilisateurs. 
+
+La carte est accessible à l’utilisateur qui peut prendre connaissance des différentes opportunités signalées via un système de pictogrammes. La mairie, de son côté a accès aux déchets et aux encombrants de la carte afin de garantir une meilleure propreté des rues.
+
+En plus de signaler des lieux sur la carte, Un utilisateur, une association, une entreprise ou une mairie peuvent communiquer sur l’organisation d’un événement. 
+Il leur est également possible de publier des informations. Ces requêtes sont également filtrées afin d’éviter de potentiels abus. 
+
+L’utilisateur peut alors accéder à ces événements ou à ces informations via un fil d’actualité auquel il accède en swippant son écran depuis le menu de la carte. Il dispose notamment d'informations complémentaires sur les événements qui l’intéressent comme les membres participant, le lieu de rdv etc… 
+Dans la logique du réseau social, il peut ensuite y convier ses amis via le système de messagerie GreenGuy et cibler les plus aptes à être intéressés à partir des informations visibles sur leur profils.
+
 
 
 
