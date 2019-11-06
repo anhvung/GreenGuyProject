@@ -22,4 +22,4 @@ Description textuelle du bloc 1.
 
 ===== Bloc Serveur
 .Le logo du projet
-image::../images/bloc_serveur.svg[bloc serveur,600, 800]
+image::../images/bloc_serveur.svg[bloc serveur,1000, 800]
