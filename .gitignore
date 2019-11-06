@@ -1,3 +1,4 @@
+
 *.iml
 .gradle
 /local.properties
@@ -13,4 +14,24 @@
 .externalNativeBuild
 .cxx
 
+1a7d77df265bab4b77b882022635d42503fa74c2
+
+# Node rules:
+## Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+## Dependency directory
+## Commenting this out is preferred by some people, see
+## https://docs.npmjs.com/misc/faq#should-i-check-my-node_modules-folder-into-git
+node_modules
+
+# Book build output
+_book
+
+# eBook build output
+*.epub
+*.mobi
+
+*.log
+.*.swp
 1a7d77df265bab4b77b882022635d42503fa74c2
