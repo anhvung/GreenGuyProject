@@ -1,26 +1,18 @@
 === Scénarios d’usage
-Mettre ici le scénario d’usage que vous avez construit lors des séances
-encadrées par les experts SES. Vous pouvez mettre un scénario amélioré
-(et non celui noté) si vous jugez votre scénario insuffisant pour faire
-comprendre au jury PACT les différentes étapes d’utilisation de votre
-produit/service ou si vous avez changé d’idées entre temps.
+APPLICATION GREEN GUY 
 
-==== XX
+==== Utilisateur 1
 
-Nulla. Curabitur aliquet leo ac massa. Praesent posuere lectus vitae
-odio. Donec imperdiet urna vel ante. In semper accumsan diam. Vestibulum
-porta justo. Suspendisse egestas commodo eros.
+Sensibilisée aux enjeux du développement, durable, Alexandra souhaite consommer de manière plus responsable. D’ailleurs, ce midi elle a prévu d’aller au restaurant. Cela tombe bien, Green Guy lui propose une sélection d’adresses eco-friendly. Sur son chemin, elle découvre un canapé-lit jeté au milieu de la rue. Bizarre, les encombrants auraient dû passer la veille! Pas de problème, elle dégaine son téléphone, trouve l’appli et signale l’objet sur sa carte interactive. Il pourra ainsi profiter à un autre utilisateur ou même être retiré par les services municipaux si personne n’est intéressé! En revenant, elle cherche une fontaine d’eau car elle en a assez d’acheter des bouteilles en plastique. Encore une fois, Green Guy lui propose la source la plus proche, il y a même une épicerie vrac sur le chemin.Mais Green Guy c’est aussi une source d’événements à conscience écologique, un accès à la poubelle la plus proche via la localisation et des informations sur le recyclage, le compost...
+Elle peut noter les lieux qu’elle visite par rapport à leur impact écologique, et utiliser les notes des autres utilisateurs pour décider des lieux qu’elle visite.
 
-Suspendisse tincidunt mi vel metus. Vivamus non urna in nisi gravida
-congue. Aenean semper orci a eros. Praesent dictum. Maecenas pharetra
-odio ut dui. Pellentesque.
 
-==== YY
+==== Utilisateur 2
 
-Ac mauris.
+Thomas est responsable de relations publiques de son entreprise. Pour partager l’impact positif sur l’environnement de son entreprise, il peut utiliser l’application pour créer des évènements et interagir avec la communauté Green Guy. Son utilisation est similaire à celle de Jean, qui appartient à une association orientée vers le développement durable et qui organise régulièrement des événements pour enrichir son association de nouveaux volontaires qui ont pu la découvrir grâce à Green Guy. Alexandra participe à l’un de ces évènements et rejoint un groupe avec lequel elle pourra communiquer grâce à la messagerie de Green Guy, et ajouter des amis.
 
-Duis velit magna, scelerisque vitae, varius ut, aliquam vel, justo.
-Proin ac augue. Nullam auctor lectus vitae arcu. Vestibulum porta justo
-placerat purus. Ut sem nunc, vestibulum nec, sodales vitae, vehicula
-eget, ipsum. Sed nec tortor. Aenean malesuada. Nunc convallis, massa eu
-vestibulum commodo, quam mauris interdum arcu, at pellentesque.
+
+==== Utilisateur 3
+
+Marie travaille à la mairie de la ville. Ses services ont accès aux données de l’application, ce qui permet une meilleure communication entre les habitants et la municipalité. Par ailleurs, les données de la carte permettent aux services de propreté de réagir efficacement aux accumulations de déchets. Le portail Mairie propose une carte en direct qui propose un trajet optimisé aux éboueurs. 
+Les bus de la ville, qui réalisent les mêmes trajets plusieurs fois par jour, sont équipés de caméras qui font le travail de reconnaissance de déchets et de cartographie en relation avec le serveur passivement, sans avoir à solliciter l’interaction d’un utilisateur de type 1. 
