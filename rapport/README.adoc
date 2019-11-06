@@ -36,7 +36,8 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 
 *_Note: 15 lignes max_*
 
-Green Guy est un réseau social écologique. Il permet de cartographier 
+Green Guy est un réseau social écologique. Il permet à l’utilisateur de cartographier les différents lieux éco-responsables : commerçants, événements, lieux publics eco-friendly, encombrants, poubelles...  Des caméras placées sur les bus des mairies partenaires complètent le système de cartographie. La carte est ensuite accessible à tous les acteurs du réseau. Un fil d’actualité sur lequel un utilisateur, une association, une entreprise ou une mairie peuvent publier des informations ou des événements est accessible pour toute la communauté. GreenGuy permet de réunir les différents acteurs soucieux de s’investir dans la transition écologique via un système de messagerie et de profils renseignant les actions des utilisateurs. 
+ 
 
 == English Summary (PAN1)
 
