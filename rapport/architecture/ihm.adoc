@@ -13,3 +13,4 @@ image::../images/sc2.png[logo pact, 400]
 image::../images/sc3.png[logo pact, 400]
 image::../images/sc4.png[logo pact, 400]
 
+image::../images/cap.PNG[logo pact, 400]
