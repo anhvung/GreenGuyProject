@@ -19,20 +19,20 @@ et entre PAN1 et PAN2 respectivement.
 
 [cols=",^,^,^,^,^,^,^",options="header",]
 |====
-| Nom        | Module1 | Module2 | Module3 | Module4 | ModuleN | Module SES | Test & Intégration
+| Nom        | Android(squelette) | Intégration| Android(GUI)| Classification automatique| Caméra modulaire| Base de données| Serveur client
 | Nom Expert |         |         |         |         |         |            |
 
-| Eleve1     | X       |         |         |         |         |            |
+| Anh-vu    | X       |         |         |         |         |            |
 
-| Eleve2     |         | X       |         |         |         |            | X
+|Florian   |         | X       |         |         |         |            | X
 
-| Eleve3     |         |         |         |         |         |            |
+| Caro    |         |         |         |         |         |            |
 
-| Eleve4     | X       |         |         |         |         |            |
+| Anas   | X       |         |         |         |         |            |
 
-| Eleve5     |         |         |         |         |         |            |
+| Olivier    |         |         |         |         |         |            |
 
-| Eleve6     |         |         |         |         |         |            |
+| louis    |         |         |         |         |         |            |
 
-| Eleve7     |         | X       |         |         |         |            | X
+| Pierre    |         | X       |         |         |         |            | X
 |====
