@@ -1,4 +1,16 @@
-Groupe PACT2.5 **PAF LOCA**.
+Groupe PACT2.5 
+
+Nom du groupe :**PAF LOCA**.
+
+Membres :
+
+* Nguyen Anh-Vu
+* HASSANALY Olivier
+* LAMALLE Florian
+* PEBEREAU Pierre
+* XIA Caroline
+* DORGE DE VACHER DE SAINT GÉRAN Louis
+* KRICHEL Anas
 
 **Projet d'application Green Guy**
 
