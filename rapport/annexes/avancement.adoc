@@ -1,4 +1,5 @@
 === Suivis des modules (Après PAN1)
 Module Android : Réalisation d'un prototype démo pour la présentation. Voir le dossier Android du dépot PACT
-.Interface serveur
-image::../images/interface_serveur.svg[interface serveur, 800, 600]
+
+
+image::../images/sc1.png[demo, 400]
