@@ -3,3 +3,6 @@ Module Android : Réalisation d'un prototype démo pour la présentation. Voir l
 
 
 image::../images/sc1.png[demo, 400]
+image::../images/ic1.png[demo, 200]
+image::../images/ic2.png[demo, 200]
+image::../images/ic3.png[demo, 200]
