@@ -1,11 +1,10 @@
 
-
 ===== Bloc Application
 
 Le bloc application fait référence à l'application Green Guy. Elle est essentiellement liée au bloc serveur.
 Les liens seront donnés plus loin.
 
-image::../images/bloc1.svg[bloc application,1000]
+image::../images/bloc1.svg[bloc application,1200]
 
 
 ===== Bloc Serveur
@@ -13,12 +12,12 @@ Le bloc serveur est relié au bloc application et à la base de données.
 Les liens seront donnés plus loin.
 
 
-image::../images/bloc_serveur.svg[bloc serveur,1000]
+image::../images/bloc_serveur.svg[bloc serveur,1200]
 
 ===== Bloc Base de données
 Le bloc serveur est relié à la base de données.
 Les liens seront donnés plus loin.
 
 
-image::../images/bloc3.svg[bloc serveur,1000]
+image::../images/bloc3.svg[bloc serveur,1200]
 image::../images/sql.svg[bloc serveur,1000]
