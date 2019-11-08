@@ -31,6 +31,7 @@ public class MapsActivity extends AppCompatActivity   implements OnMapReadyCallb
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
 
@@ -48,8 +49,10 @@ public class MapsActivity extends AppCompatActivity   implements OnMapReadyCallb
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng tetech = new LatLng(48.713111, 2.199685);
+        mMap.addMarker(new MarkerOptions().position(tetech).title("Marker in tetech"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(tetech));
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
     }
 }
