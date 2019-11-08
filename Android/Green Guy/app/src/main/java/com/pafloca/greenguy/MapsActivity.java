@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -84,7 +85,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tetech));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11.0f));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(11.1f));
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker m) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(m.getPosition(),17.0f));
+                return true;
+            }});
 
     }
 
