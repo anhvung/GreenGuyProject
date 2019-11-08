@@ -1,9 +1,11 @@
 Groupe PACT2.5 **PAF LOCA**.
 
 **Projet d'application Green Guy**
+
 ![Alt text](image_readme/cap.PNG?raw=true "Title")
 ![Alt text](image_readme/ic1.png?raw=true "Title")
-![Alt text](image_readme/ic1.png?raw=true "Title")
+![Alt text](image_readme/ic2.png?raw=true "Title")
+![Alt text](image_readme/ic3.png?raw=true "Title")
 ![Alt text](image_readme/sc6.png?raw=true "Title")
 ![Alt text](image_readme/sc1.png?raw=true "Title")
 ![Alt text](image_readme/sc5.png?raw=true "Title")
