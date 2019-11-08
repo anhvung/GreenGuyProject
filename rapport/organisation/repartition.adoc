@@ -28,11 +28,11 @@ et entre PAN1 et PAN2 respectivement.
 
 | Caro    |         |         |     X    |         |         |     X       |
 
-| Anas   |      |         |         |    X     |     X    |      X      |
+| Anas   |      |         |         |    X     |     X    |      X     |
 
 | Olivier    |         |       |    X     |        |         |          |X
 
 | louis    |         |    X     |         |         |         |            |X
 
-| Pierre    |        |       |         |    X     |    X     |            | X
+| Pierre    |        |       |         |    X     |    X     |            | 
 |====
