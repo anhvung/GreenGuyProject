@@ -22,17 +22,17 @@ et entre PAN1 et PAN2 respectivement.
 | Nom        | Android(squelette) | Intégration| Android(GUI)| Classification automatique| Caméra modulaire| Base de données| Serveur client
 | Nom Expert |         |         |         |         |         |            |
 
-| Anh-vu    | X       |     X    |         |         |         |            |X
+| Anh-vu    | X       |     X    |         |         |         |            |
 
-|Florian   |   X      | X       |         |         |         |            | X
+|Florian   |   X      |        |         |         |         |  X          | 
 
 | Caro    |         |         |     X    |         |         |     X       |
 
-| Anas   | X       |         |         |         |     X    |      X      |
+| Anas   |      |         |         |    X     |     X    |      X      |
 
-| Olivier    |         |       |         |    X     |         |          |X
+| Olivier    |         |       |    X     |        |         |          |X
 
 | louis    |         |    X     |         |         |         |            |X
 
-| Pierre    |  X       |       |         |         |    X     |            | X
+| Pierre    |        |       |         |    X     |    X     |            | X
 |====
