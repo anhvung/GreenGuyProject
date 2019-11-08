@@ -46,15 +46,7 @@ image::../images/ic2.png[demo, 200]
 Green Guy is a social network focused on ecology. The user can use the app to list the locations of various eco-friendly places such as shops, events, public places, bins and bulky waste... Cameras placed on buses would be a useful complement to the map. The map is then accessibble by all connected users. Users, companies, associations and cities can post information and events on the timeline.
 Green Guy is the perfect place to unite a strong community focused on ecology with its messaging platfom that gather various profiles.
 
-Les différentes pages du document sont rédigées en utilisant le langage
-AsciiDoc. Le squelette de rapport contient des exemples avec entre autre:
 
-* des images,
-* des liens,
-* des équations.
-
-La structure du rapport (parties, sections et la relation avec les
-differents fichiers) se trouve dans le fichier courant.
 
 // en PDF on ne peut pas controler la position de la toc
 // Macros non supportées
