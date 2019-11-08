@@ -1,4 +1,4 @@
 ==== Règle de l'application  
 
 En plus de la cartographie que l'application fournit, elle  permettra aussi à l'utilisateur d'avoir un profil et de communiquer
-avec les autres utilisateurs
+avec les autres utilisateurs enligne.
