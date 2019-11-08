@@ -28,7 +28,7 @@ et entre PAN1 et PAN2 respectivement.
 
 | Caro    |         |         |     X    |         |         |     X       |
 
-| Anas   |      |         |         |    X     |     X    |      X     |
+| Anas   |      |         |         |    X     |     X    |          |
 
 | Olivier    |         |       |    X     |        |         |          |X
 
