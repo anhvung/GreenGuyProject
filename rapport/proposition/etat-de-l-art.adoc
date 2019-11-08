@@ -4,9 +4,8 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 
 On distingue divers types d’applications écologiques.
 
-Celles qui donnent une liste d’actions positives réalisables au quotidien à l’image de WAG développée par WWF.
-
-Celles qui encouragent les actions de groupe que ce soit par des défis à relever en entreprise ou l’accès à une carte des personnes réalisant des actions quotidiennes bénéfiques à l’image de KOOM.
+Celles qui donnent une liste d’actions positives réalisables au quotidien à l’image de WAG développée par WWF.<<WAG>>
+Celles qui encouragent les actions de groupe que ce soit par des défis à relever en entreprise ou l’accès à une carte des personnes réalisant des actions quotidiennes bénéfiques à l’image de KOOM.<<KOOM>>
 
 Celles qui proposent des choix de consommation responsables et les rétribue par un système de points échangeables contre des récompenses à l’image de ZEI. 
 
