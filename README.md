@@ -1,10 +1,15 @@
-Ceci est votre dépôt pour le projet PACT.
+Groupe PACT2.5 **PAF LOCA**.
 
-**N'hésitez pas à modifier ce fichier pour décrire votre projet et son
-organisation**
-
-image::../images/cap.PNG[logo pact, 400]
-
+**Projet d'application Green Guy**
+![Alt text](image_readme/cap.PNG?raw=true "Title")
+![Alt text](image_readme/ic1.png?raw=true "Title")
+![Alt text](image_readme/ic1.png?raw=true "Title")
+![Alt text](image_readme/sc6.png?raw=true "Title")
+![Alt text](image_readme/sc1.png?raw=true "Title")
+![Alt text](image_readme/sc5.png?raw=true "Title")
+![Alt text](image_readme/sc2.png?raw=true "Title")
+![Alt text](image_readme/sc3.png?raw=true "Title")
+![Alt text](image_readme/sc4.png?raw=true "Title")
 Vous **DEVEZ** modifier ce fichier (`README.md`) et créer tous les
 répertoires et fichiers dont vous aurez besoin pour votre projet.
 
