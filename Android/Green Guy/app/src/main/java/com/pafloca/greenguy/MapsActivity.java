@@ -21,14 +21,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    ArrayList<Marker> markers = new ArrayList<Marker>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +62,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) { setDemoMarkers(googleMap);
-      googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.style_json));
-
+    public void onMapReady(GoogleMap googleMap) {
+        setDemoMarkers(googleMap);
+        googleMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                        this, R.raw.style_json));
 
 
     }
@@ -70,18 +74,50 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void setDemoMarkers(GoogleMap googleMap) {
         mMap = googleMap;
         LatLng tetech = new LatLng(48.713111, 2.199685);
-        LatLng poubelle_recyclable = new LatLng(48.713111, 2.199685);
-        LatLng poubelle_compost = new LatLng(48.713111, 2.199685);
-        LatLng atelier_DIY = new LatLng(48.713111, 2.199685);
-        LatLng eco_friendly = new LatLng(48.713111, 2.199685);
-        LatLng info = new LatLng(48.713111, 2.199685);
-        LatLng pointEau = new LatLng(48.713111, 2.199685);
+        LatLng poubelle_recyclable = new LatLng(48.714426, 2.202051);
+        LatLng poubelle_compost = new LatLng(48.711205, 2.198896);
+        LatLng atelier_DIY = new LatLng(48.717236, 2.197094);
+        LatLng eco_friendly = new LatLng(48.714199, 2.201171);
+        LatLng info = new LatLng(48.712939, 2.201053);
+        LatLng pointEau = new LatLng(48.712211, 2.192545);
 
 
         mMap.addMarker(new MarkerOptions()
                 .position(tetech)
                 .icon(bitmapDescriptorFromVector_bckgrd(this, R.drawable.ic_mylocation))
-                .title("MOI"));
+                .title("MOI")
+                .visible(true));
+
+        markers.add(mMap.addMarker(new MarkerOptions()
+                .position(poubelle_recyclable)
+
+                .icon(bitmapDescriptorFromVector(this, R.drawable.ic_recycle_bin))
+                .title("poubelle recyclable")));
+        markers.add(mMap.addMarker(new MarkerOptions()
+                .position(poubelle_compost)
+
+                .icon(bitmapDescriptorFromVector(this, R.drawable.ic_compost))
+                .title("Compost")));
+        markers.add(mMap.addMarker(new MarkerOptions()
+                .position(atelier_DIY)
+
+                .icon(bitmapDescriptorFromVector(this, R.drawable.ic_map_event))
+                .title("Event : Atelier DIY")));
+        markers.add(mMap.addMarker(new MarkerOptions()
+                .position(eco_friendly)
+
+                .icon(bitmapDescriptorFromVector(this, R.drawable.ic_restaurant_black_24dp))
+                .title("Eco-friendly")));
+        markers.add(mMap.addMarker(new MarkerOptions()
+                .position(info)
+
+                .icon(bitmapDescriptorFromVector(this, R.drawable.ic_info))
+                .title("Information")));
+        markers.add(mMap.addMarker(new MarkerOptions()
+                .position(pointEau)
+
+                .icon(bitmapDescriptorFromVector(this, R.drawable.ic_water))
+                .title("point d'eau")));
 
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tetech));
@@ -89,10 +125,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker m) {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(m.getPosition(),17.0f));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(m.getPosition(), 17.0f));
+                m.showInfoWindow();
                 return true;
-            }});
-
+            }
+        });
+        googleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                for (Marker m : markers) {
+                    m.setVisible(cameraPosition.zoom > 14.6);
+                }
+            }
+        });
     }
 
 
