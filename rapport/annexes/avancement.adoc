@@ -1,2 +1,4 @@
 === Suivis des modules (Après PAN1)
 Module Android : Réalisation d'un prototype démo pour la présentation. Voir le dossier Android du dépot PACT
+.Exemple
+image::../images/sc1.png[Exemple, 800, 600]
