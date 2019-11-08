@@ -3,6 +3,8 @@ Ceci est votre dépôt pour le projet PACT.
 **N'hésitez pas à modifier ce fichier pour décrire votre projet et son
 organisation**
 
+image::../images/cap.PNG[logo pact, 400]
+
 Vous **DEVEZ** modifier ce fichier (`README.md`) et créer tous les
 répertoires et fichiers dont vous aurez besoin pour votre projet.
 
