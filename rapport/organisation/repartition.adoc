@@ -20,19 +20,19 @@ et entre PAN1 et PAN2 respectivement.
 [cols=",^,^,^,^,^,^,^",options="header",]
 |====
 | Nom        | Android(squelette) | Intégration| Android(GUI)| Classification automatique| Caméra modulaire| Base de données| Serveur client
-| Nom Expert |Thomas Robert         |Lucien Maman         | Jean Claude Dufourd       |     Michel Roux    |      Michel Roux   |   Thomas Robert         |Antonio Casilli
+| Nom Expert |         |         |         |         |         |            |
 
-| Anh-vu    | X       |         |         |         |         |            |
+| Anh-vu    | X       |     X    |         |         |         |            |X
 
-|Florian   |         | X       |         |         |         |            | X
+|Florian   |   X      | X       |         |         |         |            | X
 
-| Caro    |         |         |         |         |         |            |
+| Caro    |         |         |     X    |         |         |     X       |
 
-| Anas   | X       |         |         |         |         |            |
+| Anas   | X       |         |         |         |     X    |      X      |
 
-| Olivier    |         |         |         |         |         |            |
+| Olivier    |         |       |         |    X     |         |          |X
 
-| louis    |         |         |         |         |         |            |
+| louis    |         |    X     |         |         |         |            |X
 
-| Pierre    |         | X       |         |         |         |            | X
+| Pierre    |  X       |       |         |         |    X     |            | X
 |====
