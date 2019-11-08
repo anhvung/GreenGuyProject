@@ -25,8 +25,7 @@ Membres :
 ![Alt text](image_readme/sc3.png?raw=true "Title")
 ![Alt text](image_readme/cap.PNG?raw=true "Title")
 ![Alt text](image_readme/sc4.png?raw=true "Title")
-Vous **DEVEZ** modifier ce fichier (`README.md`) et créer tous les
-répertoires et fichiers dont vous aurez besoin pour votre projet.
+
 
 # Important, le rapport d'avancement
 
