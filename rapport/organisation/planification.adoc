@@ -9,12 +9,12 @@
 [cols=",^,^,,",options="header",]
 |====
 |Tâche |Qui |Quand |Fait |Remarques
-|sujet | | | |
-|sujet en anglais | | | |
-|scenario | | | |
-|architecture (schéma et documentation) | | | |
-|découpage en modules | | | |
-|planning temporel (ce document, personnalisé) | | | |
+|sujet |Olivier Louis|05/11 et 07/11 |Description du scénario|
+|sujet en anglais |Pierre |06/11|  oui|
+|scenario |Toute l'équipe  |Début Octobre| oui|
+|architecture (schéma et documentation) |Pierre Anh-Vu Caroline et Florian |05/11 et 07/11 | oui|
+|découpage en modules |Toute l'équipe  |04/11 |oui |
+|planning temporel (ce document, personnalisé) | Florian Anh-Vu Anas|08/11 |oui |
 |====
 
 * présentation 15mn
@@ -22,9 +22,9 @@
 [cols=",^,^,,",options="header",]
 |====
 |Tâche |Qui |Quand |Fait |Remarques
-|préparation du document | | | |
-|répartition de la parole | | | |
-|répétition | | | |
+|préparation du document |Tout le groupe |08/11 |oui |Fait en Réunion
+|répartition de la parole |Tout le groupe  |08/11 |oui |Fait en Réunion
+|répétition | Tout le groupe |08/11 |oui |Fait en Réunion
 |====
 
 ==== Taches / PAN2 20/01/20
