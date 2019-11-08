@@ -33,24 +33,18 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 * Lucien Maman
 
 == Résumé du sujet choisi en français (PAN1)
+image::../images/ic3.png[demo, 200]
 
-*_Note: 15 lignes max_*
 
 Green Guy est un réseau social écologique. Il permet à l’utilisateur de cartographier les différents lieux éco-responsables : commerçants, événements, lieux publics eco-friendly, encombrants, poubelles...  Des caméras placées sur les bus des mairies partenaires complètent le système de cartographie. La carte est ensuite accessible à tous les acteurs du réseau. Un fil d’actualité sur lequel un utilisateur, une association, une entreprise ou une mairie peuvent publier des informations ou des événements est accessible pour toute la communauté. GreenGuy permet de réunir les différents acteurs soucieux de s’investir dans la transition écologique via un système de messagerie et de profils renseignant les actions des utilisateurs. 
  
 
 == English Summary (PAN1)
 
-*_Note : 15 lignes max, version anglaise du texte précédent_*
+image::../images/ic2.png[demo, 200]
 
-Ligula dapibus egestas. Donec sed velit ac lectus mattis sagittis.
-
-In hac habitasse platea dictumst. Maecenas in ligula. Duis tincidunt
-odio sollicitudin quam. Nullam non mauris. Phasellus lacinia, velit sit
-amet bibendum euismod, leo diam interdum ligula, eu scelerisque sem
-purus in tellus.
-
-*Notes concenant le rapport*
+Green Guy is a social network focused on ecology. The user can use the app to list the locations of various eco-friendly places such as shops, events, public places, bins and bulky waste... Cameras placed on buses would be a useful complement to the map. The map is then accessibble by all connected users. Users, companies, associations and cities can post information and events on the timeline.
+Green Guy is the perfect place to unite a strong ecology focused community with its messaging platfom that gather various profiles.
 
 Les différentes pages du document sont rédigées en utilisant le langage
 AsciiDoc. Le squelette de rapport contient des exemples avec entre autre:
