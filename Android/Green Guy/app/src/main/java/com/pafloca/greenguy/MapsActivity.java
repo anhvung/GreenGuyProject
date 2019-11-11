@@ -6,12 +6,14 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +31,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     private GoogleMap mMap;
     ArrayList<Marker> markers = new ArrayList<Marker>();
@@ -119,6 +124,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(bitmapDescriptorFromVector(this, R.drawable.ic_water))
                 .title("point d'eau")));
 
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+            @Override
+            public void onInfoWindowClick(Marker arg0) {
+                // TODO Auto-generated method stub
+                StartActivity(arg0.getTitle());
+
+            }
+        });
+
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tetech));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11.1f));
@@ -127,6 +142,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public boolean onMarkerClick(Marker m) {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(m.getPosition(), 17.0f));
                 m.showInfoWindow();
+
                 return true;
             }
         });
@@ -141,6 +157,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
+    private void StartActivity(String msg) {
+        Intent intent = new Intent(this, DisplayInfo.class);
+
+        intent.putExtra(EXTRA_MESSAGE, msg);
+        startActivity(intent);
+    }
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
