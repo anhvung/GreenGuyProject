@@ -30,7 +30,7 @@ et entre PAN1 et PAN2 respectivement.
 
 | Anas   |      |         |         |    X     |     X    |          |
 
-| Olivier    |         |       |    X     |        |         |          |X
+| Olivier    |         |       |    X     |        |         |   X       |
 
 | louis    |         |    X     |         |         |         |            |X
 
