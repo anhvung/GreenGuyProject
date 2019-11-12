@@ -16,10 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".DisplayInfo"></activity>
-        <activity
-            android:name=".DisplayMsg"
-            android:label="@string/title_activity_display_msg"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7762472071179494~6897057986"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
