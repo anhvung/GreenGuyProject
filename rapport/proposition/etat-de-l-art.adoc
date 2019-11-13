@@ -13,6 +13,9 @@ Celles qui mettent en lien des particuliers qui souhaitent donner des objets au 
 
 Green Guy est un réseau social et est donc orienté sur les actions de groupe (défis, rencontres de commerçants engagés). Il permet de sensibiliser l’utilisateur en lui distillant des informations et en l’informant des événements écologiques organisés.
 
-Il se démarque des applications déjà existantes de par sa carte interactive performante où sont localisés tous les lieux qui sont engagés dans la cause écologique. Ses partenariats avec les communes permettent à l’application de contribuer à l’économie circulaire par exemple en localisant les encombrants pour les afficher sur la carte interactive.
+L'idée ici est de fusionner plusieurs fonctionnalités de ces diverses applications déjà existantes indépendemment les unes des autres.
+
+En plus de cela, nous ajoutons un accès facile à  l'utilisateur à la carte et au fil d'actualité.
+Nous souhaitons également insister sur les actions de groupe et enfin nouer des partenariats avec les communes afin d'élargir la communauté au maximum et de s'inscrire dans une optique d'économie circulaire.
 
 
