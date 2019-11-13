@@ -20,7 +20,7 @@ et entre PAN1 et PAN2 respectivement.
 [cols=",^,^,^,^,^,^,^",options="header",]
 |====
 | Nom        | Android(squelette) | Intégration| Android(GUI)| Classification automatique| SES| Base de données| Serveur client
-| Nom Expert |Thomas Robert         |Lucien Maman         |Jean Claude Dufourd         |        |Michel Roux         |Thomas Robert            |Andrian Putina
+| Nom Expert |Thomas Robert         |Lucien Maman         |Jean Claude Dufourd         |    Cassini    |Michel Roux         |Thomas Robert            |Andrian Putina
 
 | Anh-vu    | X       |     X    |         |         |         |            |
 
