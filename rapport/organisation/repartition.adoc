@@ -22,17 +22,17 @@ et entre PAN1 et PAN2 respectivement.
 | Nom        | Android(squelette) | Intégration| Android(GUI)| Classification automatique| Focus Group (SES)| Base de données| Serveur client
 | Nom Expert |Thomas Robert         |Lucien Maman         |Jean Claude Dufourd         |Michel Roux         |Antonio Casilli       |Thomas Robert            |Andrian Putina
 
-| Anh-vu    | X       |     X    |         |         |         |            |
+| Anh-vu    | X       |     X   |         |         |   X      |            |
 
-|Florian   |   X      |        |         |         |         |  X          |
+|Florian   |   X      |        |         |         |  X       |  X          |
 
-| Caro    |         |         |         |         |     X    |  X        |
+| Caro    |         |     X   |         |         |     X    |  X        |
 
 | Anas   |      |         |         |    X     |     X    |          |
 
-| Olivier    |         |       |    X     |        |         |         |X
+| Olivier    |         |       |    X     |        |   X      |         |X
 
-| louis    |         |    X     |    X     |         |         |            |
+| louis    |         |    X     |    X     |         |     X    |            |
 
-| Pierre    |        |       |         |    X     |        |            | X
+| Pierre    |        |       |         |    X     |      X  |            | X
 |====
