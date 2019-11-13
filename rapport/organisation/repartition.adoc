@@ -26,13 +26,13 @@ et entre PAN1 et PAN2 respectivement.
 
 |Florian   |   X      |        |         |         |  X       |  X          |
 
-| Caro    |         |     X   |         |         |     X    |  X        |
+| Caroline    |         |     X   |         |         |     X    |  X        |
 
-| Anas   |      |         |         |    X     |     X    |          |
+| Anas   |      |         |      X   |    X     |     X    |          |
 
 | Olivier    |         |       |    X     |        |   X      |         |X
 
-| louis    |         |    X     |    X     |         |     X    |            |
+| Louis    |         |    X     |    X     |         |     X    |            |
 
 | Pierre    |        |       |         |    X     |      X  |            | X
 |====
