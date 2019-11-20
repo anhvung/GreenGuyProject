@@ -19,7 +19,7 @@ et entre PAN1 et PAN2 respectivement.
 
 [cols=",^,^,^,^,^,^,^",options="header",]
 |====
-| Module        | Android(squelette) | Intégration| Android(GUI)| Classification automatique| Focus Group (SES)| Base de données| Serveur client
+| Module        | Android | Intégration| Coeur du système| Classification automatique| Focus Group (SES)| Base de données| Serveur client
 | Expert |Thomas Robert         |Lucien Maman         |Thomas Robert?         |Michel Roux   |Antonio Casilli       |Antoine Amarilli?            |Jean-Claude Moissinac?
 
 | Anh-vu    | X       |     X   |         |         |   X      |            |
@@ -32,7 +32,7 @@ et entre PAN1 et PAN2 respectivement.
 
 | Olivier    |         |       |    X     |        |   X      |         |X
 
-| Louis    |         |    X     |    X     |         |     X    |            |
+| Louis    |         |    X     |         |         |     X    |            |
 
 | Pierre    |        |       |         |    X     |      X  |            | X
 |====
