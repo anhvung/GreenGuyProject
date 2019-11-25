@@ -27,13 +27,49 @@ sous-taches, l’une démontrable au PAN3 et l’autre uniquement au PAN4.
 [cols=",,^",options="header",]
 |====
 | Tâche | Description                                           | Intégré au PAN3
-| T1    | Classificateur d’image                                |
-| T1.1  | Changement espace de couleur pour permettre …         | X
-| T1.2  | Extraction de l’histogramme à partir de l’espace XYZ… | X
-| T1.3  | Extraction des caractéristiques …                     |
-| T1.4  | Comparaison des caractéristiques                      | X
-| T2    | Détection de rythme (Module « Audio/Rythme »)         |
-| T2.1  | Découpage signal sonore en bande fréquentielle        | X
-| T2.2  | Détection du tempo                                    |
-| T2.3  | Changement de tempo                                   | X
+| T1    | Android                               |
+| T1.1  |   Gestion des événements      | X
+| T1.2  |   Système de messagerie     | 
+| T1.3  |   Proposition d’itinéraires     | X
+| T1.4 |   Gestion des points d'intérêts (création de lieux, commentaires…)     | X
+| T1.5 |   Système de recherche générale     | X
+| T1.6 |   gestion des notifications    | 
+| T1.7 | Création de comptes   | X
+| T1.8 |   affichage des notifications    | 
+| T1.9|   Affichage de la  timeline (fil d’actualité) | X
+| T1.10|    Affichage et éditer des points d’intérêt sur la carte  | X
+
+| T2 |  Coeur  | 
+| T2.1| Architecture PAN 3   | X
+| T2.2| Architecture PAN 4   | 
+
+
+| T3 |   Base de données   | 
+| T3.1| Identifiants, profil (table de l’utilisateur) |X
+|T3.2|  Événements, actualité |X
+|T3.3| Communication entre les utilisateurs (Messagerie) |
+|T3.4| Carte |X
+|T3.5| Bases de données de la classification automatique |
+
+ | T4 | Serveur Client  | X 
+ | T4.1 | Mise à jour carte | X
+ | T4.2 | Gestion des profils | X
+ | T4.3 | Interactions sociales | 
+
+ | T4.4 | Recherche | X
+ | T4.5 | Classification automatique | X
+ | T4.6 | Evenements | X
+
+|T5 | Classification Automatique | 
+|T5.1| Analyse de données |X
+|T5.1.1| Analyse en composante principales|X
+|T5.2| Reconnaissance d’objets basiques|X
+|T5.2.1|Reconnaissance d’objets avancée | 
+
+
+
+
+|T6 | SES-Focus Group | X
+|T7 | Intégration | x
+
 |====
