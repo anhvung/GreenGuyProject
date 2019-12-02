@@ -32,7 +32,7 @@ et entre PAN1 et PAN2 respectivement.
 
 | Olivier    |         |       |    X     |        |         |         |X
 
-| Louis    |    X     |    X     |         |         |     X    |            |
+| Louis    |    X     |        |         |         |     X    |            |
 
 | Pierre    |        |       |         |    X     |        |            | X
 |====
