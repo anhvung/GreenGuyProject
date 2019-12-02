@@ -24,7 +24,7 @@ et entre PAN1 et PAN2 respectivement.
 
 | Anh-vu    | X       |     X   |         |         |        |            |
 
-|Florian   |   X      |        |         |         |         |  X          |
+|Florian   |         |     X   |         |         |         |  X          |
 
 | Caroline    |         |        |         |         |     X    |  X        |
 
@@ -32,7 +32,7 @@ et entre PAN1 et PAN2 respectivement.
 
 | Olivier    |         |       |    X     |        |         |         |X
 
-| Louis    |         |    X     |         |         |     X    |            |
+| Louis    |    X     |    X     |         |         |     X    |            |
 
 | Pierre    |        |       |         |    X     |        |            | X
 |====
