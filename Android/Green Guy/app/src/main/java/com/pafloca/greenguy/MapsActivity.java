@@ -203,10 +203,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
     private void  startAddPoiActivity(){
-
+        Intent intent = new Intent(this, AddPoiActivity.class);
+        startActivity(intent);
     }
     private void  startAddEventActivity(){
-
+        Intent intent = new Intent(this, AddEventActivity.class);
+        startActivity(intent);
     }
     private void StartActivity(String msg) {
         Intent intent = new Intent(this, DisplayInfo.class);

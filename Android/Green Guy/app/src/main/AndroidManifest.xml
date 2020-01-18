@@ -15,10 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".DisplayInfo"></activity>
+        <activity android:name=".AddPoiActivity"></activity>
+        <activity android:name=".AddEventActivity" />
+        <activity android:name=".DisplayInfo" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7762472071179494~6897057986"/>
+            android:value="ca-app-pub-7762472071179494~6897057986" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
