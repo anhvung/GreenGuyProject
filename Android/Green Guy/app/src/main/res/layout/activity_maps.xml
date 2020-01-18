@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/map"
@@ -71,6 +72,16 @@
 
             </RelativeLayout>
         </LinearLayout>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:padding="8dp"
+            android:layout_margin="5dp"
+
+            android:text="Add event" />
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
@@ -81,6 +92,8 @@
             ads:adSize="SMART_BANNER"
             ads:adUnitId="ca-app-pub-7762472071179494/1173618705">
         </com.google.android.gms.ads.AdView>
+
+
     </RelativeLayout>
 
 
