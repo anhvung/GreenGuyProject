@@ -3,8 +3,11 @@ package com.pafloca.greenguy;
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GestureDetectorCompat;
+import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -13,7 +16,10 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +40,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -41,7 +48,10 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-
+    static FloatingActionButton addEvent;
+    static FloatingActionButton addPoi;
+    static FloatingActionButton add;
+    static long transiton = 500;// button fade time millis
     private GoogleMap mMap;
     ArrayList<Marker> markers = new ArrayList<Marker>();
 
@@ -53,8 +63,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (NullPointerException e) {
         }
         setContentView(R.layout.activity_maps);
-
-
+        initializeButtons();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -69,19 +78,44 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mAdView.loadAd(adRequest);
     }
 
+    private void initializeButtons() {
+        addEvent = (FloatingActionButton) findViewById(R.id.addEvent);
+        addPoi = (FloatingActionButton) findViewById(R.id.addPoi);
+        addEvent.setVisibility(View.GONE);
+        addPoi.setVisibility(View.GONE);
+        // action qd on appuie sur  le plus en bas droite
+        add = (FloatingActionButton) findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                fadeShow(v);
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+            }
+        });
+        addPoi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startAddPoiActivity();
+
+            }
+        });
+        addEvent.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startAddEventActivity();
+
+            }
+        });
+    }
+
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         setDemoMarkers(googleMap);
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng arg0) {
+                fadeHide(add);
+            }
+        });
         googleMap.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                         this, R.raw.style_json));
@@ -168,8 +202,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
+    private void  startAddPoiActivity(){
 
+    }
+    private void  startAddEventActivity(){
 
+    }
     private void StartActivity(String msg) {
         Intent intent = new Intent(this, DisplayInfo.class);
 
@@ -197,4 +235,41 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
+    private void fadeShow(View v){
+
+        addEvent.setAlpha(0f);
+        addEvent.setVisibility(View.VISIBLE);
+        addPoi.setAlpha(0f);
+        addPoi.setVisibility(View.VISIBLE);
+        addPoi.animate()
+                .alpha(1f)
+                .setDuration(transiton).setListener(null);
+        addEvent.animate()
+                .alpha(1f)
+                .setDuration(transiton).setListener(null);
+        v.animate()
+                .alpha(0f)
+                .setDuration(transiton)
+                .setListener(null);
+        v.setVisibility(View.GONE);
+
+    }
+    private void fadeHide(View v){
+        v.setAlpha(0f);
+        v.setVisibility(View.VISIBLE);
+        v.animate()
+                .alpha(1f)
+                .setDuration(transiton).setListener(null);
+        addEvent.animate()
+                .alpha(0f)
+                .setDuration(transiton)
+                .setListener(null);
+        addEvent.setVisibility(View.GONE);
+        addPoi.animate()
+                .alpha(0f)
+                .setDuration(transiton)
+                .setListener(null);
+        addPoi.setVisibility(View.GONE);
+    }
+
 }

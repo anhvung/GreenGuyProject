@@ -11,7 +11,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/RelativeLayoutMaps">
 
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -72,16 +73,39 @@
 
             </RelativeLayout>
         </LinearLayout>
-        <Button
-            android:id="@+id/button"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:padding="8dp"
-            android:layout_margin="5dp"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_add_poi"
+            android:layout_margin="16dp" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:padding="8dp"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_event"
+            android:layout_marginBottom="100dp"
+            android:layout_marginRight="100dp"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addPoi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:padding="8dp"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_poi"
+            android:layout_marginBottom="100dp"
+            android:layout_marginRight="16dp" />
 
-            android:text="Add event" />
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
