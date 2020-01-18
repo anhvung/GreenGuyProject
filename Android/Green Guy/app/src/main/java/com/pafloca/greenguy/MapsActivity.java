@@ -1,38 +1,30 @@
 package com.pafloca.greenguy;
 
 import androidx.annotation.DrawableRes;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GestureDetectorCompat;
-import androidx.core.view.MotionEventCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.PlaceDetectionClient;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -58,10 +50,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     static FloatingActionButton position;
     static long transiton = 500;// button fade time millis
     private GoogleMap mMap;
+    double longitude=2.2;
+    double latitude=48.713111;
+    GeoDataClient mGeoDataClient;
+    PlaceDetectionClient mPlaceDetectionClient;
+    FusedLocationProviderClient mFusedLocationProviderClient;
     ArrayList<Marker> markers = new ArrayList<Marker>();
     private final static int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Construct a GeoDataClient.
+        mGeoDataClient = Places.getGeoDataClient(this, null);
+
+        // Construct a PlaceDetectionClient.
+        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
+
+        // Construct a FusedLocationProviderClient.
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         super.onCreate(savedInstanceState);
         try {
             this.getSupportActionBar().hide();
@@ -115,7 +120,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void reposition() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
+            Location myLocation = mMap.getMyLocation();
+            latitude= myLocation.getLatitude();
+            longitude= myLocation.getLongitude();
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(latitude, longitude)));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(11.1f));
+
+
+
 
         }
         else{
@@ -127,7 +139,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -309,7 +320,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Location access granted", Toast.LENGTH_SHORT).show();
-                    mMap.setMyLocationEnabled(true);
+                    reposition();
                 } else {
                    Toast.makeText(this, "Location access refused", Toast.LENGTH_SHORT).show();
                 }

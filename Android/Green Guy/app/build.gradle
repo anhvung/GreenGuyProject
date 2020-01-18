@@ -36,4 +36,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
     implementation 'com.android.support:design:27.1.0'
+    implementation 'com.google.android.libraries.places:places-compat:1.1.0'
 }
