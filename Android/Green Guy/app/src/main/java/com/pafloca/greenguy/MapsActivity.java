@@ -2,14 +2,17 @@ package com.pafloca.greenguy;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.core.view.MotionEventCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -20,6 +23,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,10 +55,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     static FloatingActionButton addEvent;
     static FloatingActionButton addPoi;
     static FloatingActionButton add;
+    static FloatingActionButton position;
     static long transiton = 500;// button fade time millis
     private GoogleMap mMap;
     ArrayList<Marker> markers = new ArrayList<Marker>();
-
+    private final static int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +84,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void initializeButtons() {
+        position= findViewById(R.id.position);
         addEvent = (FloatingActionButton) findViewById(R.id.addEvent);
         addPoi = (FloatingActionButton) findViewById(R.id.addPoi);
         addEvent.setVisibility(View.GONE);
@@ -103,8 +109,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
+
     }
 
+    private void reposition() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+
+        }
+        else{
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+
+
+        }
+
+    }
 
 
     @Override
@@ -119,7 +141,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                         this, R.raw.style_json));
+        position.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                reposition();
 
+            }
+        });
 
     }
 
@@ -273,5 +300,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setListener(null);
         addPoi.setVisibility(View.GONE);
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Location access granted", Toast.LENGTH_SHORT).show();
+                    mMap.setMyLocationEnabled(true);
+                } else {
+                   Toast.makeText(this, "Location access refused", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
 
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
 }
