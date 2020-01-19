@@ -14,38 +14,70 @@
   ~ limitations under the License.
   -->
 
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <PreferenceCategory app:title="Paramètres de confidentialité">
+        <SwitchPreferenceCompat
+            app:key="real_name"
+            app:title="Partager votre nom réel"
+            app:summaryOff="Seul votre pseudo est visible"
+            app:summaryOn="Votre vrai nom est visible publiquement"/>
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="Partager position"
+            app:summaryOff="Votre position n'est pas partagée"
+            app:summaryOn="Vos amis peuvent voir votre position"/>
+
+
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Notifications">
+
+        <SwitchPreferenceCompat
+            app:key="notif_nosound"
+            app:title="Notifications silencieuses" />
+
+        <SwitchPreferenceCompat
+            app:key="notif_suggest"
+            app:summaryOff="Vous ne recevrez pas d'informations sur l'écologie et la communauté GreenGuy"
+            app:summaryOn="Vous recevrez des informations sur l'écologie et la communauté GreenGuy"
+            app:title="Recevoir des suggestions ponctuelles" />
+        <SwitchPreferenceCompat
+            app:key="notif_msg"
+            app:summaryOff="Vous ne recevrez pas de notification à la réception de messages"
+            app:summaryOn="Vous recevrez une notification à la réception de chaque messages"
+            app:title="Recevoir des suggestions ponctuelles" />
+
+    </PreferenceCategory>
+    <PreferenceCategory app:title="Langues">
+
+        <ListPreference
+            app:defaultValue="Français"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:key="reply"
+            app:title="Langue"
+            app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
             app:key="signature"
             app:title="@string/signature_title"
             app:useSimpleSummaryProvider="true" />
 
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+    <PreferenceCategory app:title="A propos">
+
+        <Preference
+            android:selectable="false"
+            android:enabled="true"
+            android:key="example_key"
+            android:title="GreenGuy dev version"
+            android:summary="Groupe PACT 2.5 Module Android" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/sync_header">
-
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
-
-    </PreferenceCategory>
 
 </PreferenceScreen>
