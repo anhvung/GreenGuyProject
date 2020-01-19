@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
-public class ProfilComplete extends ProfilSmall {
+public class    ProfilComplete extends ProfilSmall {
     ArrayList<Long> friends = new ArrayList<Long>();
     // a ajouter : profil pic
 
