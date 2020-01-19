@@ -142,7 +142,7 @@
         android:layout_gravity="left"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu"
-        android:layout_marginRight="-64dp"/>
+       />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_viewEvent"

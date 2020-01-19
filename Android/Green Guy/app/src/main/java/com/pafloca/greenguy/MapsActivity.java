@@ -10,8 +10,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,10 +37,9 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
@@ -74,6 +73,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         setContentView(R.layout.activity_maps);
         initializeButtons();
+        initializeMenu();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -87,6 +87,42 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
+    private void initializeMenu(){
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                int id = item.getItemId();
+                switch (id){
+                    case R.id.nav_profile :
+                        Toast.makeText(getApplicationContext(),"profile",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_points :
+                        Toast.makeText(getApplicationContext(),"points",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_friend :
+                        Toast.makeText(getApplicationContext(),"messages",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_event :
+                        Toast.makeText(getApplicationContext(),"events",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_notif :
+                        Toast.makeText(getApplicationContext(),"notif",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_settings :
+                        Toast.makeText(getApplicationContext(),"settings",Toast.LENGTH_SHORT).show();
+                        start(SettingsActivity.class);
+                        break;
+
+                }
+
+                return true;
+            }
+        });
+
+    }
+
 
     private void initializeButtons() {
         position= findViewById(R.id.position);
@@ -120,11 +156,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void reposition() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            Location myLocation = mMap.getMyLocation();
-            latitude= myLocation.getLatitude();
-            longitude= myLocation.getLongitude();
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(latitude, longitude)));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(11.1f));
+
 
 
 
@@ -248,6 +280,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Intent intent = new Intent(this, AddEventActivity.class);
         startActivity(intent);
     }
+    private void start(Class<SettingsActivity> settingsActivityClass){
+        Intent intent = new Intent(this,settingsActivityClass );
+        startActivity(intent);
+    }
     private void StartActivity(String msg) {
         Intent intent = new Intent(this, DisplayInfo.class);
 
@@ -331,4 +367,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             // permissions this app might request.
         }
     }
+
+
+
 }
