@@ -97,6 +97,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 switch (id){
                     case R.id.nav_profile :
                         Toast.makeText(getApplicationContext(),"profile",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MapsActivity.this, AddEventActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_points :
                         Toast.makeText(getApplicationContext(),"points",Toast.LENGTH_SHORT).show();

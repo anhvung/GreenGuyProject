@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PageProfil"
+    android:orientation="vertical">
+
+
+
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/photo_profil"
+        android:id="@+id/page_profil_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/page_profil_ll_nom"
+        android:layout_below="@+id/page_profil_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L'homme vert"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/page_profil_ll_nom"
+        android:id="@+id/page_profil_ll_lieu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Point de résidence"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Neuilly"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/page_profil_ll_age"
+        android:layout_below="@+id/page_profil_ll_lieu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="42"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/page_profil_ll_liste_amis"
+        android:layout_below="@+id/page_profil_ll_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Afficher la liste d'amis"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/v"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_below="@+id/page_profil_ll_liste_amis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modifier"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>
