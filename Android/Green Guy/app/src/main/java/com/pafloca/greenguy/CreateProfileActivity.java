@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Senregistrer extends AppCompatActivity {
+public class CreateProfileActivity extends AppCompatActivity {
 
     private EditText nom_utilisateur;
     private EditText email;
@@ -19,7 +19,7 @@ public class Senregistrer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_senregistrer);
+        setContentView(R.layout.activity_create_profile);
 
         nom_utilisateur = findViewById(R.id.senregistrer_nom_utilisateur);
         email = findViewById(R.id.senregistrer_email);

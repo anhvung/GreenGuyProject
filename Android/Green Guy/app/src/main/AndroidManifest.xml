@@ -20,6 +20,7 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
         <activity android:name=".AddPoiActivity" />
+        <activity android:name=".AddEventActivity" />
         <activity android:name=".DisplayInfo" />
 
         <meta-data
@@ -46,14 +47,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Sidentifier"/>
-        <activity android:name=".PageProfil" >
+        <activity android:name=".IdentificationActivity"/>
+        <activity android:name=".ProfileActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Senregistrer" />
+        <activity android:name=".CreateProfileActivity" />
     </application>
 
 </manifest>

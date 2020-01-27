@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Sidentifier extends AppCompatActivity {
+public class IdentificationActivity extends AppCompatActivity {
 
     private EditText nom_utilisateur_ou_email;
     private EditText mdp;
@@ -17,7 +17,7 @@ public class Sidentifier extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sidentifier);
+        setContentView(R.layout.activity_identification);
 
         nom_utilisateur_ou_email = findViewById(R.id.sidentifier_nom_utilisateur_ou_email);
         mdp = findViewById(R.id.sidentifier_mdp);
