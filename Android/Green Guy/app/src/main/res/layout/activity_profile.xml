@@ -106,12 +106,13 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_below="@+id/page_profil_ll_liste_amis"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Modifier"
-        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_add"
+        android:id="@+id/page_profil_add_friend"
+        android:layout_below="@id/page_profil_ll_liste_amis"
+        android:layout_centerHorizontal="true"
         />
 
 </RelativeLayout>
