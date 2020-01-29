@@ -1,0 +1,125 @@
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `particularPlaces`
+--
+
+CREATE TABLE `particularPlaces` (
+  `type` varchar(100) NOT NULL,
+  `localisation` point NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pointOfInterest`
+--
+
+CREATE TABLE `pointOfInterest` (
+  `id` int(11) NOT NULL,
+  `interest` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='centre d''intérêt';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `lastName` varchar(65) NOT NULL,
+  `firstName` varchar(65) NOT NULL,
+  `pseudo` varchar(65) NOT NULL,
+  `password` varchar(65) NOT NULL,
+  `lastLocation` point NOT NULL,
+  `registrationDate` date NOT NULL,
+  `birthDate` date NOT NULL,
+  `score` int(11) NOT NULL,
+  `mail` varchar(65) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='utilisateurs';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usersMessagesOnAGroup`
+--
+
+CREATE TABLE `usersMessagesOnAGroup` (
+  `senderId` int(11) NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='messages d''utilisateurs dans un groupe';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `waste`
+--
+
+CREATE TABLE `waste` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `localisation` point NOT NULL,
+  `signallingDate` date NOT NULL,
+  `flagmanId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='déchets';
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `creationOfEvents`
+--
+ALTER TABLE `creationOfEvents`
+  ADD PRIMARY KEY (`eventId`);
+
+--
+-- Indexes for table `listOfGroups`
+--
+ALTER TABLE `listOfGroups`
+  ADD PRIMARY KEY (`groupId`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `waste`
+--
+ALTER TABLE `waste`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `creationOfEvents`
+--
+ALTER TABLE `creationOfEvents`
+  MODIFY `eventId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `listOfGroups`
+--
+ALTER TABLE `listOfGroups`
+  MODIFY `groupId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `waste`
+--
+ALTER TABLE `waste`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
