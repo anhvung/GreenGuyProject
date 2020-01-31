@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 /*
- * www.codeurjava.com
+ *\brief Classe Client, il s'agit pour le moment d'un code servant de point de dÃ©part
  */
 public class Client {
 
@@ -14,7 +14,7 @@ public class Client {
       final Socket clientSocket;
       final BufferedReader in;
       final PrintWriter out;
-      final Scanner sc = new Scanner(System.in);//pour lire à partir du clavier
+      final Scanner sc = new Scanner(System.in);//pour lire  partir du clavier
   
       try {
          /*
@@ -51,7 +51,7 @@ public class Client {
                     System.out.println("Serveur : "+msg);
                     msg = in.readLine();
                  }
-                 System.out.println("Serveur déconecté");
+                 System.out.println("Serveur dconect");
                  out.close();
                  clientSocket.close();
                } catch (IOException e) {
