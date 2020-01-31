@@ -1,7 +1,7 @@
 package usefulclasses;
-//!  se charge des communication avec le serveur.
-/*!
-  A remplir
-*/
+
+/**
+ * se charge des communication avec le serveur.. Aremplir
+ */
 public class Communicator {
 }

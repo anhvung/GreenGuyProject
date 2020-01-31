@@ -5,7 +5,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/**
+ * création de profil.
+ *
+ */
 public class CreateProfileActivity extends AppCompatActivity {
 
     private EditText nom_utilisateur;

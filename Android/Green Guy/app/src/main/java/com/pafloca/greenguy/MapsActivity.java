@@ -40,10 +40,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-//!  Activité : carte principale.
-/*!
-    Il y a une maps (maps sdk), une timeline à droite et le menu à gauche.
-*/
+
+/**
+ * Activité : carte principale.
+ *
+ *  Il y a une maps (maps sdk), une timeline à droite et le menu à gauche.
+ */
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     static FloatingActionButton addEvent;

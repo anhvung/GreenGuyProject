@@ -5,7 +5,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/**
+ * Page identification
+ */
 public class IdentificationActivity extends AppCompatActivity {
 
     private EditText nom_utilisateur_ou_email;
