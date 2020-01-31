@@ -1,7 +1,10 @@
 package usefulclasses;
 
 import com.google.android.gms.maps.model.LatLng;
-
+//! représente un profil partiel
+/*!
+  A remplir
+*/
 public class ProfilSmall {
     private long id;
     private String realName;
