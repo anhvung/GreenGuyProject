@@ -11,7 +11,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/RelativeLayoutMaps">
+
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -71,6 +73,53 @@
 
             </RelativeLayout>
         </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:padding="8dp"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_gps"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorTransparent"
+            android:tint="@color/colorBlue"
+            android:outlineSpotShadowColor="@color/colorTransparent"
+            android:outlineAmbientShadowColor="@color/colorTransparent"
+            app:borderWidth="0dp"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="false"
+            android:padding="8dp"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_add_poi"
+            android:layout_margin="16dp" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="false"
+            android:padding="8dp"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_event"
+            android:layout_marginBottom="100dp"
+            android:layout_marginLeft="100dp"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addPoi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="false"
+            android:padding="8dp"
+            android:src="@drawable/ic_poi"
+            android:layout_marginBottom="100dp"
+            android:layout_marginLeft="16dp" />
+
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
@@ -81,6 +130,8 @@
             ads:adSize="SMART_BANNER"
             ads:adUnitId="ca-app-pub-7762472071179494/1173618705">
         </com.google.android.gms.ads.AdView>
+
+
     </RelativeLayout>
 
 
@@ -90,14 +141,17 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/drawer_menu"
+       />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_viewEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
         android:layout_gravity="right"
-        app:menu="@menu/event_menu" />
+        app:menu="@menu/event_menu"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="-64dp"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
