@@ -40,7 +40,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-
+//!  Activité : carte principale.
+/*!
+    Il y a une maps (maps sdk), une timeline à droite et le menu à gauche.
+*/
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     static FloatingActionButton addEvent;
@@ -88,6 +91,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mAdView.loadAd(adRequest);
     }
     private void initializeMenu(){
+        /**
+        *\brief initialise les boutons du menu gauche
+         */
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -125,6 +132,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void initializeButtons() {
+        /**
+         *\brief initialise les boutons flottants et leur animation
+         */
         position= findViewById(R.id.position);
         addEvent = (FloatingActionButton) findViewById(R.id.addEvent);
         addPoi = (FloatingActionButton) findViewById(R.id.addPoi);
@@ -155,6 +165,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private void reposition() {
+        /**
+         *\brief pour le GPS
+         */
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
@@ -195,6 +208,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void setDemoMarkers(GoogleMap googleMap) {
+        /**
+         *\brief place les points sur la carte
+         */
         mMap = googleMap;
         LatLng tetech = new LatLng(48.713111, 2.199685);
         LatLng poubelle_recyclable = new LatLng(48.714426, 2.202051);
@@ -293,6 +309,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        /**
+         *\brief converti les images au format approprié
+         */
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -302,6 +321,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector_bckgrd(Context context, @DrawableRes int vectorDrawableResourceId) {
+        /**
+         *\brief converti les images au format approprié
+         */
         Drawable background = ContextCompat.getDrawable(context, R.drawable.ic_background);
         background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
@@ -313,7 +335,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
     private void fadeShow(View v){
-
+/**
+ *\brief animation
+ */
         addEvent.setAlpha(0f);
         addEvent.setVisibility(View.VISIBLE);
         addPoi.setAlpha(0f);
@@ -332,6 +356,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
     private void fadeHide(View v){
+        /**
+         *\brief animation
+         */
         v.setAlpha(0f);
         v.setVisibility(View.VISIBLE);
         v.animate()

@@ -3,7 +3,10 @@ package usefulclasses;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-
+//!  Représente un profil complet, hérite de ProfilSmall
+/*!
+  A remplir
+*/
 public class    ProfilComplete extends ProfilSmall {
     ArrayList<Long> friends = new ArrayList<Long>();
     // a ajouter : profil pic
