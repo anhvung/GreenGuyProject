@@ -9,7 +9,7 @@ from sklearn.decomposition import PCA
 from matplotlib import pyplot
 
 
-# define training data
+# define test training data
 sentences = [['this', 'is', 'the', 'first', 'sentence', 'for', 'word2vec'],
 			['this', 'is', 'the', 'second', 'sentence'],
 			['yet', 'another', 'sentence'],
