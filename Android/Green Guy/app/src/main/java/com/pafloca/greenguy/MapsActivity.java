@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -59,6 +62,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     FusedLocationProviderClient mFusedLocationProviderClient;
     ArrayList<Marker> markers = new ArrayList<Marker>();
     private final static int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+    private RecyclerView recyclerView;
+    private EventMenuAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Construct a GeoDataClient.
@@ -89,6 +95,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_event_menu);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new EventMenuAdapter(this, commentaireList);
+        rv.setAdapter(adapter);
+
     }
     private void initializeMenu(){
         /**

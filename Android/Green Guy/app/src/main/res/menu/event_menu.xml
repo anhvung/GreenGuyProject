@@ -6,6 +6,17 @@
     <group android:checkableBehavior="single">
     <item android:title="Evénements">
         <menu>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="@drawable/background_item_profil_5"
+                android:layout_below="@+id/moi_utilisateur_layout_publication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerview_event_menu"
+                android:layout_marginBottom="10dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
             <item
                 android:id="@+id/clenwalk"
                 android:icon="@drawable/ic_cleanwalk"
