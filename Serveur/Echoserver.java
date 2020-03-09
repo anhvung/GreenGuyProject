@@ -1,13 +1,30 @@
 import java.net.*;
 import java.io.*;
+import java.sql.*;
+import java.util.*;
 
 public class Echoserver {
-    public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
         
+
+
+
         if (args.length != 1) {
             System.err.println("Usage: java EchoServer <port number>");
             System.exit(1);
         }
+        String url = "jdbc:mysql://localhost:3306/greenGuyDataBase";
+	String utilisateur = "mysql";
+	String motDePasse = "Password1";
+	Connection connexion = null;
+	try{
+	     connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
+	}catch( Exception e) {} 
+
+
+
+
+
         
         int portNumber = Integer.parseInt(args[0]);
         
