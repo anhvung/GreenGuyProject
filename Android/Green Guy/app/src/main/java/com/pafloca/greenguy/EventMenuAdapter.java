@@ -33,7 +33,7 @@ public class EventMenuAdapter extends RecyclerView.Adapter<EventMenuAdapter.MyVi
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.actu_item, parent, false);
+        View view = inflater.inflate(R.layout.item_menu_event, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -46,16 +46,16 @@ public class EventMenuAdapter extends RecyclerView.Adapter<EventMenuAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView nom;
-        private TextView comment;
+        private TextView titre;
+        private TextView sous_titre;
         public View mView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.mView = itemView;
-            //nom = itemView.findViewById(R.id.commentaire_item_nom);
-            //comment = itemView.findViewById(R.id.commentaire_item_commentaire);
+            titre = itemView.findViewById(R.id.titre_item_menu_event);
+            sous_titre = itemView.findViewById(R.id.sous_titre_item_menu_event);
         }
     }
 }

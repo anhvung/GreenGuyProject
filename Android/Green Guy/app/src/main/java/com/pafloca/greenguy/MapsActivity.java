@@ -64,6 +64,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private final static int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private RecyclerView recyclerView;
     private EventMenuAdapter adapter;
+    private ArrayList<ModelEvent> eventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,10 +99,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview_event_menu);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new EventMenuAdapter(this, commentaireList);
-        rv.setAdapter(adapter);
+        adapter = new EventMenuAdapter(this, eventList);
+        recyclerView.setAdapter(adapter);
+
+        chargementEvents();
 
     }
+
+    private void chargementEvents() {
+
+        //ajouter à eventList les évènements récupérés de la base de donnée
+
+        adapter.notifyDataSetChanged();
+
+
+    }
+
     private void initializeMenu(){
         /**
         *\brief initialise les boutons du menu gauche
