@@ -6,9 +6,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Titre"
+        android:textColor="#000000"
+        android:textSize="14dp"
         android:id="@+id/titre_item_menu_event"/>
 
     <TextView
+        android:layout_below="@id/titre_item_menu_event"
+        android:text="Sous titre"
+        android:textColor="#000000"
+        android:textSize="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sous_titre_item_menu_event"/>
