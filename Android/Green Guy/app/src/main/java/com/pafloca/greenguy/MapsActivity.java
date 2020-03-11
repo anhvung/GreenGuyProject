@@ -97,6 +97,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        eventList = new ArrayList<>();
+        ModelEvent modelEvent1 = new ModelEvent( "CleanWalk", "Ramassage de déchets collectif dans un quartier","blablabla", "Serguei", "8 mars", "Paris");
+        ModelEvent modelEvent2 = new ModelEvent( "Cop 1", "Rassemblement entre étudiants","blablabla", "Vlad", "9 mai", "Moscou");
+        ModelEvent modelEvent3 = new ModelEvent( "Cop 29", "Rassemblement pour défendre l'écologie", "blablabla","Marie Thérèse", "1 avril", "Cracovie");
+        ModelEvent modelEvent4 = new ModelEvent( "Conférence", "Les économistes enfument ils la planère","blablabla", "Charles", "3 avril", "Berlin");
+        ModelEvent modelEvent5 = new ModelEvent( "Débat politico écologique", "Occasion de retrouver les figures principales du mouvement écologique", "blablabla", "Thomas", "25 décembre", "Marseille");
+        ModelEvent modelEvent6 = new ModelEvent( "Cinéma", "Au nom de la terre, film projeté en plein air", "blablabla","Marion", "5 septembre", "Bruges");
+        ModelEvent modelEvent7 = new ModelEvent( "Salon de l'agriculture", "Rencontre avec les agriculteurs venant de toute la France","blablabla", "Manu", "1 janvier", "Toulouse");
+        ModelEvent modelEvent8 = new ModelEvent( "Voyage dans plusieurs villes d'Europe", "But: rencontrer des jeunes avec des pensées diverses et variées sur le sujet","blablabla", "David", "26 mai", "Amsterdam - Rotterdam");
+
+        eventList.add(modelEvent1);
+        eventList.add(modelEvent2);
+        eventList.add(modelEvent3);
+        eventList.add(modelEvent4);
+        eventList.add(modelEvent5);
+        eventList.add(modelEvent6);
+        eventList.add(modelEvent7);
+        eventList.add(modelEvent8);
+
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview_event_menu);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EventMenuAdapter(this, eventList);

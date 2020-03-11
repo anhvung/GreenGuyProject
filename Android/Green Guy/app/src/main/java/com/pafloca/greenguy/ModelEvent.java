@@ -4,6 +4,7 @@ public class ModelEvent {
 
     private String titre;
     private String soustitre;
+    private String description;
     private String publieur;
     private String date;
     private String lieu;
@@ -12,9 +13,10 @@ public class ModelEvent {
 
     }
 
-    public ModelEvent(String titre, String soustitre, String publieur, String date, String lieu) {
+    public ModelEvent(String titre, String soustitre, String description, String publieur, String date, String lieu) {
         this.titre = titre;
         this.soustitre = soustitre;
+        this.description = description;
         this.publieur = publieur;
         this.date = date;
         this.lieu = lieu;
@@ -26,6 +28,14 @@ public class ModelEvent {
 
     public void setLieu(String lieu) {
         this.lieu = lieu;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTitre() {

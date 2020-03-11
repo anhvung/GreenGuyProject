@@ -41,6 +41,8 @@ public class EventMenuAdapter extends RecyclerView.Adapter<EventMenuAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
+        holder.sous_titre.setText(events.get(position).getSoustitre());
+        holder.titre.setText(events.get(position).getTitre());
 
     }
 

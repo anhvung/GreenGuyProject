@@ -147,11 +147,18 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_viewEvent"
         android:layout_gravity="right"
-        app:menu="@menu/event_menu"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="-64dp"/>
+        android:layout_marginRight="-64dp">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="25dp"
+                android:id="@+id/recyclerview_event_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
