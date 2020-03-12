@@ -171,6 +171,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(intent_event);
                         Toast.makeText(getApplicationContext(),"events",Toast.LENGTH_SHORT).show();
                         break;
+                    /*
+
+                    case R.id.nav_my_event :
+                        Intent intent_my_event = new Intent(MapsActivity.this, ListOfMyEventsActivity.class);
+                        startActivity(intent_my_event);
+                        Toast.makeText(getApplicationContext(),"events",Toast.LENGTH_SHORT).show();
+                        break;
+
+                     */
                     case R.id.nav_notif :
                         Toast.makeText(getApplicationContext(),"notif",Toast.LENGTH_SHORT).show();
                         break;
