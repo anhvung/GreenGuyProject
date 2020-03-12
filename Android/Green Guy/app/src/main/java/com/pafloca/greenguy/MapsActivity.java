@@ -157,8 +157,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     break;
                     case R.id.nav_profile :
                         Toast.makeText(getApplicationContext(),"profile",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MapsActivity.this, MyProfileActivity.class);
-                        startActivity(intent);
+                        Intent intent_profile = new Intent(MapsActivity.this, MyProfileActivity.class);
+                        startActivity(intent_profile);
                         break;
                     case R.id.nav_points :
                         Toast.makeText(getApplicationContext(),"points",Toast.LENGTH_SHORT).show();
@@ -167,6 +167,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Toast.makeText(getApplicationContext(),"messages",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_event :
+                        Intent intent_event = new Intent(MapsActivity.this, ListOfEventsActivity.class);
+                        startActivity(intent_event);
                         Toast.makeText(getApplicationContext(),"events",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_notif :
