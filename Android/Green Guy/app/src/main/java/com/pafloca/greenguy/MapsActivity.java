@@ -1,6 +1,7 @@
 package com.pafloca.greenguy;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
@@ -65,6 +66,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private RecyclerView recyclerView;
     private EventMenuAdapter adapter;
     private ArrayList<ModelEvent> eventList;
+    private int ajoutPoiRequestCode = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
 
         eventList = new ArrayList<>();
         ModelEvent modelEvent1 = new ModelEvent( "CleanWalk", "Ramassage de déchets collectif dans un quartier","blablabla", "Serguei", "8 mars", "Paris");
@@ -258,6 +262,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    public GoogleMap getmMap() {
+        return mMap;
+    }
+
     private void setDemoMarkers(GoogleMap googleMap) {
         /**
          *\brief place les points sur la carte
@@ -271,6 +279,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng info = new LatLng(48.712939, 2.201053);
         LatLng pointEau = new LatLng(48.712211, 2.192545);
 
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+
+                Intent intent = new Intent(MapsActivity.this, AddPoiActivity.class);
+                Bundle args = new Bundle();
+                args.putParcelable("position", latLng);
+                intent.putExtra("bundle", args);
+                startActivityForResult(intent, ajoutPoiRequestCode);
+
+
+            }
+        });
 
         mMap.addMarker(new MarkerOptions()
                 .position(tetech)
@@ -341,8 +362,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
     private void  startAddPoiActivity(){
-        Intent intent = new Intent(this, AddPoiActivity.class);
-        startActivity(intent);
+        Toast.makeText(getApplicationContext(),"Appuyez longtemps sur un point de la carte pour ajouter un point d'intérêt",Toast.LENGTH_LONG).show();
+
+
     }
     private void  startAddEventActivity(){
         Intent intent = new Intent(this, AddEventActivity.class);
@@ -445,6 +467,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             // other 'case' lines to check for other
             // permissions this app might request.
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == ajoutPoiRequestCode) {
+                //actualiser la carte car on a ajouté un nouveau POI
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
