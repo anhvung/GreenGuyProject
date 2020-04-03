@@ -23,3 +23,6 @@ Utilisation de ces groupes pour les suggestions
 *Module Intégration* : Des problèmes d’intégration entre le serveur et l’application sont survenue. Une fois le prototype du module Serveur Client au point, il s’agira de vérifier que toutes les méthodes d’échange des données entre l’application et le serveur marchent.
 
 *2. OBJECTIFS POUR LE PAN4*
+
+*Module Android* : Pour le pan4 la mise en place d'une messagerie entre amis en prévue. Un système de géolocalisation encore non existante doit être implémentée pour qu l'utilisation puisse se repérer. Dans la même optique, une proposition d'itinéraires doit pouvoir petre fait.
+*Module Intégration* : On compte pour le pan4 poursuivre l'intégration de tous les modules et d'approfondir les test, surtout entre serveur et application, dès que cela est possible. La mise en place de tests de performance est envisagée, que ce soit au niveau de l'interface de l'appplication (via des test automatisés) ou au niveau du temps de réponse du serveur pour différentes requêtes.
