@@ -10,7 +10,8 @@ Etat d’avancement PACT : Groupe 2.5
 
 *Module Serveur Client* : Le module client-serveur a plus ou moins terminé son prototype, mais nous n’avons pas pu le tester dans une configuration réaliste faute de l’accès au serveur de Télécom. À la place, nous allons effectuer les tests sur une machine avec le script Java et Android Studio. 
 
-*Module Base de données* :
+*Module Base de données* :  Le module base de données a déjà installer la base sur le serveur avec toutes les tables et a commencé à écrire des requetes en Java pour communiquer avec le serveur(écrire dans la base de données et récupérer des informations) .
+Cependant, depuis le confinement, il n'est plus possible de travailler avec la base de données en ligne car nous n'y avons pas accès de chez nous, il faut ^être sur le réseau local de l'école. Peut-etre y'a-t-il des moyens de se connecter dessus de chez nous. 
 
 *Module Apprentissage Automatique* : Nous avons fini le travail théorique préalable, qui permet de comprendre les enjeux de notre module et les différentes pistes d’applications. Nous avons besoin de nous coordonner avec les modules clients-serveur et BDD pour pouvoir appliquer les différentes méthodes, qui s’appuient sur une certaine quantité de donnée à disposition.
 Les pistes que nous allons aborder sont :
@@ -25,6 +26,9 @@ Utilisation de ces groupes pour les suggestions
 *2. OBJECTIFS POUR LE PAN4*
 
 *Module Android* : Pour le pan4 la mise en place d'une messagerie entre amis en prévue. Un système de géolocalisation encore non existante doit être implémentée pour qu l'utilisation puisse se repérer. Dans la même optique, une proposition d'itinéraires doit pouvoir être fait.
+
+*Module Base de données* :  
+Avoir une base de données fonctionnelle qui est capable de stocker et de donner toutes les informations nécessaires au fonctionnement de l'application.
 
 *Module Intégration* : On compte pour le pan4 poursuivre l'intégration de tous les modules et d'approfondir les test, surtout entre serveur et application, dès que cela est possible. La mise en place de tests de performance est envisagée, que ce soit au niveau de l'interface de l'appplication (via des test automatisés) ou au niveau du temps de réponse du serveur pour différentes requêtes.
 
