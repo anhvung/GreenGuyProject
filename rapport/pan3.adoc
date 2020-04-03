@@ -29,3 +29,5 @@ Utilisation de ces groupes pour les suggestions
 *Module Intégration* : On compte pour le pan4 poursuivre l'intégration de tous les modules et d'approfondir les test, surtout entre serveur et application, dès que cela est possible. La mise en place de tests de performance est envisagée, que ce soit au niveau de l'interface de l'appplication (via des test automatisés) ou au niveau du temps de réponse du serveur pour différentes requêtes.
 
 *Module Coeur* : Nous comptons maximiser l'interraction avec les autres applications du smartphone, à minima une synchronisation avec le calendrier. Nous allons aussi implémenter les notifications pour la réception de messages et les événements. Moins sur, nous voulons travailler sur l'interconnexion  avec d'autres réseaux sociaux ou le feedback d'événements.
+
+*Module Serveur Client* : Ajout des requêtes en lien avec les modules base de données et android. Programmation de la communication entre deux clients (via le serveur).
