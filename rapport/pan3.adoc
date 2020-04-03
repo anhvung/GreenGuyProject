@@ -14,7 +14,7 @@ Etat d’avancement PACT : Groupe 2.5
 
 *Module Apprentissage Automatique* : Nous avons fini le travail théorique préalable, qui permet de comprendre les enjeux de notre module et les différentes pistes d’applications. Nous avons besoin de nous coordonner avec les modules clients-serveur et BDD pour pouvoir appliquer les différentes méthodes, qui s’appuient sur une certaine quantité de donnée à disposition.
 Les pistes que nous allons aborder sont :
-Classification des évenements écologiques par un MLP.
+Classification des évenements écologiques par un modèle MLP.
 Création de groupes de personnes automatiquement via PCA selon critères géopgraphiques
 Utilisation de ces groupes pour les suggestions 
 
