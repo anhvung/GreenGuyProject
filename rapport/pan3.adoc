@@ -2,24 +2,24 @@ Etat d’avancement PACT : Groupe 2.5
 
 
 
-ETAT ACTUEL
+*1. ETAT ACTUEL*
 
-Module SES Focus Group : Le Focus Group a été réalisé et nous avons reçu de nombreuses suggestions intéressantes. Le compte-rendu a été envoyé à l’endadrant. La séance a été enregistrée et si plus tard d’autres informations se révèlent utiles, l’enregistrement pourra servir en plus des notes prises.
+*Module SES Focus Group* : Le Focus Group a été réalisé et nous avons reçu de nombreuses suggestions intéressantes. Le compte-rendu a été envoyé à l’endadrant. La séance a été enregistrée et si plus tard d’autres informations se révèlent utiles, l’enregistrement pourra servir en plus des notes prises.
 
-Module Android : Le module Android s’est chargé d’ajouter la timeline permettant d’afficher des informations et événements pertinents. La page permettant la création d’événements et de points d’intérêts a aussi été faite. Un travail sur la page des réglages et des gestions des amis a été commencé et est partiellement fonctionnel et doit être complété pour le pan 4
+*Module Android* : Le module Android s’est chargé d’ajouter la timeline permettant d’afficher des informations et événements pertinents. La page permettant la création d’événements et de points d’intérêts a aussi été faite. Un travail sur la page des réglages et des gestions des amis a été commencé et est partiellement fonctionnel et doit être complété pour le pan 4
 
-Module Serveur Client : Le module client-serveur a plus ou moins terminé son prototype, mais nous n’avons pas pu le tester dans une configuration réaliste faute de l’accès au serveur de Télécom. À la place, nous allons effectuer les tests sur une machine avec le script Java et Android Studio. 
+*Module Serveur Client* : Le module client-serveur a plus ou moins terminé son prototype, mais nous n’avons pas pu le tester dans une configuration réaliste faute de l’accès au serveur de Télécom. À la place, nous allons effectuer les tests sur une machine avec le script Java et Android Studio. 
 
-Module Base de données :
+*Module Base de données* :
 
-Module Apprentissage Automatique : Nous avons fini le travail théorique préalable, qui permet de comprendre les enjeux de notre module et les différentes pistes d’applications. Nous avons besoin de nous coordonner avec les modules clients-serveur et BDD pour pouvoir appliquer les différentes méthodes, qui s’appuient sur une certaine quantité de donnée à disposition.
+*Module Apprentissage Automatique* : Nous avons fini le travail théorique préalable, qui permet de comprendre les enjeux de notre module et les différentes pistes d’applications. Nous avons besoin de nous coordonner avec les modules clients-serveur et BDD pour pouvoir appliquer les différentes méthodes, qui s’appuient sur une certaine quantité de donnée à disposition.
 Les pistes que nous allons aborder sont :
 Classification des évenement écologiques.
 Création de groupes de personnes automatiquement via PCA selon critères géopgraphiques
 Utilisation de ces groupes pour les suggestions 
 
-Module Coeur : On a construit plusieurs classes sur Androidstudio par exemple une Activity qui permet de scanner le code QR d'un utilisateur pour pouvoir ensuite le rajouter dans la liste des amis.
+*Module Coeur* : On a construit plusieurs classes sur Androidstudio par exemple une Activity qui permet de scanner le code QR d'un utilisateur pour pouvoir ensuite le rajouter dans la liste des amis.
 
-Module Intégration : Des problèmes d’intégration entre le serveur et l’application sont survenue. Une fois le prototype du module Serveur Client au point, il s’agira de vérifier que toutes les méthodes d’échange des données entre l’application et le serveur marchent.
+*Module Intégration* : Des problèmes d’intégration entre le serveur et l’application sont survenue. Une fois le prototype du module Serveur Client au point, il s’agira de vérifier que toutes les méthodes d’échange des données entre l’application et le serveur marchent.
 
-OBJECTIFS POUR LE PAN4
+*2. OBJECTIFS POUR LE PAN4*
