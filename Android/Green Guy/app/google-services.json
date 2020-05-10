@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "178450566634",
+    "firebase_url": "https://pact-97731.firebaseio.com",
+    "project_id": "pact-97731",
+    "storage_bucket": "pact-97731.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178450566634:android:bb7f5f15a01fcca856f693",
+        "android_client_info": {
+          "package_name": "com.pafloca.greenguy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178450566634-qn90p7j68csuffjrsvuscf3tmnnsdm9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pafloca.greenguy",
+            "certificate_hash": "5edb83e442130c755c5b6b7095ac564845e2493a"
+          }
+        },
+        {
+          "client_id": "178450566634-0ns79df9tu3ce9mlagn2isagfc2v3cvp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9XyiPNqOER4kMBDb9ZSfEpGSy96w9B6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178450566634-0ns79df9tu3ce9mlagn2isagfc2v3cvp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
