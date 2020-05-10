@@ -1,8 +1,10 @@
 package usefulclasses;
-//!  représente une notification.
-/*!
-  A remplir
-*/
+
+/**
+ * Représente une notification.
+ * A remplir
+ */
+
 public class Notification {
 
 }

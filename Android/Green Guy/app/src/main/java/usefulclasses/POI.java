@@ -1,8 +1,8 @@
 package usefulclasses;
-//!  représente un Point d'intérêt
-/*!
-  A remplir
-*/
+/**
+ * Représente un point d'intérêt.
+ * A remplir
+ */
 public class POI {
     private String description ="Veuillez ajouter une dscription";
     private String title;

@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import usefulclasses.ClientConnexion;
 import androidx.appcompat.app.AppCompatActivity;
 
-import usefulclasses.ClientConnexion;
+/**
+ * Page identification
+ */
 
 public class IdentificationActivity extends AppCompatActivity {
 

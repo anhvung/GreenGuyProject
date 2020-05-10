@@ -2,12 +2,23 @@ package com.pafloca.greenguy;
 
 import android.os.Bundle;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8ab990d9b75bda6a7fd11f81d78a8f057d2c81ee
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD
+/**
+ * Activité : ajouter un événement.
+ * A remplir
+ */
+=======
 
 
+>>>>>>> 8ab990d9b75bda6a7fd11f81d78a8f057d2c81ee
 public class AddEventActivity extends AppCompatActivity {
 
     private EditText titre;

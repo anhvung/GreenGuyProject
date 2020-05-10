@@ -10,9 +10,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import usefulclasses.ClientConnexion;
 
 import static java.lang.Boolean.parseBoolean;
+
+
+/**
+ * création de profil.
+ *
+ */
 
 public class CreateProfileActivity extends AppCompatActivity {
 

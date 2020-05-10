@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
-//!  Activité : afficher les infos d'un événement ou point d'intérêt.
-/*!
-  A remplir
-*/
+/**
+ * Raffiches les info d'un événement / point d'intérêt.
+ * A remplir
+ */
 public class DisplayInfo extends AppCompatActivity {
     private Map<String,String> dic =new HashMap<String,String>();
 
