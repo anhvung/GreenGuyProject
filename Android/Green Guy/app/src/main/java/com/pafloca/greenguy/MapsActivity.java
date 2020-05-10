@@ -1,6 +1,7 @@
 package com.pafloca.greenguy;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
@@ -15,6 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -61,6 +65,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     FusedLocationProviderClient mFusedLocationProviderClient;
     ArrayList<Marker> markers = new ArrayList<Marker>();
     private final static int MY_PERMISSIONS_REQUEST_LOCATION = 1;
+    private RecyclerView recyclerView;
+    private EventMenuAdapter adapter;
+    private ArrayList<ModelEvent> eventList;
+    private int ajoutPoiRequestCode = 1000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Construct a GeoDataClient.
@@ -91,7 +100,48 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
+
+        eventList = new ArrayList<>();
+        ModelEvent modelEvent1 = new ModelEvent( "CleanWalk", "Ramassage de déchets collectif dans un quartier","blablabla", "Serguei", "8 mars", "Paris");
+        ModelEvent modelEvent2 = new ModelEvent( "Cop 1", "Rassemblement entre étudiants","blablabla", "Vlad", "9 mai", "Moscou");
+        ModelEvent modelEvent3 = new ModelEvent( "Cop 29", "Rassemblement pour défendre l'écologie", "blablabla","Marie Thérèse", "1 avril", "Cracovie");
+        ModelEvent modelEvent4 = new ModelEvent( "Conférence", "Les économistes enfument ils la planère","blablabla", "Charles", "3 avril", "Berlin");
+        ModelEvent modelEvent5 = new ModelEvent( "Débat politico écologique", "Occasion de retrouver les figures principales du mouvement écologique", "blablabla", "Thomas", "25 décembre", "Marseille");
+        ModelEvent modelEvent6 = new ModelEvent( "Cinéma", "Au nom de la terre, film projeté en plein air", "blablabla","Marion", "5 septembre", "Bruges");
+        ModelEvent modelEvent7 = new ModelEvent( "Salon de l'agriculture", "Rencontre avec les agriculteurs venant de toute la France","blablabla", "Manu", "1 janvier", "Toulouse");
+        ModelEvent modelEvent8 = new ModelEvent( "Voyage dans plusieurs villes d'Europe", "But: rencontrer des jeunes avec des pensées diverses et variées sur le sujet","blablabla", "David", "26 mai", "Amsterdam - Rotterdam");
+
+        eventList.add(modelEvent1);
+        eventList.add(modelEvent2);
+        eventList.add(modelEvent3);
+        eventList.add(modelEvent4);
+        eventList.add(modelEvent5);
+        eventList.add(modelEvent6);
+        eventList.add(modelEvent7);
+        eventList.add(modelEvent8);
+
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_event_menu);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new EventMenuAdapter(this, eventList);
+        recyclerView.setAdapter(adapter);
+
+        chargementEvents();
+
     }
+
+    private void chargementEvents() {
+
+        //ajouter à eventList les évènements récupérés de la base de donnée
+
+        adapter.notifyDataSetChanged();
+
+
+    }
+
     private void initializeMenu(){
         /**
         *\brief initialise les boutons du menu gauche
@@ -104,10 +154,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 int id = item.getItemId();
                 switch (id){
+                    case R.id.nav_add_friend :
+                    Toast.makeText(getApplicationContext(),"add friend",Toast.LENGTH_SHORT).show();
+                    break;
                     case R.id.nav_profile :
                         Toast.makeText(getApplicationContext(),"profile",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MapsActivity.this, MyProfileActivity.class);
-                        startActivity(intent);
+                        Intent intent_profile = new Intent(MapsActivity.this, MyProfileActivity.class);
+                        startActivity(intent_profile);
                         break;
                     case R.id.nav_points :
                         Toast.makeText(getApplicationContext(),"points",Toast.LENGTH_SHORT).show();
@@ -116,8 +169,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Toast.makeText(getApplicationContext(),"messages",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_event :
+                        Intent intent_event = new Intent(MapsActivity.this, ListOfEventsActivity.class);
+                        startActivity(intent_event);
                         Toast.makeText(getApplicationContext(),"events",Toast.LENGTH_SHORT).show();
                         break;
+                    /*
+
+                    case R.id.nav_my_event :
+                        Intent intent_my_event = new Intent(MapsActivity.this, ListOfMyEventsActivity.class);
+                        startActivity(intent_my_event);
+                        Toast.makeText(getApplicationContext(),"events",Toast.LENGTH_SHORT).show();
+                        break;
+
+                     */
                     case R.id.nav_notif :
                         Toast.makeText(getApplicationContext(),"notif",Toast.LENGTH_SHORT).show();
                         break;
@@ -211,6 +275,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    public GoogleMap getmMap() {
+        return mMap;
+    }
+
     private void setDemoMarkers(GoogleMap googleMap) {
         /**
          *\brief place les points sur la carte
@@ -224,6 +292,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng info = new LatLng(48.712939, 2.201053);
         LatLng pointEau = new LatLng(48.712211, 2.192545);
 
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+
+                Intent intent = new Intent(MapsActivity.this, AddPoiActivity.class);
+                Bundle args = new Bundle();
+                args.putParcelable("position", latLng);
+                intent.putExtra("bundle", args);
+                startActivityForResult(intent, ajoutPoiRequestCode);
+
+
+            }
+        });
 
         mMap.addMarker(new MarkerOptions()
                 .position(tetech)
@@ -294,8 +375,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
     private void  startAddPoiActivity(){
-        Intent intent = new Intent(this, AddPoiActivity.class);
-        startActivity(intent);
+        Toast.makeText(getApplicationContext(),"Appuyez longtemps sur un point de la carte pour ajouter un point d'intérêt",Toast.LENGTH_LONG).show();
+
+
     }
     private void  startAddEventActivity(){
         Intent intent = new Intent(this, AddEventActivity.class);
@@ -398,6 +480,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             // other 'case' lines to check for other
             // permissions this app might request.
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == ajoutPoiRequestCode) {
+                //actualiser la carte car on a ajouté un nouveau POI
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 

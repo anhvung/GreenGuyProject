@@ -7,7 +7,20 @@
     tools:context=".AddEventActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ajouter un événement"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:id="@+id/ajout_evenement_first_ll"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        />
+
     <LinearLayout
+        android:layout_below="@+id/ajout_evenement_first_ll"
         android:layout_marginTop="20dp"
         android:id="@+id/ajout_evenement_ll_titre"
         android:layout_width="match_parent"
@@ -20,7 +33,9 @@
             android:layout_height="wrap_content"
             android:text="Titre"
             android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:textSize="15dp"
+            android:textColor="#000000"
+            />
 
         <EditText
             android:ems="15"
@@ -28,13 +43,76 @@
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
+
             />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ajout_evenement_ll_lieu"
         android:layout_below="@+id/ajout_evenement_ll_titre"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ajout_evenement_ll_sous_titre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sous titre"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            />
+
+        <EditText
+            android:ems="15"
+            android:id="@+id/ajout_evenement_sous_titre"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/ajout_evenement_ll_sous_titre"
+        android:layout_marginTop="20dp"
+        android:id="@+id/ajout_evenement_ll_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            />
+
+        <EditText
+            android:ems="15"
+            android:id="@+id/ajout_evenement_description"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/ajout_evenement_ll_lieu"
+        android:layout_below="@+id/ajout_evenement_ll_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -45,18 +123,23 @@
             android:layout_height="wrap_content"
             android:text="Lieu"
             android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:textSize="15dp"
+            android:textColor="#000000"
+            />
         <EditText
             android:ems="15"
             android:id="@+id/ajout_evenement_lieu"
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
+
             />
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:id="@+id/ajout_evenement_ll_date"
         android:layout_below="@id/ajout_evenement_ll_lieu"
         android:layout_width="match_parent"
@@ -69,37 +152,31 @@
             android:layout_height="wrap_content"
             android:text="Date"
             android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:textSize="15dp"
+            android:textColor="#000000"
+            />
         <EditText
             android:ems="15"
             android:id="@+id/ajout_evenement_date"
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
+
             />
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_margin="20dp"
-        android:id="@+id/ajout_evenement_image"
-        android:layout_below="@id/ajout_evenement_ll_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:adjustViewBounds="true"
-        android:src="@drawable/photo_profil"
-        android:textStyle="bold" />
-
     <TextView
         android:layout_alignParentRight="true"
         android:id="@+id/ajout_evenement_publier"
-        android:layout_below="@id/ajout_evenement_image"
+        android:layout_below="@id/ajout_evenement_ll_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="30dp"
         android:text="Ajouter"
-        android:textSize="25dp"
+        android:textColor="#000000"
+        android:textSize="20dp"
         />
 
 </RelativeLayout>

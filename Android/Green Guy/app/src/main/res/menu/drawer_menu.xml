@@ -18,6 +18,10 @@
     <item android:title="Menu">
         <menu>
             <item
+                android:id="@+id/nav_add_friend"
+                android:icon="@drawable/ic_addfirend"
+                android:title="Ajouter un ami" />
+            <item
                 android:id="@+id/nav_friend"
                 android:icon="@drawable/ic_friends"
                 android:title="Messagerie" />
