@@ -6,17 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class AddFriendQr extends AppCompatActivity {
     String id;
@@ -40,13 +44,48 @@ public class AddFriendQr extends AppCompatActivity {
 
 
         //add friend button
+
             ImageButton add = findViewById(R.id.addFrienQr);
-            ImageButton.setOnClickListener(new View.OnClickListener() {
+            add.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v)
                 {
-                   Intent intent=new Intent(v.getContext(),PhotoQr.class);
+                    IntentIntegrator integrator = new IntentIntegrator(AddFriendQr.this);
+                    integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                    integrator.setPrompt("Scan the QR code");
+                    integrator.setBeepEnabled(true);
+                    integrator.setOrientationLocked(false);
+                    integrator.setBarcodeImageEnabled(false);
+
+                    integrator.initiateScan();
                 }
             });
+
+    }
+
+    @Override
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        if(result != null) {
+
+            if(result.getContents() == null) {
+
+
+            Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+
+            } else {
+
+//Scanned successfully
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+
+            super.onActivityResult(requestCode, resultCode, data);
+
+        }
 
     }
     //TEXT to QR
