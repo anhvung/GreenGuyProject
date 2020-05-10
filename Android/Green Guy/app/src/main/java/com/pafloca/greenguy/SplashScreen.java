@@ -31,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }
 
-        }, 2100);
+        }, 1500);
 
         new Handler().postDelayed(new Runnable() {
             @Override

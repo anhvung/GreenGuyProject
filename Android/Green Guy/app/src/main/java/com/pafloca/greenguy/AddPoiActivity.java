@@ -4,12 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
+
 /**
  * Représente un point d'intérêt.
  * A remplir
  */
-=======
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 /*!
   A remplir
 */
->>>>>>> 8ab990d9b75bda6a7fd11f81d78a8f057d2c81ee
+
 public class AddPoiActivity extends AppCompatActivity {
 
     String titre = "Nouveau POI";

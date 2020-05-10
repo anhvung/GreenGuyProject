@@ -156,6 +156,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 switch (id){
                     case R.id.nav_add_friend :
                     Toast.makeText(getApplicationContext(),"add friend",Toast.LENGTH_SHORT).show();
+                        Intent intentQR = new Intent(MapsActivity.this, AddFriendQr.class);
+                        startActivity(intentQR);
                     break;
                     case R.id.nav_profile :
                         Toast.makeText(getApplicationContext(),"profile",Toast.LENGTH_SHORT).show();
