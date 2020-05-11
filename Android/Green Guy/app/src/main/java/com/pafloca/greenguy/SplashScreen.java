@@ -76,4 +76,12 @@ public class SplashScreen extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent intent=new Intent(this, MapsActivity
+                .class);
+        startActivity(intent);
+    }
 }

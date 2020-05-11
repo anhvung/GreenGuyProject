@@ -67,7 +67,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0001",sendMsg);
-            sendMsg=connect.magicSauce();
+            sendMsg=connect.magicSauce()[0];
             allParamValid=parseBoolean(sendMsg)    ;
 
             return null;

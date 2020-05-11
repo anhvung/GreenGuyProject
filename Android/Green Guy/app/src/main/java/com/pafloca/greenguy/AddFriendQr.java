@@ -105,7 +105,7 @@ public class AddFriendQr extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             Log.d("greend", "Sending : "+sendMsg);
             ClientConnexion connect = new ClientConnexion("192.168.1.17", 2345, "0003", sendMsg);
-            sendMsg = connect.magicSauce();
+            sendMsg = connect.magicSauce()[0];
             Log.d("greend", "Return : "+sendMsg);
 
 

@@ -62,7 +62,7 @@ public class IdentificationActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0002",sendMsg);
-            sendMsg=connect.magicSauce();
+            sendMsg=connect.magicSauce()[0];
             String[] responseList = sendMsg.split(sep, -1);
             Log.d("greend", sendMsg);
             if (responseList.length!=1){
