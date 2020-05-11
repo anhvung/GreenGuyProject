@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class MyProfileActivity extends AppCompatActivity {
     ImageButton setImage;
     ImageView my_page_profil_image;
     Bitmap image;
+    private static final int TAG = 421206948;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,35 @@ public class MyProfileActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("SAVE", Context.MODE_PRIVATE);
         storedId = sharedPref.getInt("USER_ID", -1);
         new getInfo().execute();
+
     }
+
+    private void setFriends() {
+        final LinearLayout listLayout=findViewById(R.id.friend_list_layout);
+        for (int i=0;i<10;i++){
+            LinearLayout item=new LinearLayout(MyProfileActivity.this);
+            item.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            item.setOrientation(LinearLayout.HORIZONTAL);
+
+            ImageView pic =new ImageView(this);
+            pic.setImageBitmap(image);
+            TextView text = new TextView(this);
+            text.setText("test name "+i);
+
+            item.addView(pic);
+            item.addView(text);
+            item.setTag(TAG,i);
+            listLayout.addView(item);
+            item.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+                    Log.d("greend", String.valueOf((int) v.getTag(TAG)));
+                }
+            });
+        }
+
+    }
+
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
@@ -93,7 +123,15 @@ public class MyProfileActivity extends AppCompatActivity {
         if (response[3]=="" ||response[3].substring(0,min(4,response[3].length())).contains("null")|| response[3]==null ||response[3].isEmpty()){
             Log.d("greend", "NO PICTURE FOUND");
         }
+        else{
 
+            byte[] decodedString = Base64.decode( response[3], Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            image = decodedByte; //for testin
+            my_page_profil_image.setImageBitmap(image);
+
+        }
+        setFriends();
 
 
     }
@@ -112,6 +150,7 @@ public class MyProfileActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             updateInfo();
+
         }
     }
     private class getPicture extends AsyncTask<Void,Void,Void>{

@@ -123,5 +123,21 @@
         android:layout_marginTop="46dp"
         android:layout_marginEnd="197dp"
         app:srcCompat="@drawable/ic_friends" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/setImage">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/friend_list_layout"
+
+        ></LinearLayout>
+</ScrollView>
+
+
+
+
 
 </RelativeLayout>

@@ -24,7 +24,6 @@ public class IdentificationActivity extends AppCompatActivity {
     private TextView senregistrer;
     private TextView sidentifier;
     public static final String sep;
-
     static {
         sep = "!@@!!";
     }

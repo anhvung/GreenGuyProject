@@ -8,10 +8,13 @@
     android:id="@+id/splash_layout">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewS"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srcCompat="@mipmap/splash_foreground"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="227dp" />
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
