@@ -118,12 +118,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         //position of location button
+
         View locationButton = ((View) findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
         // position on right bottom
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
         rlp.setMargins(0, 180, 180, 0);
+
+
 
 
 
@@ -283,6 +286,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        googleMap.setPadding(100, 20, 0, 0);
         setDemoMarkers(googleMap);
 
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
