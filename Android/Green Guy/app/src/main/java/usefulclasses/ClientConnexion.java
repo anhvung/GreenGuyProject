@@ -59,7 +59,10 @@ public class ClientConnexion {
 
 
             commande+=EOF;
-            reader = new BufferedInputStream(connexion.getInputStream());
+            if(connexion!=null)
+                reader = new BufferedInputStream(connexion.getInputStream());
+            else
+                return null;
             //On envoie la commande au serveur
 
             bufOut = new DataOutputStream(connexion.getOutputStream());

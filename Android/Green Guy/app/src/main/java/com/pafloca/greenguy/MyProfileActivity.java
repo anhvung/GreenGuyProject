@@ -71,7 +71,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
 
-        Drawable d = getResources().getDrawable(R.drawable.ic_friends);
+        Drawable d = getResources().getDrawable(R.mipmap.default_profile_foreground);
 
         defaultPic=drawableToBitmap(d);
         photo = findViewById(R.id.my_page_profil_image);
@@ -123,16 +123,22 @@ public class MyProfileActivity extends AppCompatActivity {
             item.addView(pic);
             item.addView(text);
             item.setTag(TAG,friendsId[i]);
-            listLayout.addView(item);
-            item.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v)
-                {
-                    Log.d("greend", String.valueOf( v.getTag(TAG)));
-                    Intent intent=new Intent(MyProfileActivity.this,MyProfileActivity.class);
-                    intent.putExtra(FROFILE_ID, String.valueOf( v.getTag(TAG)));
-                    startActivity(intent);
-                }
-            });
+            if(friendsName[i]=="" || friendsName[i]==null || friendsName[i].isEmpty() || friendsName[i]=="-1"){
+
+            }
+            else {
+                listLayout.addView(item);
+                item.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v)
+                    {
+                        Log.d("greend", String.valueOf( v.getTag(TAG)));
+                        Intent intent=new Intent(MyProfileActivity.this,MyProfileActivity.class);
+                        intent.putExtra(FROFILE_ID, String.valueOf( v.getTag(TAG)));
+                        startActivity(intent);
+                    }
+                });
+            }
+
         }
 
     }

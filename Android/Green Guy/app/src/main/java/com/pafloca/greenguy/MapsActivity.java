@@ -196,6 +196,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
                     case R.id.nav_friend :
                         Toast.makeText(getApplicationContext(),"messages",Toast.LENGTH_SHORT).show();
+                        Intent intentMs = new Intent(MapsActivity.this, AllConvActivity.class);
+                        startActivity(intentMs);
                         break;
                     case R.id.nav_event :
                         Intent intent_event = new Intent(MapsActivity.this, ListOfEventsActivity.class);
