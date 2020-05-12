@@ -37,7 +37,7 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }
 
-        }, 1500);
+        }, 0);//faster
 
         new whouaa().execute();
 
