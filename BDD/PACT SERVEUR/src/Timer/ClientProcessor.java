@@ -23,7 +23,7 @@ public class ClientProcessor implements Runnable {
 	private Socket sock;
 	private DataOutputStream writer = null;
 	private BufferedInputStream reader = null;
-	private int code = 0000;
+	private String code = "0000";
 	final String server = "localhost:3306/";
 	final String db_name = "green_guy";
 	final String userName = "root";
@@ -35,13 +35,19 @@ public class ClientProcessor implements Runnable {
 	ResultSet rs;
 	String EOF="[eNdEnD]";
 	byte[] buffer = new byte[4096];
+	int timeout=1000;
+	long time=0;
+	long starttime=0;
 	public ClientProcessor(Socket pSock) {
 		sock = pSock;
+		time =System.currentTimeMillis();
+		starttime=time;
 	}
 	public void run() {
 		System.err.println("Lancement du traitement de la connexion cliente");
 		boolean closeConnexion = false;
 		while (!sock.isClosed()) {
+			time=System.currentTimeMillis();
 			try {
 				writer = new DataOutputStream(sock.getOutputStream());
 				reader = new BufferedInputStream(sock.getInputStream());
@@ -60,27 +66,64 @@ public class ClientProcessor implements Runnable {
 					if(str.length()<300) System.out.println(str); else System.out.println("Sans doute une image");
 				}
 				if (responseList.length != 0) {
-					code = Integer.parseInt(responseList[0]);
+					code = responseList[0];
 				}
 				itemList =new ArrayList<String>(Arrays.asList(Arrays.copyOfRange(responseList, 1, responseList.length)));
 						;
 				switch (code) {
-				case 0001:
+				case "0001":
 					toSend = nouveauProfile();
 					break;
-				case 0002:
+				case "0002":
 					toSend = login();
 					break;
-				case 0003:
+				case "0003":
 					toSend= addFriend();
 					break;
-				case 0004:
+				case "0004":
 					toSend= getAllInfo();
 					break;
-				case 0005:
+				case "0005":
 					toSend= updateUserPicture();
 					break;
-				case 0000:
+				case "0006":
+					toSend= getFriendsId();
+					break;
+				case "0007":
+					toSend= getFriendsName();
+					break;
+				case "0008":
+					toSend= getFriendsPic();
+					break;
+				case "0009":
+					toSend= getAllConvId();
+					break;
+				case "0010":
+					toSend= getAllConvName();
+					break;
+				case "0011":
+					toSend= getAllConPic();
+					break;
+				case "0012":
+					toSend= checkNewConv();
+					break;
+				case "0013":
+					toSend= idToPic();
+					break;
+				case "0014":
+					toSend= idToName();
+					break;
+				case "0015":
+					toSend= getAllConvDates();
+					break;
+				case "0016":
+					toSend= getAllConvMsg();
+					break;
+				case "0017":
+					toSend= storeMsg();
+					break;
+					
+				case "0000":
 					closeConnexion = true;
 					break;
 				default:
@@ -88,6 +131,7 @@ public class ClientProcessor implements Runnable {
 					closeConnexion = true;
 					break;
 				}
+				 closeSQL();
 				toSend += EOF;
 				if(toSend.length()<300) System.err.println("\n \t Sending : " + toSend); else System.err.println("\n \t Sending : Sans doute une image" );
 				InputStream in = new ByteArrayInputStream(toSend.getBytes(StandardCharsets.UTF_8));
@@ -97,10 +141,11 @@ public class ClientProcessor implements Runnable {
 					writer.flush();
 				}
 
-				if (closeConnexion) {
-					System.err.println("///////////////////////////FINI////////////////////////// !");
+				if (closeConnexion || time-starttime>timeout) {
+					System.err.println("///////////////////////////FINI////////////////////////// ! "+String.valueOf(time-starttime));
 					writer = null;
 					reader = null;
+					if (myConn!=null)myConn.close();
 					sock.close();
 					break;
 				}
@@ -110,12 +155,241 @@ public class ClientProcessor implements Runnable {
 				break;
 			} catch (IOException e) {
 				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			if (closeConnexion || time-starttime>timeout) {
+				System.err.println("///////////////////////////FINI////////////////////////// ! "+String.valueOf(time-starttime));
+				writer = null;
+				reader = null;
+				try {
+					if (sock!=null)sock.close();
+					if (myConn!=null)myConn.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
 			}
 
 		}
 	}
 
 
+	private String storeMsg() {
+		String[] champs= {"msg","type","date"};
+		try {
+			itemList.set(4,"'"+itemList.get(4)+"'");
+			itemList.set(2,"'"+itemList.get(2).replace("'","''")+"'");
+			add("CONV_"+itemList.get(0)+"_"+itemList.get(1),champs,new ArrayList<String>(itemList.subList(2,itemList.size())));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	private String getAllConvMsg() {
+		try {
+			ArrayList<String> dates=new ArrayList<String>();
+			ask("SELECT msg from CONV_"+itemList.get(0)+"_"+itemList.get(1));
+			while (rs.next()) {
+				dates.add(rs.getString("msg"));
+			}
+			return format(dates);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	private String getAllConvDates() {
+		try {
+			ArrayList<String> dates=new ArrayList<String>();
+			ask("SELECT date from CONV_"+itemList.get(0)+"_"+itemList.get(1));
+			while (rs.next()) {
+				dates.add(rs.getString("date"));
+			}
+			return format(dates);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	private String idToName() {
+		try {
+			ask("SELECT name from users WHERE id=" + itemList.get(0));
+			rs.next();
+			return rs.getString("name");
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "null";
+	}
+	private String idToPic() {
+		try {
+			ask("SELECT photo from users WHERE id=" + itemList.get(0));
+			rs.next();
+			return rs.getString("photo");
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "null";
+	}
+	
+	private String checkNewConv() {
+		String id1=itemList.get(0);
+		String id2=itemList.get(1);
+		try {
+			if (exists("CONV_"+id1+"_"+id2)) {
+				//rien à faire
+			}
+			else {
+				update("UPDATE user_"+id1+" SET conv='"+1+"' WHERE friend_id = "+id2);
+				update("UPDATE user_"+id2+" SET conv='"+1+"' WHERE friend_id = "+id1);
+				String query ="CREATE TABLE `CONV_"+id1+"_"+id2+"` (\r\n" + 
+						" `msg` longtext NOT NULL,\r\n" + 
+						" `date` longtext NOT NULL,\r\n" + 
+						" `type` int(11) NOT NULL\r\n" + 
+						")";
+				createTable(query);
+			}
+			return null;
+		} catch (ClassNotFoundException e) {			
+			e.printStackTrace();
+		}
+		return "";
+	}
+	private String getAllConPic() {
+		ArrayList<String> names = new ArrayList<String>();
+		for (String id : itemList) {
+			try {
+				System.out.println("SELECT photo from users WHERE id=" + id);
+				ask("SELECT photo from users WHERE id=" + id);
+				rs.next();
+				names.add(rs.getString("photo"));
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return format(names);
+	}
+
+	private String getAllConvName() {
+		ArrayList<String> names = new ArrayList<String>();
+		for (String id : itemList) {
+			try {
+				System.out.println("SELECT name from users WHERE id=" + id);
+				ask("SELECT name from users WHERE id=" + id);
+				rs.next();
+				names.add(rs.getString("name"));
+				
+				System.out.println("new name");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return format(names);
+	}
+	private String getAllConvId() {
+		try {
+			ask("SELECT * from user_" + itemList.get(0));
+			ArrayList<String> ids=new ArrayList<String>();
+			while(rs.next()) {
+				if(String.valueOf(rs.getBoolean("conv")).toLowerCase().equals("true"))
+				ids.add(String.valueOf(rs.getInt("friend_id")));
+			}
+			return format(ids);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	private String getFriendsPic() {
+		try {
+			ask("SELECT friend_id from user_" + itemList.get(0));
+			ArrayList<String> ids=new ArrayList<String>();
+			ArrayList<String> pics=new ArrayList<String>();
+			while(rs.next()) {
+				ids.add(String.valueOf(rs.getInt("friend_id")));
+			}
+			for (String i :ids) {
+				ask("SELECT photo from users WHERE id=" + i);
+				rs.next();
+				pics.add(rs.getString("photo"));
+			}
+			return format(pics);
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "null";//no friend or error
+		
+	}
+	private String getFriendsName() {
+		try {
+			ask("SELECT friend_id from user_" + itemList.get(0));
+			ArrayList<String> ids=new ArrayList<String>();
+			ArrayList<String> pics=new ArrayList<String>();
+			while(rs.next()) {
+				ids.add(String.valueOf(rs.getInt("friend_id")));
+			}
+			for (String i :ids) {
+				ask("SELECT name from users WHERE id=" + i);
+				rs.next();
+				pics.add(rs.getString("name"));
+			}
+			return format(pics);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "null";//no friend or error
+		
+	}
+	private String getFriendsId() {
+		try {
+			ask("SELECT friend_id from user_" + itemList.get(0));
+			ArrayList<String> ids=new ArrayList<String>();
+			while(rs.next()) {
+				ids.add(String.valueOf(rs.getInt("friend_id")));
+			}
+			return format(ids);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "null";//no friend or error
+	}
 	private String updateUserPicture() {
 		String id=itemList.get(0);
 		String image64=itemList.get(1);
@@ -237,7 +511,9 @@ public class ClientProcessor implements Runnable {
 				String[] champs= {"id","name","mail","pwd","age"};
 				if (add("users",champs,itemList)) {
 					closeSQL();
-					String query ="CREATE TABLE `"+"user_"+String.valueOf(id)+"` (`friend_id` int(11) NOT NULL) ";
+					String query ="CREATE TABLE `"+"user_"+String.valueOf(id)+"` (`friend_id` int(11) NOT NULL,\r\n" + 
+							" `conv` tinyint(1) NOT NULL DEFAULT 0\r\n" + 
+							")  ";
 					createTable(query);
 					return "true";
 				}
@@ -273,6 +549,7 @@ public class ClientProcessor implements Runnable {
 					myConn.close();
 
 				}
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -325,6 +602,38 @@ public class ClientProcessor implements Runnable {
 		}
 
 	}
+	private boolean exists(String request) throws ClassNotFoundException {
+
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			myConn = DriverManager.getConnection("jdbc:mysql://" + server + db_name, userName, password);
+
+			try {
+				DatabaseMetaData dbm = myConn.getMetaData();
+				ResultSet tables = dbm.getTables(null, null, request, null);
+				if (tables.next()) {
+					System.out.println("table "+request+" exists");
+				  return true;
+				}
+				else {
+					System.out.println("table "+request+"D OES NOT exists");
+					return false;
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return false;
+
+	}
 	private void update(String request) throws ClassNotFoundException {
 
 		try {
@@ -363,7 +672,7 @@ public class ClientProcessor implements Runnable {
 			}
 			send += request.get(len-1);
 			String sendcommand="INSERT INTO "+table+" ("+String.join(",", champs).toUpperCase()+ ") VALUES (" + send + ")";
-			
+			System.out.println(sendcommand);
 			statement.executeUpdate(sendcommand);
 			return true;
 		} catch (SQLException e) {
@@ -399,8 +708,10 @@ public class ClientProcessor implements Runnable {
 		for (String s:liste) {
 			ret+=s+sep;
 		}
-		
-		return ret.substring(0, ret.length() - sep.length());
+		if (ret.length() - sep.length()>=0)
+			return ret.substring(0, ret.length() - sep.length());
+		else
+			return"";
 	}
 
 }
