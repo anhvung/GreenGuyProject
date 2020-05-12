@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,11 +17,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.pafloca.greenguy.MyProfileActivity.drawableToBitmap;
+
 class ConvAdapter extends RecyclerView.Adapter {
     private String[] id;
     private String[] name;
     private Context mContext;
     private String[] pic;
+    Bitmap defaultPic;
     public final static String ALLCONVID="FROFILE_ID65468787484447";
     public final static int TAG=987849874;
     public ConvAdapter(String[] response_id, String[] response_name, String[] pic,Context context) {
@@ -28,6 +32,9 @@ class ConvAdapter extends RecyclerView.Adapter {
         this.name=response_name;
         this.pic=pic;
         mContext = context;
+
+        Drawable d = mContext.getResources().getDrawable(R.mipmap.default_profile_foreground);
+        defaultPic=drawableToBitmap(d);
     }
 
     @NonNull
@@ -47,8 +54,12 @@ class ConvAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
+        if(name==null){
+            return 0;
+        }
         return name.length;
     }
+
     private class ConvHolder extends RecyclerView.ViewHolder {
         TextView messageText;
         ImageView user_pic;
@@ -61,12 +72,20 @@ class ConvAdapter extends RecyclerView.Adapter {
             ll = itemView.findViewById(R.id.item_conv);
         }
 
-        void bind(String message,String picture,String id) {
-            messageText.setText(message);
-            // Format the stored timestamp into a readable String using method.
-            byte[] decodedString = Base64.decode(picture, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            user_pic.setImageBitmap(decodedByte);
+        void bind(String message,String id,String picture) {
+
+                messageText.setText(message);
+
+            if (picture.length()>100){
+                byte[] decodedString = Base64.decode(picture, Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                user_pic.setImageBitmap(decodedByte);
+            }
+            else{
+
+                user_pic.setImageBitmap(defaultPic);
+            }
+
             ll.setTag(TAG,id);
             ll.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v)

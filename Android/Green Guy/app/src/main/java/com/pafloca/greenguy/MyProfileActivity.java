@@ -72,8 +72,8 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
         Drawable d = getResources().getDrawable(R.mipmap.default_profile_foreground);
-
         defaultPic=drawableToBitmap(d);
+
         photo = findViewById(R.id.my_page_profil_image);
         age = findViewById(R.id.age);
         nom = findViewById(R.id.nom);

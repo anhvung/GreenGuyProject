@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import static com.pafloca.greenguy.IdentificationActivity.sep;
+
 class MainAdapter extends RecyclerView.Adapter {
     private ArrayList<String> dates;
     private ArrayList<String> msg;
@@ -24,18 +26,25 @@ class MainAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
-    public MainAdapter(ArrayList<String> dates, ArrayList<String> msg, Bitmap pic, String hisname, String myname,Context context) {
+    private static final String sep2="!sepPourlEsmSg?";
+    String myid;
+    public MainAdapter(int id,ArrayList<String> dates, ArrayList<String> msg, Bitmap pic, String hisname, String myname,Context context) {
         this.dates=dates;
         this.msg=msg;
         this.pic=pic;
         this.hisname=hisname;
         this.myname=myname;
         mContext = context;
+        myid=String.valueOf(id);
     }
 
     @Override
     public int getItemViewType(int position) {
-        return Integer.parseInt(msg.get(position).substring(0, 1));
+        if (myid.equals(msg.get(position).split(sep2)[0])){
+            return VIEW_TYPE_MESSAGE_SENT;
+        }
+        return VIEW_TYPE_MESSAGE_RECEIVED ;
+
     }
     @NonNull
     @Override
@@ -86,9 +95,17 @@ class MainAdapter extends RecyclerView.Adapter {
             if(timeText==null){
                 Log.d("greend", "imageview null");
             }
-            messageText.setText(message);
-            // Format the stored timestamp into a readable String using method.
-            timeText.setText(date);
+
+            if(message==""||message.isEmpty()||message==null){
+                timeText.setVisibility(View.GONE);
+                messageText.setVisibility(View.GONE);
+            }
+            else {
+                message=message.substring(myid.length()+sep2.length(),message.length());
+                messageText.setText(message);
+                timeText.setText(date);
+            }
+
 
         }
     }
@@ -114,15 +131,21 @@ class MainAdapter extends RecyclerView.Adapter {
             if(timeText==null){
                 Log.d("greend", "imageview null");
             }
-            messageText.setText(message);
 
-            // Format the stored timestamp into a readable String using method.
-            timeText.setText(date);
+            if(message==""||message.isEmpty()||message==null){
+                timeText.setVisibility(View.GONE);
+                nameText.setVisibility(View.GONE);
+                profileImage.setVisibility(View.GONE);
+                messageText.setVisibility(View.GONE);
+            }
+            else{
+                message=message.substring(myid.length()+sep2.length(),message.length());
+                messageText.setText(message);
 
-            nameText.setText(hisname);
-
-            // Insert the profile image from the URL into the ImageView.
-            profileImage.setImageBitmap(pic);
+                timeText.setText(date);
+                nameText.setText(hisname);
+                profileImage.setImageBitmap(pic);
+            }
 
 
 

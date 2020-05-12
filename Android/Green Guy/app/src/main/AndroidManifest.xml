@@ -21,7 +21,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".NewConv"></activity>
+        <activity
+            android:name=".test"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity android:name=".NewConv" />
         <activity android:name=".ConvActivity" />
         <activity
             android:name=".AllConvActivity"

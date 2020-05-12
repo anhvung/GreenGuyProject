@@ -18,6 +18,8 @@ import android.view.View;
 
 import usefulclasses.ClientConnexion;
 
+import static com.pafloca.greenguy.IdentificationActivity.sep;
+
 public class AllConvActivity extends AppCompatActivity {
     String[] response_name;
     String[] response_id;
@@ -36,7 +38,7 @@ public class AllConvActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(AllConvActivity.this, ConvActivity.class);
+                Intent intent=new Intent(AllConvActivity.this, NewConv.class);
                 startActivity(intent);
             }
         });
@@ -52,10 +54,16 @@ public class AllConvActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0009",String.valueOf(storedId));
             response_id=connect.magicSauce();
-            connect= new ClientConnexion("192.168.1.17",2345,"00010",String.valueOf(storedId));
-            response_name=connect.magicSauce();
-            connect= new ClientConnexion("192.168.1.17",2345,"00011",String.valueOf(storedId));
-            response_pic=connect.magicSauce();
+            connect= new ClientConnexion("192.168.1.17",2345,"0010",encode(response_id));
+            if(response_id[0]==""||response_id.length==0||response_id==null){
+
+            }
+            else{
+                response_name=connect.magicSauce();
+                connect= new ClientConnexion("192.168.1.17",2345,"0011",encode(response_id));
+                response_pic=connect.magicSauce();
+            }
+
             return null;
         }
 
@@ -64,10 +72,17 @@ public class AllConvActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             mRecyclerView =findViewById(R.id.convlist);
             adapter= new ConvAdapter(response_id,response_name,response_pic,AllConvActivity.this);
-            mRecyclerView.setAdapter(adapter);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(AllConvActivity.this));
+            mRecyclerView.setAdapter(adapter);
+
 
         }
     }
-
+    public String encode(String[] liste){
+        String ret="";
+        for(String s:liste){
+            ret+=s+sep;
+        }
+        return ret.substring(0,ret.length()-sep.length());
+    }
 }
