@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Green Guy</string>
     <string name="title_activity_maps">Green Guy</string>
-    <string name="action_search">Green Guy</string>
+    <string name="action_search">Rechercher</string>
     <string name="title_activity_display_msg">DisplayMsg</string>
     <string name="title_activity_settings">Settings</string>
 

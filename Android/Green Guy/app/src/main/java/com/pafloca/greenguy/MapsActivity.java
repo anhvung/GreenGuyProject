@@ -19,7 +19,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,6 +52,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,7 +90,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Location mLastKnownLocation;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
-
+    boolean choosing=false;
+    int code =0; //rien POi Event
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Construct a GeoDataClient.
@@ -234,6 +239,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         /**
          *\brief initialise les boutons flottants et leur animation
          */
+        LinearLayout overlay=findViewById(R.id.Overlay);
+        overlay.setVisibility(View.GONE);
 
         addEvent = findViewById(R.id.addEvent);
         addPoi =  findViewById(R.id.addPoi);
@@ -263,28 +270,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-
-    private void reposition() {
-        /**
-         *\brief pour le GPS
-         */
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-
-
-
-
-
-        }
-        else{
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-
-
-        }
-
-    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -327,11 +312,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onMapLongClick(LatLng latLng) {
 
-                Intent intent = new Intent(MapsActivity.this, AddPoiActivity.class);
-                Bundle args = new Bundle();
-                args.putParcelable("position", latLng);
-                intent.putExtra("bundle", args);
-                startActivityForResult(intent, ajoutPoiRequestCode);
+
+                if(code ==1){
+                    Intent intent = new Intent(MapsActivity.this, AddPoiActivity.class);
+                    Bundle args = new Bundle();
+                    args.putParcelable("position", latLng);
+                    intent.putExtra("bundle", args);
+                    startActivityForResult(intent, ajoutPoiRequestCode);
+                }
+                else if (code==2){
+                    Intent intent = new Intent(MapsActivity.this, AddEventActivity.class);
+                    Bundle args = new Bundle();
+                    args.putParcelable("position", latLng);
+                    intent.putExtra("bundle", args);
+                    startActivityForResult(intent, ajoutPoiRequestCode);
+                }
+
 
 
             }
@@ -379,7 +375,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onInfoWindowClick(Marker arg0) {
                 // TODO Auto-generated method stub
-                StartActivity(arg0.getTitle());
+                StartActivityDisplay(arg0.getTitle());
 
             }
         });
@@ -406,19 +402,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
     private void  startAddPoiActivity(){
-        Toast.makeText(getApplicationContext(),"Appuyez longtemps sur un point de la carte pour ajouter un point d'intérêt",Toast.LENGTH_LONG).show();
+        choosing=true;
+        POIOverlay();
 
 
     }
     private void  startAddEventActivity(){
-        Intent intent = new Intent(this, AddEventActivity.class);
-        startActivity(intent);
+        choosing=true;
+        EventOverlay();
     }
     private void start(Class<SettingsActivity> settingsActivityClass){
         Intent intent = new Intent(this,settingsActivityClass );
         startActivity(intent);
     }
-    private void StartActivity(String msg) {
+    private void StartActivityDisplay(String msg) {
         Intent intent = new Intent(this, DisplayInfo.class);
 
         intent.putExtra(EXTRA_MESSAGE, msg);
@@ -491,6 +488,40 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setDuration(transiton)
                 .setListener(null);
         addPoi.setVisibility(View.GONE);
+        Log.d("greend", "fade hide");
+        if (choosing){
+            noOverlay();
+            choosing=false;
+        }
+    }
+    public void noOverlay(){
+        LinearLayout linearLayout= findViewById(R.id.searchLayout);
+        linearLayout.setVisibility(View.VISIBLE);
+        LinearLayout overlay=findViewById(R.id.Overlay);
+        overlay.setVisibility(View.GONE);
+        findViewById(R.id.textoverlayPOI).setVisibility(View.GONE);
+        findViewById(R.id.textoverlayPOI).setVisibility(View.GONE);
+        code=0;
+    }
+    public void POIOverlay(){
+        code=1;
+        LinearLayout linearLayout= findViewById(R.id.searchLayout);
+        linearLayout.setVisibility(View.GONE);
+        findViewById(R.id.textoverlayPOI).setVisibility(View.VISIBLE);
+        findViewById(R.id.textoverlayEvent).setVisibility(View.GONE);
+        LinearLayout overlay=findViewById(R.id.Overlay);
+        overlay.setVisibility(View.VISIBLE);
+
+    }
+    public void EventOverlay(){
+        code=2;
+        LinearLayout linearLayout= findViewById(R.id.searchLayout);
+        linearLayout.setVisibility(View.GONE);
+        findViewById(R.id.textoverlayEvent).setVisibility(View.VISIBLE);
+        findViewById(R.id.textoverlayPOI).setVisibility(View.GONE);
+        LinearLayout overlay=findViewById(R.id.Overlay);
+        overlay.setVisibility(View.VISIBLE);
+
     }
 
     @Override

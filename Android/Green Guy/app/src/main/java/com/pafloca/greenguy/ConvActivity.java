@@ -101,6 +101,7 @@ public class ConvActivity extends AppCompatActivity {
                 {
                     EditText edittext_chatbox=findViewById(R.id.edittext_chatbox);
                     monMsg=myid+sep2+edittext_chatbox.getText().toString();
+                    edittext_chatbox.getText().clear();
                     new sendMsg().execute();
                 }
             });
