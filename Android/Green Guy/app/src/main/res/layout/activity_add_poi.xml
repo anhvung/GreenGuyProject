@@ -78,14 +78,38 @@
             />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/SnipperLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textStyle="bold"
+            android:textSize="20dp"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/planets_array"
+            android:layout_margin="20dp" />
+
+
+
+    </LinearLayout>
 
     <TextView
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/ajout_poi_ll_titre"
-        android:id="@+id/poi_ajouter"
+        android:layout_below="@+id/SnipperLayout"
+        android:id="@+id/poi_ajouter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="40dp"
         android:text="Ajouter"
         android:textSize="25dp"
         />

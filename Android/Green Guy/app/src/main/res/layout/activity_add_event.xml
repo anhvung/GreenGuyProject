@@ -55,38 +55,10 @@
 
     </LinearLayout>
 
+
+
     <LinearLayout
         android:layout_below="@+id/ajout_evenement_ll_titre"
-        android:layout_marginTop="20dp"
-        android:id="@+id/ajout_evenement_ll_sous_titre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sous titre"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="#000000"
-            />
-
-        <EditText
-            android:ems="15"
-            android:id="@+id/ajout_evenement_sous_titre"
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_below="@+id/ajout_evenement_ll_sous_titre"
         android:layout_marginTop="20dp"
         android:id="@+id/ajout_evenement_ll_description"
         android:layout_width="match_parent"
@@ -146,36 +118,8 @@
 
     <LinearLayout
         android:layout_marginTop="20dp"
-        android:id="@+id/ajout_evenement_ll_date"
-        android:layout_below="@id/ajout_evenement_ll_lieu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="#000000"
-            />
-        <EditText
-            android:ems="15"
-            android:id="@+id/ajout_evenement_date"
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="20dp"
         android:id="@+id/date_startLayout"
-        android:layout_below="@+id/ajout_evenement_ll_date"
+        android:layout_below="@+id/ajout_evenement_ll_lieu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -189,7 +133,7 @@
             android:textSize="15dp"
             android:textColor="#000000"
             />
-        <CalendarView
+        <DatePicker
             android:ems="15"
             android:id="@+id/datedebcal"
             android:layout_marginLeft="20dp"
@@ -222,7 +166,7 @@
                 android:textSize="15dp"
                 android:textColor="#000000"
                 />
-            <CalendarView
+            <DatePicker
                 android:ems="15"
                 android:id="@+id/date_Fin_cal"
                 android:layout_marginLeft="20dp"

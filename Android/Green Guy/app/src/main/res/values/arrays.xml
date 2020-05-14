@@ -15,4 +15,16 @@
     </string-array>
 
 
+        <string-array name="planets_array">
+            <item>Restaurant</item>
+            <item>Point d\'eau</item>
+            <item>lieu touristique</item>
+            <item>Communauté</item>
+            <item>Festival</item>
+            <item>Lieu public</item>
+            <item>Compost</item>
+            <item>Recyclag</item>
+            <item>Autre</item>
+        </string-array>
+
 </resources>
