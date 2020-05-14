@@ -138,63 +138,63 @@
             android:src="@drawable/ic_poi"
             android:layout_marginBottom="100dp"
             android:layout_marginLeft="16dp" />
-
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-7762472071179494/1173618705">
-        </com.google.android.gms.ads.AdView>
-
-
-    </RelativeLayout>
+        <!--
+                <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    ads:adSize="SMART_BANNER"
+                    ads:adUnitId="ca-app-pub-7762472071179494/1173618705">
+                </com.google.android.gms.ads.AdView>-->
 
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu"
-       />
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_viewEvent"
-        android:layout_gravity="right"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="-64dp">
+            </RelativeLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                app:headerLayout="@layout/nav_header"
+                app:menu="@menu/drawer_menu"
+               />
 
-            <TextView
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:textColor="#000000"
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nav_viewEvent"
+                android:layout_gravity="right"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nouveautés"/>
+                android:layout_height="match_parent"
+                android:layout_marginRight="-64dp">
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_event_menu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textSize="20dp"
+                        android:textColor="#000000"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nouveautés"/>
 
-    </com.google.android.material.navigation.NavigationView>
 
-</androidx.drawerlayout.widget.DrawerLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_event_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.navigation.NavigationView>
+
+        </androidx.drawerlayout.widget.DrawerLayout>

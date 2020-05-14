@@ -38,6 +38,7 @@ public class ClientConnexion {
     public static final String sep="!@@!!";
     String EOF="[eNdEnD]";
     public ClientConnexion(String host, int port,String codee,String msg){
+        host="10.50.2.94";
         name += ++count;
         code=Integer.parseInt(codee);
         commande = codee+sep+msg;

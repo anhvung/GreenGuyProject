@@ -3,20 +3,26 @@ package com.pafloca.greenguy;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
+import android.app.PictureInPictureParams;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Rational;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -114,14 +121,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+        /*
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mAdView.loadAd(adRequest);*/
         //position of location button
 
         View locationButton = ((View) findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
@@ -667,6 +676,52 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onUserLeaveHint () {
+        final PictureInPictureParams.Builder pictureInPictureParamsBuilder;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            pictureInPictureParamsBuilder = new PictureInPictureParams.Builder();
+            Rational aspectRatio = new Rational(2, 3);
+            pictureInPictureParamsBuilder.setAspectRatio(aspectRatio);
+            enterPictureInPictureMode(pictureInPictureParamsBuilder.build());
+        }
+
+    }
+    @Override
+    public void onPictureInPictureModeChanged (boolean isInPictureInPictureMode, Configuration newConfig) {
+        DrawerLayout dl=findViewById(R.id.drawer_layout);
+        if (isInPictureInPictureMode) {
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            LinearLayout linearLayout= findViewById(R.id.searchLayout);
+            linearLayout.setVisibility(View.GONE);
+            dl.closeDrawer(Gravity.LEFT);
+            dl.closeDrawer(Gravity.RIGHT);
+            fadeHide(add);
+            if (choosing){
+                addPoi.setVisibility(View.GONE);
+                addEvent.setVisibility(View.GONE);
+            }
+            else{
+                add.setVisibility(View.GONE);
+            }
+
+
+        } else {
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            LinearLayout linearLayout= findViewById(R.id.searchLayout);
+            linearLayout.setVisibility(View.VISIBLE);
+            if (choosing){
+                addPoi.setVisibility(View.VISIBLE);
+                addEvent.setVisibility(View.VISIBLE);
+            }
+            else{
+                add.setVisibility(View.VISIBLE);
+            }
+
+
         }
     }
 

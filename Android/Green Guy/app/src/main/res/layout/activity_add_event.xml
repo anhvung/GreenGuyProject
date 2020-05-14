@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +9,10 @@
     tools:context=".AddEventActivity"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -166,11 +172,77 @@
             />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/date_startLayout"
+        android:layout_below="@+id/ajout_evenement_ll_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Début"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            />
+        <CalendarView
+            android:ems="15"
+            android:id="@+id/datedebcal"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+
+            />
+        <TimePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner"/>
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/datefinlayout"
+            android:layout_below="@+id/date_startLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fin"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#000000"
+                />
+            <CalendarView
+                android:ems="15"
+                android:id="@+id/date_Fin_cal"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+
+                />
+            <TimePicker
+                android:id="@+id/datePickerFin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner"/>
+
+        </LinearLayout>
 
     <TextView
         android:layout_alignParentRight="true"
         android:id="@+id/ajout_evenement_publier"
-        android:layout_below="@id/ajout_evenement_ll_date"
+        android:layout_below="@id/datefinlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
@@ -180,3 +252,4 @@
         />
 
 </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

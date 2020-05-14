@@ -46,6 +46,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity android:name=".ChatActivity" />
         <activity android:name=".MyProfileActivity" />
@@ -54,13 +56,13 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".AddPoiActivity"
-            android:screenOrientation="portrait" />
+            />
         <activity
             android:name=".ListOfEventsActivity"
-            android:screenOrientation="portrait" />
+            />
         <activity
             android:name=".AddEventActivity"
-            android:screenOrientation="portrait" />
+            />
         <activity android:name=".DisplayInfo" />
 
         <meta-data
@@ -80,7 +82,10 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="fullSensor"
+            android:supportsPictureInPicture="true" />
         <activity android:name=".IdentificationActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".CreateProfileActivity" />

@@ -4,6 +4,8 @@
     <string name="action_search">Rechercher</string>
     <string name="title_activity_display_msg">DisplayMsg</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="messagerie">messagerie</string>
+    <string name="myeventsshortcut">Mes events</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

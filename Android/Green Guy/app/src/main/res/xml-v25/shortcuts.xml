@@ -1,0 +1,42 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="compose"
+        android:enabled="true"
+        android:icon="@drawable/ic_msg"
+        android:shortcutShortLabel="@string/messagerie"
+        android:shortcutLongLabel="@string/messagerie"
+        android:shortcutDisabledMessage="@string/messagerie">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.pafloca.greenguy"
+            android:targetClass="com.pafloca.greenguy.AllConvActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="Settings"
+        android:enabled="true"
+        android:icon="@drawable/ic_settings"
+        android:shortcutShortLabel="@string/title_activity_settings"
+        android:shortcutLongLabel="@string/title_activity_settings"
+        android:shortcutDisabledMessage="@string/title_activity_settings">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.pafloca.greenguy"
+            android:targetClass="com.pafloca.greenguy.SettingsActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="My events"
+        android:enabled="true"
+        android:icon="@drawable/ic_event"
+        android:shortcutShortLabel="@string/myeventsshortcut"
+        android:shortcutLongLabel="@string/myeventsshortcut"
+        android:shortcutDisabledMessage="@string/myeventsshortcut">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.pafloca.greenguy"
+            android:targetClass="com.pafloca.greenguy.SettingsActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+</shortcuts>
