@@ -8,11 +8,20 @@
     android:fitsSystemWindows="true"
     tools:context="com.pafloca.greenguy.MapsActivity"
     tools:openDrawer="start">
+    <FrameLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/RelativeLayoutMaps">
+        android:id="@+id/RelativeLayoutMaps"
+        android:alpha="1">
+
+
 
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,10 +29,25 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+              >
 
 
         </fragment>
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="500dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_alignParentBottom="true"
+            />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/Overlay"
@@ -34,6 +58,7 @@
             android:layout_marginRight="22dp"
             android:orientation="horizontal"
             android:background="#88FFFFFF">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +141,8 @@
             android:padding="8dp"
             android:layout_gravity="end|bottom"
             android:src="@drawable/ic_add_poi"
-            android:layout_margin="16dp" />
+            android:layout_margin="30dp"
+            android:layout_marginBottom="45dp"/>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addEvent"
             android:layout_width="wrap_content"

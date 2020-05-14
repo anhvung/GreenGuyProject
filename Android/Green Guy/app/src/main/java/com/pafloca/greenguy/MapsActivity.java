@@ -12,12 +12,17 @@ import android.app.PictureInPictureParams;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.hardware.Camera;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +30,10 @@ import android.util.Rational;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,9 +69,16 @@ import com.google.android.material.navigation.NavigationView;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
+import usefulclasses.CameraPreview;
+import usefulclasses.ClientConnexion;
+
+import static java.lang.Float.max;
 
 /**
  * Activité : carte principale.
@@ -79,8 +93,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     static FloatingActionButton position;
     static long transiton = 500;// button fade time millis
     private GoogleMap mMap;
-    double longitude=2.2;
-    double latitude=48.713111;
     GeoDataClient mGeoDataClient;
     PlaceDetectionClient mPlaceDetectionClient;
     FusedLocationProviderClient mFusedLocationProviderClient;
@@ -99,6 +111,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String KEY_LOCATION = "location";
     boolean choosing=false;
     int code =0; //rien POi Event
+    int storedId;
+    private Camera mCamera;
+    private CameraPreview mPreview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Construct a GeoDataClient.
@@ -115,8 +131,46 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (NullPointerException e) {
         }
         setContentView(R.layout.activity_maps);
+        SharedPreferences sharedPref = getSharedPreferences("SAVE", Context.MODE_PRIVATE);
+        storedId = sharedPref.getInt("USER_ID", -1);
+        new getAllMarkers().execute();
         initializeButtons();
         initializeMenu();
+        // Create an instance of Camera
+        mCamera = getCameraInstance();
+        mCamera.setDisplayOrientation(90);
+        mPreview = new CameraPreview(this, mCamera);
+        final FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
+        SeekBar seekBar=findViewById(R.id.seekBar);
+        seekBar.setMax(100);
+        seekBar.setProgress(0);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+             double alpha=1-(progress/100.0);
+             RelativeLayout rl=findViewById(R.id.RelativeLayoutMaps);
+             if (alpha<0.9){
+                 rl.setAlpha(max((float)alpha,(float)0.1));
+                 mCamera.startPreview();
+
+             }
+             else{
+                 rl.setAlpha((float)alpha);
+                 mCamera.stopPreview();
+
+             }
+            }
+        });
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -300,9 +354,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    public GoogleMap getmMap() {
-        return mMap;
-    }
+
 
     private void setDemoMarkers(GoogleMap googleMap) {
         /**
@@ -375,7 +427,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .title("Information")));
         markers.add(mMap.addMarker(new MarkerOptions()
                 .position(pointEau)
-
                 .icon(bitmapDescriptorFromVector(this, R.drawable.ic_water))
                 .title("point d'eau")));
 
@@ -652,14 +703,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         updateLocationUI();
     }
 
-    /**
-     * Prompts the user to select the current place from a list of likely places, and shows the
-     * current place on the map - provided the user has granted location permission.
-     */
-
-    /**
-     * Updates the map's UI settings based on whether the user has granted location permission.
-     */
     private void updateLocationUI() {
         if (mMap == null) {
             return;
@@ -723,6 +766,76 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         }
+    }
+
+    private class getAllMarkers extends AsyncTask<Void,Void,Void> {
+        String[] allLocations;
+        String[] allTypes;
+        String[] allTitles;
+        String[] allIds;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0019",String.valueOf(storedId));
+            allLocations=connect.magicSauce();
+            connect= new ClientConnexion("192.168.1.17",2345,"0020",String.valueOf(storedId));
+            allTypes=connect.magicSauce();
+            connect= new ClientConnexion("192.168.1.17",2345,"0021",String.valueOf(storedId));
+            allTitles=connect.magicSauce();
+            connect= new ClientConnexion("192.168.1.17",2345,"0022",String.valueOf(storedId));
+            allIds=connect.magicSauce();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            for (int i=0;i<allIds.length;i++){
+                String mtitre=allTitles[i];
+                double latitude=0;
+                double longitude=0;
+                Geocoder geocoder = new Geocoder(MapsActivity.this);
+                List<Address> addresses;
+
+                try {
+                    addresses = geocoder.getFromLocationName(allLocations[i], 1);
+                    if(addresses.size() > 0) {
+                        latitude= addresses.get(0).getLatitude();
+                        longitude= addresses.get(0).getLongitude();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                LatLng mpos = new LatLng(latitude, longitude);
+                switch (allTypes[i]) {
+                    case "event":
+                        markers.add(mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_event))
+                                .title(mtitre)));
+                        break;
+                    case "Restaurant":
+                        markers.add(mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_restaurant_black_24dp))
+                                .title(mtitre)));
+                        break;
+                }
+
+
+
+            }
+
+        }
+    }
+    public static Camera getCameraInstance(){
+        Camera c = null;
+        try {
+            c = Camera.open(); // attempt to get a Camera instance
+        }
+        catch (Exception e){
+            // Camera is not available (in use or does not exist)
+        }
+        return c; // returns null if camera is unavailable
     }
 
 }
