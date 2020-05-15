@@ -1,10 +1,15 @@
 package com.pafloca.greenguy;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,11 +18,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,7 +51,7 @@ public class MyProfileActivity extends AppCompatActivity {
     TextView age;
     ImageView photo;
     TextView nom;
-    TextView lieu;
+    EditText lieu;
     ImageButton setImage;
     ImageView my_page_profil_image;
     Bitmap image;
@@ -52,6 +59,10 @@ public class MyProfileActivity extends AppCompatActivity {
     public final static String FROFILE_ID="FROFILE_ID";
     private static final int TAG = 421206948;
     boolean mine = true;
+    String tosaveName;
+    String tosaveLieu;
+    private static final int CAMERA_REQUEST = 1888;
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +71,34 @@ public class MyProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String message = intent.getStringExtra(MyProfileActivity.FROFILE_ID);
         Log.d("greend", "extra message : "+message);
+        ImageButton setImage=findViewById(R.id.setImage);
+        ImageButton takepicture=findViewById(R.id.takepicture);
+        ImageButton editname=findViewById(R.id.editname);
+        ImageButton save=findViewById(R.id.saveB);
+        save.setVisibility(View.GONE);
+        ImageButton editlieu=findViewById(R.id.editlieu);
+        ImageButton savelieu=findViewById(R.id.saveLieu);
+        save.setVisibility(View.GONE);
+
         if (message==null){
             SharedPreferences sharedPref = getSharedPreferences("SAVE", Context.MODE_PRIVATE);
             storedId = sharedPref.getInt("USER_ID", -1);
+            setImage.setVisibility(View.VISIBLE);
+            takepicture.setVisibility(View.VISIBLE);
+            editname.setVisibility(View.VISIBLE);
+            save.setVisibility(View.VISIBLE);
+            savelieu.setVisibility(View.VISIBLE);
+            editlieu.setVisibility(View.VISIBLE);
         }
         else{
             mine=false;
             storedId = Integer.parseInt(message);
+            setImage.setVisibility(View.GONE);
+            takepicture.setVisibility(View.GONE);
+            editname.setVisibility(View.GONE);
+            save.setVisibility(View.GONE);
+            savelieu.setVisibility(View.GONE);
+            editlieu.setVisibility(View.GONE);
         }
 
 
@@ -94,6 +126,11 @@ public class MyProfileActivity extends AppCompatActivity {
         new getInfo().execute();
         new getFriends().execute();
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(this,MapsActivity.class);
+        startActivity(setIntent);
     }
 
     private void setFriends() {
@@ -148,7 +185,7 @@ public class MyProfileActivity extends AppCompatActivity {
         super.onActivityResult(reqCode, resultCode, data);
 
 
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK && reqCode==42) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
@@ -160,14 +197,21 @@ public class MyProfileActivity extends AppCompatActivity {
                 Toast.makeText(MyProfileActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
 
-        }else {
-            Toast.makeText(MyProfileActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+        }
+        if (reqCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)
+        {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            image=photo;
+            new getPicture().execute();
+        }
+        else {
+            Toast.makeText(MyProfileActivity.this, "You haven't picked an image",Toast.LENGTH_LONG).show();
         }
     }
     public void updateInfo(){
         nom.setText(response[0]);
         age.setText(response[1]);
-        if (response[2]=="" ||response[3].substring(0,min(4,response[3].length())).contains("null")|| response[2]==null ||response[2].isEmpty()){
+        if (response[2]=="" ||response[2].substring(0,min(4,response[2].length())).contains("null")|| response[2]==null ||response[2].isEmpty()){
             lieu.setText("non renseigné");
         }
         else{
@@ -189,6 +233,98 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
     }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void takepic(View view) {
+        ImageButton takepicture=findViewById(R.id.takepicture);
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+        {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+        }
+        else
+        {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        }
+
+
+    }
+
+    public void editname(View view) {
+        EditText editname=findViewById(R.id.nom);
+        editname.setEnabled(true);
+        ImageButton save=findViewById(R.id.saveB);
+        save.setVisibility(View.VISIBLE);
+    }
+
+    public void savename(View view) {
+        EditText editname=findViewById(R.id.nom);
+        tosaveName = editname.getText().toString();
+        new saveName().execute();
+    }
+
+    public void editlieu(View view) {
+        EditText editLieu=findViewById(R.id.lieu);
+        editLieu.setEnabled(true);
+        ImageButton save=findViewById(R.id.saveLieu);
+        save.setVisibility(View.VISIBLE);
+    }
+
+    public void saveLieu(View view) {
+        EditText editlieu=findViewById(R.id.lieu);
+        tosaveLieu = editlieu.getText().toString();
+        new saveLieu().execute();
+    }
+    private class saveLieu extends AsyncTask<Void,Void,Void> {
+        String returmsg;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0029",String.valueOf(storedId)+sep+tosaveLieu);
+            returmsg=connect.magicSauce()[0];
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if(returmsg.equals("true")){
+
+            }else{
+                Toast.makeText(MyProfileActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+            EditText editlieu=findViewById(R.id.lieu);
+            editlieu.setEnabled(false);
+            ImageButton save=findViewById(R.id.saveLieu);
+            save.setVisibility(View.GONE);
+        }
+    }
+
+    private class saveName extends AsyncTask<Void,Void,Void> {
+        String returmsg;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0028",String.valueOf(storedId)+sep+tosaveName);
+            returmsg=connect.magicSauce()[0];
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if(returmsg.equals("true")){
+
+            }else{
+                Toast.makeText(MyProfileActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+            EditText editname=findViewById(R.id.nom);
+            editname.setEnabled(false);
+            ImageButton save=findViewById(R.id.saveB);
+            save.setVisibility(View.GONE);
+        }
+    }
+
     private class getInfo extends AsyncTask<Void,Void,Void> {
 
         @Override
@@ -278,5 +414,23 @@ public class MyProfileActivity extends AppCompatActivity {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_PERMISSION_CODE)
+        {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+            else
+            {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

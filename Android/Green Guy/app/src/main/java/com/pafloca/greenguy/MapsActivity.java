@@ -134,7 +134,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
         SharedPreferences sharedPref = getSharedPreferences("SAVE", Context.MODE_PRIVATE);
         storedId = sharedPref.getInt("USER_ID", -1);
-        new getAllMarkers().execute();
+
         new getAllInfo().execute();
         initializeButtons();
         initializeMenu();
@@ -250,6 +250,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         recyclerView.setAdapter(adapter);
 
         chargementEvents();
+        new getAllMarkers().execute();
 
     }
 

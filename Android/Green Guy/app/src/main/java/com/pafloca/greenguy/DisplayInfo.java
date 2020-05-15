@@ -35,6 +35,7 @@ import static com.pafloca.greenguy.EventMenuAdapter.EXTRA_INFOID;
 public class DisplayInfo extends AppCompatActivity {
     int storedId;
     String infoid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,8 @@ public class DisplayInfo extends AppCompatActivity {
         infoid= intent.getStringExtra(EXTRA_INFOID);
         new Display().execute();
     }
+
+
 
     private class Display extends AsyncTask<Void,Void,Void> {
     String[] response;
