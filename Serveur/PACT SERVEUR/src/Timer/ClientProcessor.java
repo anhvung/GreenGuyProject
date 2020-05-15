@@ -138,6 +138,18 @@ public class ClientProcessor implements Runnable {
 				case "0022":
 					toSend= getAllMID();
 					break;
+				case "0023":
+					toSend= getNewInfo();
+					break;
+				case "0024":
+					toSend= getAllInfoIds();
+					break;
+				case "0025":
+					toSend= getAllInfoTitles();
+					break;
+				case "0026":
+					toSend= getInfo();
+					break;
 				case "0000":
 					closeConnexion = true;
 					break;
@@ -196,6 +208,101 @@ public class ClientProcessor implements Runnable {
 	}
 
 
+	private String getInfo() {
+		
+			try {
+				ask("SELECT * FROM infos WHERE id="+itemList.get(0));
+				ArrayList<String> resultat=new ArrayList<String>();
+				rs.next();
+				resultat.add(rs.getString("titre"));
+				resultat.add(rs.getString("lien"));
+				resultat.add(String.valueOf(rs.getLong("date")));
+				String id = String.valueOf(rs.getInt("creator_id"));
+				ask("SELECT name FROM users WHERE id="+id);
+				rs.next();
+				resultat.add(rs.getString("name"));
+				return format(resultat);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		return null;
+	}
+	private String getAllInfoTitles() {
+		try {
+			ask("SELECT titre FROM infos");
+			ArrayList<String> titres=new ArrayList<String>();
+			
+			while (rs.next()) {
+				titres.add(rs.getString("titre"));
+			}
+			return format(titres);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	private String getAllInfoIds() {
+
+		try {
+			ask("SELECT id FROM infos");
+			ArrayList<String> ids=new ArrayList<String>();
+			
+			while (rs.next()) {
+				ids.add(rs.getString("id"));
+			}
+			return format(ids);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;	
+	}
+	private String getNewInfo() {
+		try {
+			ask("SELECT MAX(id) FROM infos");
+			rs.next();
+			int id=rs.getInt(1)+1;	
+			itemList.add(0, String.valueOf(id));
+			System.out.println("id : "+id);
+			String[] champs= {"id","creator_id","titre","lien","date","points"};
+			itemList.add("0");
+			if (add("infos",champs,itemList)) {
+				closeSQL();
+				String query ="CREATE TABLE `"+"info_"+String.valueOf(id)+"` (\r\n" + 
+						" `comment` longtext NOT NULL,\r\n" + 
+						" `date` bigint(20) NOT NULL,\r\n" + 
+						" `user_id` int(11) NOT NULL\r\n" + 
+						") ";
+				createTable(query);
+				return "true";
+			}
+		else {
+			closeSQL();
+			return "champs invalides";
+		}
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			return "";
+	}
 	private String getAllMID() {
 		try {
 			ask("SELECT id FROM events");
