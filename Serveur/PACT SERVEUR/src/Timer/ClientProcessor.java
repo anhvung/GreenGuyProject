@@ -150,6 +150,30 @@ public class ClientProcessor implements Runnable {
 				case "0026":
 					toSend= getInfo();
 					break;
+				case "0027":
+					toSend= getGeneralEvent();
+					break;
+				case "0028":
+					toSend= UpdateUserName();
+					break;
+				case "0029":
+					toSend= UpdateUserLieu();
+					break;
+				case "0030":
+					toSend= saveCommentGeneralEvent();
+					break;
+				case "0031":
+					toSend= getAllCommentersName();
+					break;
+				case "0032":
+					toSend= getAllCommentersMsg();
+					break;
+				case "0033":
+					toSend= getAllCommentersDate();
+					break;
+				case "0034":
+					toSend= getAllCommentersPic();
+					break;
 				case "0000":
 					closeConnexion = true;
 					break;
@@ -208,6 +232,177 @@ public class ClientProcessor implements Runnable {
 	}
 
 
+	private String getAllCommentersPic() {
+		try {
+			ArrayList<String> Names=new ArrayList<String>();
+			ArrayList<String> ids=new ArrayList<String>();
+			ask("SELECT * from event_"+itemList.get(0));
+			while (rs.next()) {
+				ids.add(String.valueOf(rs.getInt("user_id")));
+			}
+			
+			for (String id : ids) {
+				try {
+					System.out.println("SELECT photo from users WHERE id=" + id);
+					ask("SELECT photo from users WHERE id=" + id);
+					rs.next();
+					Names.add(rs.getString("photo"));
+				
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+			}
+			return format(Names);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+		
+	}
+	private String getAllCommentersDate() {
+		try {
+			ArrayList<String> dates=new ArrayList<String>();
+			ask("SELECT * from event_"+itemList.get(0));
+			while (rs.next()) {
+				dates.add(rs.getString("date"));
+			}
+			return format(dates);			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	private String getAllCommentersMsg() {
+		try {
+			ArrayList<String> msgs=new ArrayList<String>();
+			ask("SELECT * from event_"+itemList.get(0));
+			while (rs.next()) {
+				msgs.add(rs.getString("comment"));
+			}
+			return format(msgs);			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	private String getAllCommentersName() {
+		try {
+			ArrayList<String> Names=new ArrayList<String>();
+			ArrayList<String> ids=new ArrayList<String>();
+			ask("SELECT * from event_"+itemList.get(0));
+			while (rs.next()) {
+				ids.add(String.valueOf(rs.getInt("user_id")));
+			}
+			
+			for (String id : ids) {
+				try {
+					System.out.println("SELECT name from users WHERE id=" + id);
+					ask("SELECT name from users WHERE id=" + id);
+					rs.next();
+					Names.add(rs.getString("name"));
+					
+					System.out.println("new name");
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+			}
+			return format(Names);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+		
+	}
+	private String saveCommentGeneralEvent() {
+		String[] champs= {"user_id","comment","date"};
+		try {
+			itemList.set(2,"'"+itemList.get(2)+"'");
+			Date date = new Date(); 
+		    long timeMilli = date.getTime();
+			itemList.add(String.valueOf(timeMilli));
+			add("event_"+itemList.get(0),champs,new ArrayList<String>(itemList.subList(1,itemList.size())));
+			return "true";
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	
+	}
+	private String UpdateUserLieu() {
+		String id=itemList.get(0);
+		String lieu=itemList.get(1);
+		try {
+			update("UPDATE users SET lieu='"+lieu+"' WHERE id = "+id);
+			return "true";
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "error";
+	}
+	private String UpdateUserName() {
+		String id=itemList.get(0);
+		String name=itemList.get(1);
+		try {
+			update("UPDATE users SET name='"+name+"' WHERE id = "+id);
+			return "true";
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "error";
+	}
+	private String getGeneralEvent() {
+		try {
+			ask("SELECT * FROM events WHERE id="+itemList.get(0));
+			ArrayList<String> resultat=new ArrayList<String>();
+			rs.next();
+			resultat.add(rs.getString("titre"));
+			resultat.add(rs.getString("descr"));
+			resultat.add(rs.getString("type"));
+			resultat.add(String.valueOf(rs.getLong("deb")));
+			resultat.add(String.valueOf(rs.getLong("fin")));
+			String id = String.valueOf(rs.getInt("creator_id"));
+			ask("SELECT name FROM users WHERE id="+id);
+			rs.next();
+			resultat.add(rs.getString("name"));
+			return format(resultat);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	private String getInfo() {
 		
 			try {
