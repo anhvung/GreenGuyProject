@@ -220,7 +220,18 @@
                         android:layout_height="match_parent"/>
 
                 </LinearLayout>
-
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/publishButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="false"
+                    android:padding="8dp"
+                    android:layout_gravity="end|bottom"
+                    android:src="@drawable/ic_add_poi"
+                    android:layout_margin="30dp"
+                    android:layout_marginBottom="45dp"
+                    android:onClick="publish"/>
             </com.google.android.material.navigation.NavigationView>
 
         </androidx.drawerlayout.widget.DrawerLayout>

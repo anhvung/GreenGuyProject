@@ -8,6 +8,7 @@ public class ModelEvent {
     private String publieur;
     private String date;
     private String lieu;
+    private String id;
 
     public ModelEvent(){
 
@@ -21,7 +22,14 @@ public class ModelEvent {
         this.date = date;
         this.lieu = lieu;
     }
+    public ModelEvent(String titre, String id) {
+        this.titre = titre;
+        this.id = id;
 
+    }
+    public String getId() {
+        return id;
+    }
     public String getLieu() {
         return lieu;
     }

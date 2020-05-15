@@ -2,5 +2,6 @@
 <resources>
 
         <item name="TAG2" type="id"/>
+        <item name="INFOIDTAG" type="id"/>
 
 </resources>

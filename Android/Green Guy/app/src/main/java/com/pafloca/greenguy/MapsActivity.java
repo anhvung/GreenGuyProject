@@ -78,7 +78,8 @@ import java.util.Map;
 import usefulclasses.CameraPreview;
 import usefulclasses.ClientConnexion;
 
-import static java.lang.Float.max;
+import static java.lang.Math.max;
+
 
 /**
  * Activité : carte principale.
@@ -114,7 +115,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     int storedId;
     private Camera mCamera;
     private CameraPreview mPreview;
-
+    boolean cameraAccess=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Construct a GeoDataClient.
@@ -134,11 +135,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SharedPreferences sharedPref = getSharedPreferences("SAVE", Context.MODE_PRIVATE);
         storedId = sharedPref.getInt("USER_ID", -1);
         new getAllMarkers().execute();
+        new getAllInfo().execute();
         initializeButtons();
         initializeMenu();
-        // Create an instance of Camera
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.CAMERA)) {
+
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        12847);
+
+            }
+        } else {
+            cameraAccess=true;
+        }
         mCamera = getCameraInstance();
-        mCamera.setDisplayOrientation(90);
+        if(mCamera!=null){
+            mCamera.setDisplayOrientation(90);
+        }
+
         mPreview = new CameraPreview(this, mCamera);
         final FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
@@ -160,13 +181,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
              RelativeLayout rl=findViewById(R.id.RelativeLayoutMaps);
              if (alpha<0.9){
                  rl.setAlpha(max((float)alpha,(float)0.1));
-                 mCamera.startPreview();
+                 if(mCamera!=null && cameraAccess){
+                     mCamera.startPreview();
+                 }
+
 
              }
              else{
                  rl.setAlpha((float)alpha);
-                 mCamera.stopPreview();
-
+                 if(mCamera!=null && cameraAccess){
+                     mCamera.stopPreview();
+                 }
              }
             }
         });
@@ -393,7 +418,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
-
+/*
         mMap.addMarker(new MarkerOptions()
                 .position(tetech)
                 .icon(bitmapDescriptorFromVector_bckgrd(this, R.drawable.ic_mylocation))
@@ -428,14 +453,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         markers.add(mMap.addMarker(new MarkerOptions()
                 .position(pointEau)
                 .icon(bitmapDescriptorFromVector(this, R.drawable.ic_water))
-                .title("point d'eau")));
+                .title("point d'eau"))); */
 
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
             @Override
             public void onInfoWindowClick(Marker arg0) {
                 // TODO Auto-generated method stub
-                StartActivityDisplay(arg0.getTitle());
+                StartActivityDisplay(String.valueOf(arg0.getTag()));
 
             }
         });
@@ -476,7 +501,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(intent);
     }
     private void StartActivityDisplay(String msg) {
-        Intent intent = new Intent(this, DisplayInfo.class);
+        Intent intent = new Intent(this, DisplayGeneralEvent.class);
 
         intent.putExtra(EXTRA_MESSAGE, msg);
         startActivity(intent);
@@ -699,6 +724,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     mLocationPermissionGranted = true;
                 }
             }
+            case 12847 :{
+
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                        cameraAccess=true;
+                    } else {
+                        Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+                    }
+
+            }
         }
         updateLocationUI();
     }
@@ -768,11 +803,40 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    public void publish(View view) {
+        Intent intent=new Intent(this,AddInfo.class);
+        startActivity(intent);
+    }
+    private class getAllInfo extends AsyncTask<Void,Void,Void> {
+        String[] allId;
+
+        String[] allTitles;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0025",String.valueOf(storedId));
+            allTitles=connect.magicSauce();
+            connect= new ClientConnexion("192.168.1.17",2345,"0024",String.valueOf(storedId));
+            allId=connect.magicSauce();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            for (int i=0;i<allId.length;i++){
+                ModelEvent info = new ModelEvent(allTitles[i],allId[i]);
+                eventList.add(info);
+            }
+            chargementEvents();
+
+            super.onPostExecute(aVoid);
+        }
+    }
     private class getAllMarkers extends AsyncTask<Void,Void,Void> {
         String[] allLocations;
         String[] allTypes;
         String[] allTitles;
         String[] allIds;
+        LatLng[] posl;
         @Override
         protected Void doInBackground(Void... voids) {
             ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0019",String.valueOf(storedId));
@@ -783,14 +847,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             allTitles=connect.magicSauce();
             connect= new ClientConnexion("192.168.1.17",2345,"0022",String.valueOf(storedId));
             allIds=connect.magicSauce();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+            posl= new LatLng[allIds.length];
             for (int i=0;i<allIds.length;i++){
-                String mtitre=allTitles[i];
                 double latitude=0;
                 double longitude=0;
                 Geocoder geocoder = new Geocoder(MapsActivity.this);
@@ -805,23 +863,77 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                LatLng mpos = new LatLng(latitude, longitude);
+                posl[i] = new LatLng(latitude, longitude);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            for (int i=0;i<allIds.length;i++){
+                String mtitre=allTitles[i];
+                LatLng mpos=posl[i] ;
+                Marker marker=null;
                 switch (allTypes[i]) {
+
                     case "event":
-                        markers.add(mMap.addMarker(new MarkerOptions()
+                        marker=mMap.addMarker(new MarkerOptions()
                                 .position(mpos)
                                 .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_event))
-                                .title(mtitre)));
+                                .title(mtitre));
                         break;
                     case "Restaurant":
-                        markers.add(mMap.addMarker(new MarkerOptions()
+                        marker=mMap.addMarker(new MarkerOptions()
                                 .position(mpos)
                                 .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_restaurant_black_24dp))
+                                .title(mtitre));
+                        break;
+                    case "lieu touristique":
+                        marker=mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_local))
+                                .title(mtitre));
+                        break;
+                    case "Communauté":
+                        marker=mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_group))
+                                .title(mtitre));
+                        break;
+                    case "Festival":
+                        marker=mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_whatshot))
+                                .title(mtitre));
+                        break;
+                    case "Compost":
+                        marker=mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_compost))
+                                .title(mtitre));
+                        break;
+                    case "Recyclage":
+                        marker=mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_recycle_bin))
+                                .title(mtitre));
+                        break;
+                    case "Lieu Autre":
+                        markers.add(mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_place))
                                 .title(mtitre)));
                         break;
+                    case "Point d'eau":
+                        marker=mMap.addMarker(new MarkerOptions()
+                                .position(mpos)
+                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_water))
+                                .title(mtitre));
+                        break;
                 }
-
-
+                marker.setTag(allIds[i]);
+                markers.add(marker);
 
             }
 
@@ -837,5 +949,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         return c; // returns null if camera is unavailable
     }
+
 
 }

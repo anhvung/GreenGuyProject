@@ -1,0 +1,101 @@
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddInfo"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ajouter un événement"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:id="@+id/ajout_evenement_first_ll"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            />
+
+        <LinearLayout
+            android:layout_below="@+id/ajout_evenement_first_ll"
+            android:layout_marginTop="20dp"
+            android:id="@+id/ajout_evenement_ll_titre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Titre"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#000000"
+                />
+
+            <EditText
+                android:ems="15"
+                android:id="@+id/ajout_inf_titre"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+
+                />
+
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/ajout_evenement_ll_lieu"
+            android:layout_below="@+id/ajout_evenement_ll_titre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lien"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#000000"
+                />
+            <EditText
+                android:ems="15"
+                android:id="@+id/ajout_lien"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+
+                />
+
+        </LinearLayout>
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ajout_evenement_ll_lieu"
+            android:id="@+id/poi_ajouter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:text="Ajouter"
+            android:textSize="25dp"
+            android:onClick="ajout"
+            />
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
