@@ -59,7 +59,7 @@ public class DisplayInfo extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Log.d("greend", response[1]);
+
             TextView titre= findViewById(R.id.titre);
             TextView auteur= findViewById(R.id.auteur);
             TextView date= findViewById(R.id.date);
@@ -97,7 +97,7 @@ public class DisplayInfo extends AppCompatActivity {
             webView.loadUrl(url);
 
 
-            date.setText(getDate(Long.parseLong(response[2]), "dd/MM/yyyy hh:mm:ss.SSS"));
+            date.setText(getDate(Long.parseLong(response[2]), "dd/MM/yyyy hh:mm"));
             auteur.setText(response[3]);
             super.onPostExecute(aVoid);
         }

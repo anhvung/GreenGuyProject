@@ -131,19 +131,20 @@ public class AddEventActivity extends AppCompatActivity {
         TimePicker timedeb=findViewById(R.id.datePicker);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-           deb=new Date(datedeb.getYear(),datedeb.getMonth(),datedeb.getDayOfMonth(),timedeb.getHour(),timedeb.getMinute());
+           deb=new Date(datedeb.getYear()-1900,datedeb.getMonth(),datedeb.getDayOfMonth(),timedeb.getHour(),timedeb.getMinute());
         }
         else{
-            deb=new Date(datedeb.getYear(),datedeb.getMonth(),datedeb.getDayOfMonth(),timedeb.getCurrentHour(),timedeb.getCurrentMinute());
+            deb=new Date(datedeb.getYear()-1900,datedeb.getMonth(),datedeb.getDayOfMonth(),timedeb.getCurrentHour(),timedeb.getCurrentMinute());
         }
+        Log.d("greend", "date oeiufhwofih"+datedeb.getYear()+" "+datedeb.getMonth()+" "+datedeb.getDayOfMonth());
         DatePicker datefin=findViewById(R.id.date_Fin_cal);
         TimePicker timefin=findViewById(R.id.datePickerFin);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            fin=new Date(datefin.getYear(),datefin.getMonth(),datefin.getDayOfMonth(),timefin.getHour(),timefin.getMinute());
+            fin=new Date(datefin.getYear()-1900,datefin.getMonth(),datefin.getDayOfMonth(),timefin.getHour(),timefin.getMinute());
         }
         else{
-            fin=new Date(datefin.getYear(),datefin.getMonth(),datefin.getDayOfMonth(),timefin.getCurrentHour(),timefin.getCurrentMinute());
+            fin=new Date(datefin.getYear()-1900,datefin.getMonth(),datefin.getDayOfMonth(),timefin.getCurrentHour(),timefin.getCurrentMinute());
         }
 
         new uploadEvent().execute();

@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,20 @@ public class ConvActivity extends AppCompatActivity {
     String monMsg;
     private static final String ALLCONVID="FROFILE_ID65468787484447";
     private static final String sep2="!sepPourlEsmSg?";
+    boolean active=true;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        active=false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        active=true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +66,55 @@ public class ConvActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("SAVE", Context.MODE_PRIVATE);
         myid = sharedPref.getInt("USER_ID", -1);
         new CheckNewConv().execute();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                new pollserver().execute();
+            }
+
+        }, 1500);//faster
         //test();
 
 
     }
+    private class pollserver extends AsyncTask<Void,Void,Void> {
+        ArrayList<String> newdates;
+        ArrayList<String> newmsg;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            ClientConnexion connect = new ClientConnexion("192.168.1.17", 2345, "0015", String.valueOf(min(myid,hisid))+ sep+String.valueOf(max(myid,hisid)));
+            newdates= new ArrayList<>(Arrays.asList(connect.magicSauce()));
+            connect = new ClientConnexion("192.168.1.17", 2345, "0016", String.valueOf(min(myid,hisid))+ sep+String.valueOf(max(myid,hisid)));
+            newmsg= new ArrayList<>(Arrays.asList(connect.magicSauce()));
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Log.d("greend", "new old ; "+newdates.size()+" "+dates.size());
+                if(newdates.size()!=dates.size()){
+                    new updateNewMsg().execute();
+                }
+
+
+            if(active){
+
+                new pollserver().execute();
+            }
+
+        }
+    }
+
+
     private class CheckNewConv extends AsyncTask<Void,Void,Void> {
 
         @Override
@@ -115,7 +175,7 @@ public class ConvActivity extends AppCompatActivity {
             String ladate=java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
             ClientConnexion connect = new ClientConnexion("192.168.1.17", 2345, "0017", String.valueOf(min(myid,hisid))+ sep+String.valueOf(max(myid,hisid))+sep+monMsg+sep+"0"+sep+ladate);
             connect.magicSauce();
-            Log.d("greend", "send");
+
             return null;
         }
 
@@ -123,7 +183,7 @@ public class ConvActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Log.d("greend", "updating updateMsg length : "+dates.size());
-            new updateNewMsg().execute();
+            //new updateNewMsg().execute();
 
         }
     }
@@ -145,21 +205,11 @@ public class ConvActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             Log.d("greend", "updating recycler view length : "+dates.size());
             adapter.notifyDataSetChanged();
+            RecyclerView rv = (RecyclerView)findViewById(R.id.reyclerview_message_list);
+            rv.smoothScrollToPosition(dates.size()-1);
         }
     }
-    private void test() {
-        dates.add("10:30");
-        dates.add("11:30");
-        dates.add("10:35");
-        dates.add("10:60");
-        msg.add("1hello");
-        msg.add("2hello how are you");
-        msg.add("1im fine");
-        msg.add("2Dinner 2night?");
-       hisname="firend name";
-       myname="mememe";
-       pic= BitmapFactory.decodeResource(getResources(), R.drawable.ic_friends);
-    }
+
     public Bitmap Base64toBitmap(String pp){
         byte[] decodedString = Base64.decode(pp, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
