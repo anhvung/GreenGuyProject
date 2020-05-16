@@ -24,6 +24,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,6 +65,32 @@ public class DisplayGeneralEvent extends AppCompatActivity {
 
 
     }
+
+    public void participer(View view) {
+        new AjouterParticipant().execute();
+    }
+
+    public void participants(View view) {
+        Intent intent=new Intent(this,ParticipantsActivity.class);
+        intent.putExtra("EventGeneralId", Integer.parseInt(id));
+        startActivity(intent);
+    }
+
+    public void inviter(View view) {
+        Intent intent=new Intent(this,InviteFriendsActivity.class);
+        intent.putExtra("EventGeneralId", Integer.parseInt(id));
+        startActivity(intent);
+    }
+    private class AjouterParticipant extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+    }
+
+
+
     private class DisplayComments extends AsyncTask<Void,Void,Void>{
 
         @Override
@@ -197,13 +224,26 @@ public class DisplayGeneralEvent extends AppCompatActivity {
             TextView type= findViewById(R.id.type);
             TextView deb= findViewById(R.id.deb);
             TextView fin= findViewById(R.id.fin);
+            TextView debtxt= findViewById(R.id.debtxt);
+            TextView fintxt= findViewById(R.id.fintxt);
+            LinearLayout ll= findViewById(R.id.layoutsButons);
+            if(response[2].equals("event")){
+
+                deb.setText(getDate(Long.parseLong(response[3]), "dd/MM/yyyy hh:mm"));
+                fin.setText(getDate(Long.parseLong(response[4]), "dd/MM/yyyy hh:mm"));
+            }
+            else{
+                deb.setVisibility(View.GONE);
+                fin.setVisibility(View.GONE);
+                debtxt.setVisibility(View.GONE);
+                fintxt.setVisibility(View.GONE);
+                ll.setVisibility(View.GONE);
+            }
+
             TextView auteur= findViewById(R.id.auteur);
             titre.setText(response[0]);
             descr.setText(response[1]);
             type.setText(response[2]);
-
-            deb.setText(getDate(Long.parseLong(response[3]), "dd/MM/yyyy hh:mm"));
-            fin.setText(getDate(Long.parseLong(response[4]), "dd/MM/yyyy hh:mm"));
             auteur.setText(response[5]);
             super.onPostExecute(aVoid);
         }

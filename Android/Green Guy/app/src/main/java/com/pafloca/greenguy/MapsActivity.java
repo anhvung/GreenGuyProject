@@ -17,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.location.Address;
@@ -41,6 +42,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.directions.route.AbstractRouting;
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -51,6 +57,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -62,11 +69,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -77,6 +87,7 @@ import java.util.Map;
 
 import usefulclasses.CameraPreview;
 import usefulclasses.ClientConnexion;
+import usefulclasses.GMapV2Direction;
 
 import static java.lang.Math.max;
 
@@ -86,7 +97,7 @@ import static java.lang.Math.max;
  *
  *  Il y a une maps (maps sdk), une timeline à droite et le menu à gauche.
  */
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, RoutingListener {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     static FloatingActionButton addEvent;
     static FloatingActionButton addPoi;
@@ -251,7 +262,64 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         chargementEvents();
         new getAllMarkers().execute();
+        test();
 
+    }
+
+    public void test() {
+           Routing routing = new Routing.Builder()
+            .travelMode(AbstractRouting.TravelMode.DRIVING)
+            .withListener(MapsActivity.this)
+            .waypoints(new LatLng(48.712900, 2.244050), new LatLng(48.714140,2.171400))
+            .key("AIzaSyApwtfKqENhCUUoh4H2qqIFcFyDGhgee9Y")
+            .build();
+        routing.execute();
+    }
+    @Override
+    public void onRoutingFailure(RouteException e) {
+        Log.e("check", e.getMessage());
+    }
+
+    @Override
+    public void onRoutingStart() {
+        Log.e("check", "onRoutingStart");
+    }
+
+    @Override
+    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
+
+        Log.e("check", "onRoutingSuccess");
+        CameraUpdate center = CameraUpdateFactory.newLatLng(  new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()));
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        List<Polyline> polylines = new ArrayList<>();
+
+        mMap.moveCamera(center);
+
+
+        if (polylines.size() > 0) {
+            for (Polyline poly : polylines) {
+                poly.remove();
+            }
+        }
+
+        polylines = new ArrayList<>();
+        //add route(s) to the map.
+        for (int i = 0; i < route.size(); i++) {
+
+            //In case of more than 5 alternative routes
+
+            PolylineOptions polyOptions = new PolylineOptions();
+            polyOptions.color(getResources().getColor(R.color.colorBlue));
+            polyOptions.width(10 + i * 3);
+            polyOptions.addAll(route.get(i).getPoints());
+            Polyline polyline = mMap.addPolyline(polyOptions);
+            polylines.add(polyline);
+        }
+    }
+
+    @Override
+    public void onRoutingCancelled() {
+        Log.e("check", "onRoutingCancelled");
     }
 
     private void chargementEvents() {

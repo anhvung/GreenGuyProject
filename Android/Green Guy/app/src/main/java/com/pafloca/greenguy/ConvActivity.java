@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,16 +47,19 @@ public class ConvActivity extends AppCompatActivity {
     private static final String sep2="!sepPourlEsmSg?";
     boolean active=true;
 
+
     @Override
     protected void onStop() {
         super.onStop();
         active=false;
+        scheduleJob();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         active=true;
+        cancelJob();
     }
 
     @Override
@@ -214,4 +220,23 @@ public class ConvActivity extends AppCompatActivity {
         byte[] decodedString = Base64.decode(pp, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
+    public void scheduleJob() {
+        ComponentName componentName = new ComponentName(this, NotifJob.class);
+        JobInfo info;
+        info = new JobInfo.Builder(4296969, componentName)
+                .setMinimumLatency(3000).build();
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+            Log.d("greend", "Job scheduled");
+        } else {
+            Log.d("greend", "Job scheduling failed");
+        }
+    }
+    public void cancelJob() {
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.cancel(4296969);
+        Log.d("greend", "Job cancelled");
+    }
+
 }
