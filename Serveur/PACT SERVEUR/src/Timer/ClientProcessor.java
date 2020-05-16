@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class ClientProcessor implements Runnable {
 	public static final String sep = "!@@!!";
+	private static final String sep2="!sepPourlEsmSg?";
 	private Socket sock;
 	private DataOutputStream writer = null;
 	private BufferedInputStream reader = null;
@@ -174,6 +175,9 @@ public class ClientProcessor implements Runnable {
 				case "0034":
 					toSend= getAllCommentersPic();
 					break;
+				case "0035":
+					toSend= getNewNotif();
+					break;
 				case "0000":
 					closeConnexion = true;
 					break;
@@ -232,6 +236,32 @@ public class ClientProcessor implements Runnable {
 	}
 
 
+	private String getNewNotif() {
+		try {
+			ask("SELECT * from notif_"+itemList.get(0)+" ORDER BY id DESC LIMIT 1");
+			rs.next();
+			if(rs.getInt("sent")==0) {
+				ArrayList<String> notif=new ArrayList<String>();
+				notif.add(String.valueOf(rs.getInt("id")));
+				notif.add(String.valueOf(rs.getString("titre")));
+				notif.add(String.valueOf(rs.getString("msg")));
+				notif.add(String.valueOf(rs.getString("type")));
+				
+				
+				update("UPDATE notif_"+itemList.get(0)+" SET sent=1");
+				
+				return format(notif);
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "nada";
+	}
 	private String getAllCommentersPic() {
 		try {
 			ArrayList<String> Names=new ArrayList<String>();
@@ -630,6 +660,17 @@ public class ClientProcessor implements Runnable {
 							" `conv` tinyint(1) NOT NULL DEFAULT 0\r\n" + 
 							")  ";
 					createTable(query);
+					
+					String query2 ="CREATE TABLE `notif_"+String.valueOf(id)+"` (\r\n" + 
+							" `id` int(11) NOT NULL,\r\n" + 
+							" `titre` varchar(20) NOT NULL,\r\n" + 
+							" `msg` varchar(500) NOT NULL,\r\n" + 
+							" `type` varchar(20) NOT NULL,\r\n" + 
+							" `sent` int(11) NOT NULL\r\n" + 
+							") ";
+					createTable(query2);
+					
+					
 					return "true";
 				}
 				else {
@@ -655,11 +696,47 @@ public class ClientProcessor implements Runnable {
 	
 	private String storeMsg() {
 		String[] champs= {"msg","type","date"};
+		String[] champs2= {"msg","type","sent","titre","id"};
 		try {
 			itemList.set(4,"'"+itemList.get(4)+"'");
 			itemList.set(2,"'"+itemList.get(2).replace("'","''")+"'");
 			add("CONV_"+itemList.get(0)+"_"+itemList.get(1),champs,new ArrayList<String>(itemList.subList(2,itemList.size())));
+			
+		
+		
+			
+		 ArrayList<String> liste=new ArrayList<String>();
+		 liste.add("'"+itemList.get(2).split(sep2)[1].substring(1));
+		 liste.add("'conv'");
+		 liste.add("0");
+		 System.out.println("test id ; "+itemList.get(2).split(sep2)[0]);
+		 if((itemList.get(2).split(sep2)[0].substring(1)).equals(itemList.get(0))) {
+			    ask("SELECT name FROM users WHERE id="+itemList.get(0));
+			    rs.next();
+			 	liste.add("'Nouveau message de "+rs.getString("name")+"'");
+				ask("SELECT MAX(id) FROM notif_"+itemList.get(1));
+				rs.next();
+				int id=rs.getInt(1)+1;
+				liste.add(String.valueOf(id));
+				add("notif_"+itemList.get(1),champs2,liste);
+		 }
+			
+		 else {
+			 ask("SELECT name FROM users WHERE id="+itemList.get(1));
+			    rs.next();
+			 	liste.add("'Nouveau message de "+rs.getString("name")+"'");
+			 ask("SELECT MAX(id) FROM notif_"+itemList.get(0));
+				rs.next();
+				int id=rs.getInt(1)+1;
+				liste.add(String.valueOf(id));
+			 add("notif_"+itemList.get(0),champs2,liste);
+				
+		 }
+			
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
