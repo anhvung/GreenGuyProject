@@ -178,6 +178,33 @@ public class ClientProcessor implements Runnable {
 				case "0035":
 					toSend= getNewNotif();
 					break;
+				case "0036":
+					toSend= addParticipants();
+					break;
+				case "0037":
+					toSend= getParticipantsId();
+					break;
+				case "0038":
+					toSend= getParticipantspic();
+					break;
+				case "0039":
+					toSend= getParticipantsname();
+					break;
+				case "0040":
+					toSend= inviteFriend();
+					break;
+				case "0041":
+					toSend= myEventsIds();
+					break;
+				case "0042":
+					toSend= myEventstitles();
+					break;
+				case "0043":
+					toSend= inviteMyeventsDatedeb();
+					break;
+				case "0044":
+					toSend= inviteMyeventsDatefin();
+					break;
 				case "0000":
 					closeConnexion = true;
 					break;
@@ -236,6 +263,274 @@ public class ClientProcessor implements Runnable {
 	}
 
 
+	private String inviteMyeventsDatefin() {
+		try {
+			ask("SELECT eventslist FROM users WHERE id="+itemList.get(0));
+			rs.next();
+			String liste=rs.getString("eventslist");
+			String[] ListeEvents= liste.split(sep, -1);
+			ArrayList<String> res=new ArrayList<String>();
+			for (String str:ListeEvents) {
+				if(!str.equals(""))
+				{
+					ask("SELECT fin FROM events WHERE id="+str);
+					rs.next();
+					res.add(String.valueOf(rs.getLong("fin")));
+				}
+			}
+			return format(res);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+		return null;
+	}
+	private String inviteMyeventsDatedeb() {
+		try {
+			ask("SELECT eventslist FROM users WHERE id="+itemList.get(0));
+			rs.next();
+			String liste=rs.getString("eventslist");
+			String[] ListeEvents= liste.split(sep, -1);
+			ArrayList<String> res=new ArrayList<String>();
+			for (String str:ListeEvents) {
+				if(!str.equals(""))
+				{
+					ask("SELECT deb FROM events WHERE id="+str);
+					rs.next();
+					res.add(String.valueOf(rs.getLong("deb")));
+				}
+			}
+			return format(res);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+		return null;
+	}
+	private String myEventstitles() {
+		try {
+			ask("SELECT eventslist FROM users WHERE id="+itemList.get(0));
+			rs.next();
+			String liste=rs.getString("eventslist");
+			String[] ListeEvents= liste.split(sep, -1);
+			ArrayList<String> res=new ArrayList<String>();
+			for (String str:ListeEvents) {
+				if(!str.equals(""))
+				{
+					ask("SELECT titre FROM events WHERE id="+str);
+					rs.next();
+					res.add(rs.getString("titre"));
+				}
+			}
+			return format(res);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+		return null;
+	}
+	private String myEventsIds() {
+		try {
+			ask("SELECT eventslist FROM users WHERE id="+itemList.get(0));
+			rs.next();
+			String liste=rs.getString("eventslist");
+			String[] ListeEvents= liste.split(sep, -1);
+			ArrayList<String> res=new ArrayList<String>();
+			for (String str:ListeEvents) {
+				if(!str.equals(""))
+				{
+					res.add(str);
+				}
+			}
+			return format(res);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+		return null;
+	}
+	private String inviteFriend() {
+		
+		try {
+			ArrayList<String> liste=new ArrayList<String>();
+			ask("SELECT name FROM users WHERE id="+itemList.get(1));
+		    rs.next();
+		    liste.add("'"+itemList.get(2)+"'");
+		    liste.add("'invite'");
+			liste.add("0");
+		 	liste.add("'Invitation de "+rs.getString("name")+"'");
+			ask("SELECT MAX(id) FROM notif_"+itemList.get(0));
+			rs.next();
+			int id=rs.getInt(1)+1;
+			liste.add(String.valueOf(id));
+			String[] champs2= {"msg","type","sent","titre","id"};
+			add("notif_"+itemList.get(0),champs2,liste);
+			return itemList.get(2);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	private String getParticipantsname() {
+		try {
+			ask("SELECT liste_participants from events WHERE id=" + itemList.get(0));
+			rs.next();
+			String participants=rs.getString("liste_participants");
+			String[] Listeparticipants= participants.split(sep, -1);
+			ArrayList<String> res=new ArrayList<String>();
+			for (String i :Listeparticipants) {
+				if (!i.equals("")) {
+					ask("SELECT name from users WHERE id=" + i);
+					rs.next();
+					res.add(rs.getString("name"));
+				}
+				
+			}
+			return format(res);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "null";//no friend or error
+		
+	}
+	private String getParticipantspic() {
+		try {
+			ask("SELECT liste_participants from events WHERE id=" + itemList.get(0));
+			rs.next();
+			String participants=rs.getString("liste_participants");
+			String[] Listeparticipants= participants.split(sep, -1);
+			ArrayList<String> res=new ArrayList<String>();
+			for (String i :Listeparticipants) {
+				if (!i.equals("")) {
+					ask("SELECT photo from users WHERE id=" + i);
+					rs.next();
+					res.add(rs.getString("photo"));
+				}
+				
+			}
+			return format(res);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "null";//no friend or error
+	}
+	private String getParticipantsId() {
+		try {
+			ask("SELECT liste_participants from events WHERE id=" + itemList.get(0));
+			rs.next();
+			String participants=rs.getString("liste_participants");
+			String[] Listeparticipants= participants.split(sep, -1);
+			ArrayList<String> res=new ArrayList<String>();
+			for (String i :Listeparticipants) {
+				if (!i.equals("")) {
+					ask("SELECT id from users WHERE id=" + i);
+					rs.next();
+					res.add(String.valueOf(rs.getInt("id")));
+				}
+				
+			}
+			return format(res);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "null";//no friend or error
+	}
+	private String addParticipants() {
+		String[] champs= {"user_id","comment","date"};
+		try {
+			ask("SELECT liste_participants from events WHERE id="+itemList.get(1));
+			rs.next();
+			String participants =rs.getString("liste_participants");
+			System.out.println(participants);
+			String[] ListeParticipants=null;
+			if(participants!=null)
+				ListeParticipants = participants.split(sep, -1);
+			
+			if(ListeParticipants==null || Arrays.stream(ListeParticipants).anyMatch(itemList.get(0)::equals)) {
+				return "Participe deja";
+			}
+			else {
+				String nvListe = ajoutersep2(participants,itemList.get(0));
+				update("UPDATE events"+" SET liste_participants='"+nvListe+"' "+"WHERE id="+itemList.get(1));
+				
+				ask("SELECT eventslist from users WHERE id="+itemList.get(0));
+				rs.next();
+				String eventslist=rs.getString("eventslist");
+				String eventenplus = ajoutersep2(eventslist,itemList.get(1));
+				update("UPDATE users"+" SET eventslist='"+eventenplus+"' "+"WHERE id="+itemList.get(0));
+				
+				
+				////notif
+				ask("SELECT friend_id from user_" + itemList.get(0));
+				ArrayList<String> ids=new ArrayList<String>();
+				while(rs.next()) {
+					ids.add(String.valueOf(rs.getInt("friend_id")));
+				}
+				for (String id:ids) {
+					ArrayList<String> liste=new ArrayList<String>();
+					ask("SELECT name FROM users WHERE id="+itemList.get(0));
+				    rs.next();
+				    liste.add("'"+itemList.get(1)+"'");
+				    liste.add("'participe'");
+					liste.add("0");
+				 	liste.add("'"+rs.getString("name")+" participe à un événement!'");
+					ask("SELECT MAX(id) FROM notif_"+id);
+					rs.next();
+					int idex=rs.getInt(1)+1;
+					liste.add(String.valueOf(idex));
+					String[] champs2= {"msg","type","sent","titre","id"};
+					add("notif_"+id,champs2,liste);
+				}
+				
+				
+				return "ajoute";
+			}
+			
+		} catch (ClassNotFoundException e) 	{
+			e.printStackTrace();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return "error";
+	}
+	private String ajoutersep2(String string,String index) {
+		String ret=string;
+		
+		return ret+sep+index;
+		
+		
+	}
 	private String getNewNotif() {
 		try {
 			ask("SELECT * from notif_"+itemList.get(0)+" ORDER BY id DESC LIMIT 1");
