@@ -205,6 +205,9 @@ public class ClientProcessor implements Runnable {
 				case "0044":
 					toSend= inviteMyeventsDatefin();
 					break;
+				case "0045":
+					toSend= search();
+					break;
 				case "0000":
 					closeConnexion = true;
 					break;
@@ -263,6 +266,30 @@ public class ClientProcessor implements Runnable {
 	}
 
 
+	private String search() {
+		try {
+			ask("SELECT * FROM events WHERE titre LIKE '%"+itemList.get(0)+"%'");//SELECT * FROM [table] WHERE [field] LIKE '%stringtosearchfor%'.
+			ArrayList<String> res=new ArrayList<String>();
+			while(rs.next()) {
+				res.add(rs.getString("titre")+sep2+String.valueOf(rs.getInt("id")));
+			}
+			if(res.size()>0) {
+				return format(res);
+			}
+			else {
+				return "";
+			}
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
 	private String inviteMyeventsDatefin() {
 		try {
 			ask("SELECT eventslist FROM users WHERE id="+itemList.get(0));
