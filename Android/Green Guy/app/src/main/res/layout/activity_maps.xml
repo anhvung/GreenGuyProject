@@ -127,7 +127,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_search" />
+                    android:src="@drawable/ic_search"
+                    android:onClick="RechercherEvent"/>
 
             </RelativeLayout>
         </LinearLayout>

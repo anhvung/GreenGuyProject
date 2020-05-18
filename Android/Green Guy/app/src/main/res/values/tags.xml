@@ -3,5 +3,6 @@
 
         <item name="TAG2" type="id"/>
         <item name="INFOIDTAG" type="id"/>
+        <item name="TAG3" type="id"/>
 
 </resources>

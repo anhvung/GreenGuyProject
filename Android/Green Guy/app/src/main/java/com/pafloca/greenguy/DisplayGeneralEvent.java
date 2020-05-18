@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -51,6 +52,11 @@ public class DisplayGeneralEvent extends AppCompatActivity {
     ArrayList<String> commentsMsg;
     ArrayList<String> commentsDate;
     ArrayList<String> commentsUserPic;
+    String titre;
+    String descr;
+    long debutlong;
+    long finlong;
+
     public static final String sep="!@@!!";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +87,34 @@ public class DisplayGeneralEvent extends AppCompatActivity {
         intent.putExtra("EventGeneralId", Integer.parseInt(id));
         startActivity(intent);
     }
-    private class AjouterParticipant extends AsyncTask<Void,Void,Void> {
 
+    public void calendar(View view) {
+        Calendar beginCal = Calendar.getInstance();
+
+
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra(CalendarContract.Events.TITLE, titre);
+        intent.putExtra(CalendarContract.Events.DESCRIPTION, descr);
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "");
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, debutlong);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, finlong);
+        startActivity(intent);
+    }
+
+    private class AjouterParticipant extends AsyncTask<Void,Void,Void> {
+        String response;
         @Override
         protected Void doInBackground(Void... voids) {
+            ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0036",storedId+sep+id);
+            response =connect.magicSauce()[0];
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(DisplayGeneralEvent.this, response, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -213,11 +242,16 @@ public class DisplayGeneralEvent extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0027",id);
             response =connect.magicSauce();
+            titre=response[0];
+            descr=response[1];
+            debutlong=Long.parseLong(response[3]);
+            finlong=Long.parseLong(response[4]);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            Log.d("greend","INVITE2 "+id);
             Log.d("greend", response[1]);
             TextView titre= findViewById(R.id.titre);
             TextView descr= findViewById(R.id.descr);
@@ -250,6 +284,7 @@ public class DisplayGeneralEvent extends AppCompatActivity {
     }
     public static String getDate(long milliSeconds, String dateFormat)
     {
+
         SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSeconds);

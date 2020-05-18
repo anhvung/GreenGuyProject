@@ -48,12 +48,12 @@ public class ParticipantsActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0006",String.valueOf(storedId));
+            ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0037",String.valueOf(eventId));
             friendsId=connect.magicSauce();
-            connect= new ClientConnexion("192.168.1.17",2345,"0007",String.valueOf(storedId));
-            friendsName =connect.magicSauce();
-            connect= new ClientConnexion("192.168.1.17",2345,"0008",String.valueOf(storedId));
+            connect= new ClientConnexion("192.168.1.17",2345,"0038",String.valueOf(eventId));
             friendsPic =connect.magicSauce();
+            connect= new ClientConnexion("192.168.1.17",2345,"0039",String.valueOf(eventId));
+            friendsName =connect.magicSauce();
             return null;
         }
 

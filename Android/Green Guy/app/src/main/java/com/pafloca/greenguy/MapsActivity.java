@@ -31,6 +31,7 @@ import android.util.Rational;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -99,6 +100,7 @@ import static java.lang.Math.max;
  */
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, RoutingListener {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public static final String EXTRA_MESSAGE2 = "com.example.myfirstapp.MESSAGE2wfw";
     static FloatingActionButton addEvent;
     static FloatingActionButton addPoi;
     static FloatingActionButton add;
@@ -876,6 +878,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Intent intent=new Intent(this,AddInfo.class);
         startActivity(intent);
     }
+
+    public void RechercherEvent(View view) {
+        EditText seqrchtxt=findViewById(R.id.ed_home_searchbar);
+        Intent intent = new Intent(this, DisplayGeneralEvent.class);
+
+
+        intent.putExtra(EXTRA_MESSAGE2, seqrchtxt.getText());
+        seqrchtxt.setText("");
+        startActivity(intent);
+
+
+    }
+
     private class getAllInfo extends AsyncTask<Void,Void,Void> {
         String[] allId;
 

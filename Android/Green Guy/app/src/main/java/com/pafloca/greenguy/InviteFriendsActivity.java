@@ -19,9 +19,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import usefulclasses.ClientConnexion;
 
+import static com.pafloca.greenguy.DisplayGeneralEvent.sep;
 import static com.pafloca.greenguy.MyProfileActivity.FROFILE_ID;
 
 public class InviteFriendsActivity extends AppCompatActivity {
@@ -31,6 +33,8 @@ public class InviteFriendsActivity extends AppCompatActivity {
     int storedId;
     Bitmap defaultPic;
     int eventId;
+    int friendId;
+    private static final int TAG = 421206948;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,17 +98,41 @@ public class InviteFriendsActivity extends AppCompatActivity {
 
             item.addView(pic);
             item.addView(text);
-
+            item.setTag(TAG,friendsId[i]);
             if(friendsName[i]=="" || friendsName[i]==null || friendsName[i].isEmpty() || friendsName[i]=="-1"){
 
             }
             else {
                 listLayout.addView(item);
+                item.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        friendId= Integer.parseInt(String.valueOf(v.getTag(TAG)));
+                        new inviteFriend().execute();
+                        return true;
+                    }
+                });
+                item.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v)
+                    {
+                        Toast.makeText(InviteFriendsActivity.this, "Appuyez longtemps pour inviter", Toast.LENGTH_LONG).show();
 
+                    }
+                });
             }
 
         }
 
+    }
+    private class inviteFriend extends AsyncTask<Void,Void,Void> {
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            ClientConnexion connect= new ClientConnexion("192.168.1.17",2345,"0040",String.valueOf(friendId)+sep+String.valueOf(storedId)+sep+String.valueOf(eventId));
+            connect.magicSauce();
+            return null;
+        }
     }
     public Bitmap Base64toBitmap(String pp){
         byte[] decodedString = Base64.decode(pp, Base64.DEFAULT);

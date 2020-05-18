@@ -29,6 +29,7 @@ public class NotifJob extends JobService {
     public static String CHANNEL_ID="com.pafloca.greenguy.2353";
     public static int notificationId = 347765;
     private boolean jobCancelled = false;
+    String msg;
     @Override
     public boolean onStartJob(final JobParameters jobParameters) {
         Log.d("greend","Running service now..");
@@ -70,28 +71,70 @@ public void checkNotif(){
     response=connect.magicSauce();
     if (!response[0].equals("nada")) {
 
-            Class<AllConvActivity> activ = null;
+
             switch (response[3]) {
                 case "conv":
-                    activ = AllConvActivity.class;
+                    Intent intent = new Intent(this, AllConvActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                    createNotificationChannel();
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                            .setSmallIcon(R.drawable.ic_msg)
+                            .setContentTitle(response[1])
+                            .setContentText(response[2])
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+
+                    notificationManager.notify(notificationId, builder.build());
                     Log.e("greend", "NOUVEAU MSG");
                     break;
+                case "invite":
+                    Log.d("greend","INVITE "+response[2]);
+                    Intent intent2 = new Intent(this, DisplayGeneralEvent.class);
+                    intent2.putExtra(MapsActivity.EXTRA_MESSAGE, response[2]);
+                        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                    PendingIntent pendingIntent2 = PendingIntent.getActivity(this, 0, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+                    createNotificationChannel();
+                    NotificationCompat.Builder builder2 = new NotificationCompat.Builder(this, CHANNEL_ID)
+                            .setSmallIcon(R.drawable.ic_event)
+                            .setContentTitle(response[1])
+                            .setContentText("Appuyez pour en savoir plus")
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setContentIntent(pendingIntent2)
+                            .setAutoCancel(true);
+                    NotificationManagerCompat notificationManager2 = NotificationManagerCompat.from(this);
+
+
+                    notificationManager2.notify(notificationId, builder2.build());
+                    break;
+                case "participe":
+                    Log.d("greend","INVITE "+response[2]);
+                    Intent intent3 = new Intent(this, DisplayGeneralEvent.class);
+                    intent3.putExtra(MapsActivity.EXTRA_MESSAGE, response[2]);
+                    intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                    PendingIntent pendingIntent3 = PendingIntent.getActivity(this, 0, intent3, PendingIntent.FLAG_UPDATE_CURRENT);
+                    createNotificationChannel();
+                    NotificationCompat.Builder builder3 = new NotificationCompat.Builder(this, CHANNEL_ID)
+                            .setSmallIcon(R.drawable.ic_event)
+                            .setContentTitle(response[1])
+                            .setContentText("Appuyez pour en savoir plus sur l'événement")
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setContentIntent(pendingIntent3)
+                            .setAutoCancel(true);
+                    NotificationManagerCompat notificationManager3 = NotificationManagerCompat.from(this);
+
+
+                    notificationManager3.notify(notificationId, builder3.build());
+                    break;
+
             }
-            Intent intent = new Intent(this, activ);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-            createNotificationChannel();
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_msg)
-                    .setContentTitle(response[1])
-                    .setContentText(response[2])
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setContentIntent(pendingIntent)
-                    .setAutoCancel(true);
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
 
-            notificationManager.notify(notificationId, builder.build());
         }
 
 
