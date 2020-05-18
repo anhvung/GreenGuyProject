@@ -881,10 +881,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void RechercherEvent(View view) {
         EditText seqrchtxt=findViewById(R.id.ed_home_searchbar);
-        Intent intent = new Intent(this, DisplayGeneralEvent.class);
+        Intent intent = new Intent(this, SearchResultActivity.class);
 
-
-        intent.putExtra(EXTRA_MESSAGE2, seqrchtxt.getText());
+        Log.d("greend","message search depart : "+seqrchtxt.getText());
+        intent.putExtra(EXTRA_MESSAGE2, seqrchtxt.getText().toString());
         seqrchtxt.setText("");
         startActivity(intent);
 
