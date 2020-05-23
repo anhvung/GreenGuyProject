@@ -369,7 +369,7 @@ public class ClientProcessor implements Runnable {
 			e.printStackTrace();
 		}
 	   
-		return null;
+		return "";
 	}
 	private String myEventsIds() {
 		try {
