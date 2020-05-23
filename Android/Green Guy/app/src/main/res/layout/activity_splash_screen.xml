@@ -9,12 +9,11 @@
 
     <ImageView
         android:id="@+id/imageViewS"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@mipmap/splash_foreground"
-
+        app:srcCompat="@mipmap/nvicon"
+        android:maxHeight="600px"
+        android:maxWidth="600px"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

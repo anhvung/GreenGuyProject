@@ -3,6 +3,7 @@ package com.pafloca.greenguy;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
@@ -14,6 +15,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -144,6 +146,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
             ImageView pic =new ImageView(this);
             LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(200,200);
+            parms.setMargins(17, 17, 17, 17);
             pic.setLayoutParams(parms);
 
             if (friendsPic[i].length()<100){
@@ -156,10 +159,11 @@ public class MyProfileActivity extends AppCompatActivity {
 
             TextView text = new TextView(this);
             text.setText(friendsName[i]);
-
+            text.setTextColor(Color.parseColor("#ffffff"));
             item.addView(pic);
             item.addView(text);
             item.setTag(TAG,friendsId[i]);
+            item.setBackground(ContextCompat.getDrawable(MyProfileActivity.this, R.drawable.shape_orange));
             if(friendsName[i]=="" || friendsName[i]==null || friendsName[i].isEmpty() || friendsName[i]=="-1"){
 
             }

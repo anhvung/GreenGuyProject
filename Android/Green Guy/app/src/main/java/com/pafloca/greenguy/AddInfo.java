@@ -3,6 +3,7 @@ package com.pafloca.greenguy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -57,7 +58,8 @@ public class AddInfo extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if(response.equals("true")){
-                finish();
+                Intent setIntent = new Intent(AddInfo.this,MapsActivity.class);
+                startActivity(setIntent);
             }
             else{
                 Toast.makeText(getApplicationContext(),"Champs invalides",Toast.LENGTH_SHORT).show();

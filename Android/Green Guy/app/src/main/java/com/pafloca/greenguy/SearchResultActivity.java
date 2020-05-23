@@ -1,6 +1,7 @@
 package com.pafloca.greenguy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -43,6 +44,7 @@ public class SearchResultActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
 
             LinearLayout ll=findViewById(R.id.list_result);
+
             for (int i=0;i<titresPlusId.length;i++){
                 LinearLayout item=new LinearLayout(SearchResultActivity.this);
                 item.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -56,7 +58,13 @@ public class SearchResultActivity extends AppCompatActivity {
                 title.setText(titre);
 
 
-
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(20, 20, 20, 20);
+                title.setLayoutParams(params);
+                title.setTextSize(22);
                 item.addView(title);
                 item.setTag(TAG,id);
                 item.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +76,10 @@ public class SearchResultActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                item.setBackground(ContextCompat.getDrawable(SearchResultActivity.this, R.drawable.shape_lightgreen));
+
+
                 ll.addView(item);
 
 

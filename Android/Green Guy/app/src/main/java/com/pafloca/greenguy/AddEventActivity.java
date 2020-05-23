@@ -172,7 +172,8 @@ public class AddEventActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if(response_pic.equals("true")){
-                finish();
+                Intent setIntent = new Intent(AddEventActivity.this,MapsActivity.class);
+                startActivity(setIntent);
             }
             else {
                 Toast.makeText(getApplicationContext(),"Champs invalides",Toast.LENGTH_SHORT).show();

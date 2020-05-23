@@ -7,11 +7,7 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_profile"
-            android:title="Pseudo : Anh-Vu" />
-        <item
-            android:id="@+id/nav_points"
-            android:icon="@drawable/ic_points"
-            android:title="Points : - 10 pts" />
+            android:title="Pseudo : Mon profil" />
 
     </group>
 
@@ -30,10 +26,7 @@
                 android:id="@+id/nav_event"
                 android:icon="@drawable/ic_event"
                 android:title="Evénements" />
-            <item
-                android:id="@+id/nav_notif"
-                android:icon="@drawable/ic_notifications"
-                android:title="Notifications" />
+
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_settings"

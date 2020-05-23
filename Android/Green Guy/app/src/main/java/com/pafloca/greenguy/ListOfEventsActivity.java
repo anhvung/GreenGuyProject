@@ -3,8 +3,11 @@ package com.pafloca.greenguy;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,45 +64,59 @@ int storedId;
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            LinearLayout ll=findViewById(R.id.list_of_eventsll);
-            for (int i=0;i<ids.length;i++){
-                LinearLayout item=new LinearLayout(ListOfEventsActivity.this);
-                item.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                item.setOrientation(LinearLayout.VERTICAL);
-                item.setGravity(Gravity.CENTER_VERTICAL );
-                LinearLayout datell=new LinearLayout(ListOfEventsActivity.this);
-                datell.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                datell.setOrientation(LinearLayout.HORIZONTAL);
-                datell.setGravity(Gravity.CENTER_VERTICAL );
+            if(titre[0]!=""){
+                LinearLayout ll=findViewById(R.id.list_of_eventsll);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(20, 20, 20, 20);
+                for (int i=0;i<ids.length;i++){
+                    LinearLayout item=new LinearLayout(ListOfEventsActivity.this);
+                    item.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    item.setOrientation(LinearLayout.VERTICAL);
+                    item.setGravity(Gravity.CENTER_VERTICAL );
+                    LinearLayout datell=new LinearLayout(ListOfEventsActivity.this);
+                    datell.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    datell.setOrientation(LinearLayout.HORIZONTAL);
+                    datell.setGravity(Gravity.CENTER_VERTICAL );
 
-                TextView title=new TextView(ListOfEventsActivity.this);
-                title.setText(titre[i]);
+                    TextView title=new TextView(ListOfEventsActivity.this);
+                    SpannableString spanString = new SpannableString(titre[i]);
+                    spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
+                    title.setText(spanString);
 
-                TextView datedeb=new TextView(ListOfEventsActivity.this);
-                datedeb.setText(getDate(Long.parseLong(datesdeb[i]), "dd/MM/yyyy hh:mm")+"     ");
+                    TextView datedeb=new TextView(ListOfEventsActivity.this);
+                    datedeb.setText(getDate(Long.parseLong(datesdeb[i]), "dd/MM/yyyy hh:mm")+"     ");
 
-                TextView dateFin=new TextView(ListOfEventsActivity.this);
-                dateFin.setText(getDate(Long.parseLong(datesfin[i]), "dd/MM/yyyy hh:mm"));
+                    TextView dateFin=new TextView(ListOfEventsActivity.this);
+                    dateFin.setText(getDate(Long.parseLong(datesfin[i]), "dd/MM/yyyy hh:mm"));
 
-                datell.addView(datedeb);
-                datell.addView(dateFin);
+                    datell.addView(datedeb);
+                    datell.addView(dateFin);
 
-                item.addView(title);
-                item.addView(datell);
-                item.setTag(TAG,ids[i]);
-                item.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v)
-                    {
+                    title.setLayoutParams(params);
+                    datell.setLayoutParams(params);
+                    title.setLayoutParams(params);
+                    item.addView(title);
+                    item.addView(datell);
+                    item.setTag(TAG,ids[i]);
+                    item.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v)
+                        {
 
-                        Intent intent=new Intent(ListOfEventsActivity.this,DisplayGeneralEvent.class);
-                        intent.putExtra(MapsActivity.EXTRA_MESSAGE, String.valueOf( v.getTag(TAG)));
-                        startActivity(intent);
-                    }
-                });
-                ll.addView(item);
+                            Intent intent=new Intent(ListOfEventsActivity.this,DisplayGeneralEvent.class);
+                            intent.putExtra(MapsActivity.EXTRA_MESSAGE, String.valueOf( v.getTag(TAG)));
+                            startActivity(intent);
+                        }
+                    });
+                   item.setBackground(ContextCompat.getDrawable(ListOfEventsActivity.this, R.drawable.shape_lightgreen));
+                    ll.addView(item);
 
 
+                }
             }
+
         }
     }
     public static String getDate(long milliSeconds, String dateFormat)

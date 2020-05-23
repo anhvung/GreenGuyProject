@@ -11,12 +11,16 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -157,6 +161,7 @@ public class DisplayGeneralEvent extends AppCompatActivity {
             Toast.makeText(this, "Commentaire vide", Toast.LENGTH_LONG).show();
         }
         else
+            comment.getText().clear();
             new addComment().execute();
     }
     private class addComment extends AsyncTask<Void,Void,Void> {
@@ -251,6 +256,8 @@ public class DisplayGeneralEvent extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+
+
             Log.d("greend","INVITE2 "+id);
             Log.d("greend", response[1]);
             TextView titre= findViewById(R.id.titre);
@@ -275,7 +282,9 @@ public class DisplayGeneralEvent extends AppCompatActivity {
             }
 
             TextView auteur= findViewById(R.id.auteur);
-            titre.setText(response[0]);
+            SpannableString spanString = new SpannableString((response[0]));
+            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
+            titre.setText(spanString);
             descr.setText(response[1]);
             type.setText(response[2]);
             auteur.setText(response[5]);

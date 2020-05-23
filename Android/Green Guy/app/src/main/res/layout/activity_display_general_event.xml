@@ -7,6 +7,7 @@
     tools:context=".DisplayGeneralEvent"
     android:orientation="vertical">
 <LinearLayout
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -28,16 +29,36 @@
         android:onClick="calendar"/>
 
 </LinearLayout>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_lightgreen">
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/typetitre"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:text="Type :"
+            android:layout_margin="20dp"
+            />
+        <TextView
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:text="type"
+            android:layout_margin="20dp"
+            />
+        <TextView
+            android:id="@+id/auteurtitre"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:text="Auteur :"
             android:layout_margin="20dp"
             />
         <TextView
@@ -153,7 +174,7 @@
                 android:onClick="inviter"/>
         </LinearLayout>
     </LinearLayout>
-
+</LinearLayout>
 
 
 
@@ -167,7 +188,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Faire un nouveau commentaire"
+            android:hint="Faire un nouveau commentaire"
             android:id="@+id/comment"/>
         <ImageButton
             android:id="@+id/nezComment"

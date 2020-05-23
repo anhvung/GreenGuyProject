@@ -152,7 +152,8 @@ public class AddPoiActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if(response_pic.equals("true")){
-                finish();
+                Intent setIntent = new Intent(AddPoiActivity.this,MapsActivity.class);
+                startActivity(setIntent);
             }
             else {
                 Toast.makeText(getApplicationContext(),"Champs invalides",Toast.LENGTH_SHORT).show();

@@ -51,13 +51,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/Overlay"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:layout_marginLeft="22dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="22dp"
             android:orientation="horizontal"
-            android:background="#88FFFFFF">
+            android:background="@drawable/shape_orange">
 
             <TextView
                 android:layout_width="match_parent"
@@ -65,9 +65,11 @@
                 android:layout_margin="10dp"
                 android:id="@+id/textoverlayPOI"
                 android:textColor="#FFFF"
-                android:text="Long press to add point of interest"
-                android:background="#3B8959"
+                android:maxLines="10"
+                android:text="Appuyez longtemps pour \n ajouter un événement"
+                android:lines="2"
                 android:gravity="center"
+                android:textSize="22sp"
                 />
             <TextView
                 android:layout_width="match_parent"
@@ -75,9 +77,12 @@
                 android:layout_margin="10dp"
                 android:id="@+id/textoverlayEvent"
                 android:textColor="#FFFF"
-                android:text="Long press to add Event"
-                android:background="#3B8959"
+                android:maxLines="10"
+                android:lines="2"
+                android:text="Appuyez longtemps pour \n ajouter un point d'intéret"
+
                 android:gravity="center"
+                android:textSize="22sp"
                 />
         </LinearLayout>
 

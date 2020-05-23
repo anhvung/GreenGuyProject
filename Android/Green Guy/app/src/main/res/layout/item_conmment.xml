@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:id="@+id/item_conv">
+    android:id="@+id/item_conv"
+    android:background="@drawable/shape_orange">
 
     <ImageView
         android:id="@+id/image_message_profile"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
         android:layout_marginLeft="8dp"
         android:background="@drawable/ic_friends" />
     <LinearLayout
@@ -28,6 +30,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="Auteur"
                 android:textSize="18dp"
+                android:textColor="#ffffff"
                 />
             <TextView
                 android:id="@+id/date"
@@ -36,6 +39,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="date"
                 android:textSize="18dp"
+                android:textColor="#ffffff"
                 />
         </LinearLayout>
         <LinearLayout
@@ -49,6 +53,7 @@
             android:layout_marginLeft="8dp"
             android:text="John Doe"
             android:textSize="18dp"
+            android:textColor="#ffffff"
             />
         <ImageView
             android:id="@+id/commPIc"

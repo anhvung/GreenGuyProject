@@ -129,6 +129,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Camera mCamera;
     private CameraPreview mPreview;
     boolean cameraAccess=false;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        new getAllInfo().execute();
+        new getAllMarkers().execute();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Construct a GeoDataClient.
@@ -148,7 +158,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SharedPreferences sharedPref = getSharedPreferences("SAVE", Context.MODE_PRIVATE);
         storedId = sharedPref.getInt("USER_ID", -1);
 
-        new getAllInfo().execute();
+
         initializeButtons();
         initializeMenu();
         if (ContextCompat.checkSelfPermission(this,
@@ -237,6 +247,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         eventList = new ArrayList<>();
+        /*
         ModelEvent modelEvent1 = new ModelEvent( "CleanWalk", "Ramassage de déchets collectif dans un quartier","blablabla", "Serguei", "8 mars", "Paris");
         ModelEvent modelEvent2 = new ModelEvent( "Cop 1", "Rassemblement entre étudiants","blablabla", "Vlad", "9 mai", "Moscou");
         ModelEvent modelEvent3 = new ModelEvent( "Cop 29", "Rassemblement pour défendre l'écologie", "blablabla","Marie Thérèse", "1 avril", "Cracovie");
@@ -253,7 +264,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         eventList.add(modelEvent5);
         eventList.add(modelEvent6);
         eventList.add(modelEvent7);
-        eventList.add(modelEvent8);
+        eventList.add(modelEvent8);*/
 
 
 
@@ -264,6 +275,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         chargementEvents();
         new getAllMarkers().execute();
+        new getAllInfo().execute();
         test();
 
     }
@@ -346,27 +358,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 int id = item.getItemId();
                 switch (id){
                     case R.id.nav_add_friend :
-                    Toast.makeText(getApplicationContext(),"add friend",Toast.LENGTH_SHORT).show();
                         Intent intentQR = new Intent(MapsActivity.this, AddFriendQr.class);
                         startActivity(intentQR);
                     break;
                     case R.id.nav_profile :
-                        Toast.makeText(getApplicationContext(),"profile",Toast.LENGTH_SHORT).show();
                         Intent intent_profile = new Intent(MapsActivity.this, MyProfileActivity.class);
                         startActivity(intent_profile);
                         break;
-                    case R.id.nav_points :
-                        Toast.makeText(getApplicationContext(),"points",Toast.LENGTH_SHORT).show();
-                        break;
                     case R.id.nav_friend :
-                        Toast.makeText(getApplicationContext(),"messages",Toast.LENGTH_SHORT).show();
                         Intent intentMs = new Intent(MapsActivity.this, AllConvActivity.class);
                         startActivity(intentMs);
                         break;
                     case R.id.nav_event :
                         Intent intent_event = new Intent(MapsActivity.this, ListOfEventsActivity.class);
                         startActivity(intent_event);
-                        Toast.makeText(getApplicationContext(),"events",Toast.LENGTH_SHORT).show();
                         break;
                     /*
 
@@ -377,11 +382,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
 
                      */
-                    case R.id.nav_notif :
-                        Toast.makeText(getApplicationContext(),"notif",Toast.LENGTH_SHORT).show();
-                        break;
                     case R.id.nav_settings :
-                        Toast.makeText(getApplicationContext(),"settings",Toast.LENGTH_SHORT).show();
                         start(SettingsActivity.class);
                         break;
 
@@ -797,12 +798,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             case 12847 :{
 
-                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-                        cameraAccess=true;
-                    } else {
-                        Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-                    }
+
 
             }
         }
@@ -906,11 +902,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            for (int i=0;i<allId.length;i++){
-                ModelEvent info = new ModelEvent(allTitles[i],allId[i]);
-                eventList.add(info);
+            Log.d("greend","aweriogjbaeoihjbgraehiogba : "+allId.length+" "+ allTitles.length);
+            if(eventList.size()!=allTitles.length){
+                for (int i=0;i<allId.length;i++){
+                    ModelEvent info = new ModelEvent(allTitles[i],allId[i]);
+                    eventList.add(info);
+                }
+                chargementEvents();
             }
-            chargementEvents();
+
 
             super.onPostExecute(aVoid);
         }
@@ -955,71 +955,82 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            for (int i=0;i<allIds.length;i++){
-                String mtitre=allTitles[i];
-                LatLng mpos=posl[i] ;
-                Marker marker=null;
-                switch (allTypes[i]) {
+            if(markers.size()!=allIds.length){
+                for (int i=0;i<allIds.length;i++){
+                    String mtitre=allTitles[i];
+                    LatLng mpos=posl[i] ;
+                    Marker marker=null;
+                    switch (allTypes[i]) {
 
-                    case "event":
-                        marker=mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_event))
-                                .title(mtitre));
-                        break;
-                    case "Restaurant":
-                        marker=mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_restaurant_black_24dp))
-                                .title(mtitre));
-                        break;
-                    case "lieu touristique":
-                        marker=mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_local))
-                                .title(mtitre));
-                        break;
-                    case "Communauté":
-                        marker=mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_group))
-                                .title(mtitre));
-                        break;
-                    case "Festival":
-                        marker=mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_whatshot))
-                                .title(mtitre));
-                        break;
-                    case "Compost":
-                        marker=mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_compost))
-                                .title(mtitre));
-                        break;
-                    case "Recyclage":
-                        marker=mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_recycle_bin))
-                                .title(mtitre));
-                        break;
-                    case "Lieu Autre":
-                        markers.add(mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_place))
-                                .title(mtitre)));
-                        break;
-                    case "Point d'eau":
-                        marker=mMap.addMarker(new MarkerOptions()
-                                .position(mpos)
-                                .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_water))
-                                .title(mtitre));
-                        break;
+                        case "event":
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_event))
+                                    .title(mtitre));
+                            break;
+                        case "Restaurant":
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_restaurant_black_24dp))
+                                    .title(mtitre));
+                            break;
+                        case "lieu touristique":
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_local))
+                                    .title(mtitre));
+                            break;
+                        case "Communauté":
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_group))
+                                    .title(mtitre));
+                            break;
+                        case "Festival":
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_whatshot))
+                                    .title(mtitre));
+                            break;
+                        case "Compost":
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_compost))
+                                    .title(mtitre));
+                            break;
+                        case "Recyclage":
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_recycle_bin))
+                                    .title(mtitre));
+                            break;
+                        case "Lieu Autre":
+                            markers.add(mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_place))
+                                    .title(mtitre)));
+                            break;
+                        case "Point d'eau":
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_water))
+                                    .title(mtitre));
+                            break;
+                        default:
+                            marker=mMap.addMarker(new MarkerOptions()
+                                    .position(mpos)
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_add_poi))
+                                    .title(mtitre));
+                            break;
+
+                    }
+                    marker.setTag(allIds[i]);
+                    markers.add(marker);
+
+
                 }
-                marker.setTag(allIds[i]);
-                markers.add(marker);
-
             }
+
 
         }
     }
